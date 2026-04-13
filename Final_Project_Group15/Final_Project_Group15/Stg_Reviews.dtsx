@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/12/2026 4:11:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="CBG-BER-2807"
+  DTS:CreatorName="CBG-BER-2807\ASUS"
+  DTS:DTSID="{392BC8BA-8223-4B7B-A245-0603338F123D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1066"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{AFB38D2A-9C48-4E07-B61F-A13FBB4BD7FD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
