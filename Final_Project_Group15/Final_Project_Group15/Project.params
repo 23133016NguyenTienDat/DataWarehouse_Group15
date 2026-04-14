@@ -63,4 +63,25 @@
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
   </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="PROJECT_ROOT">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{d23a206d-711e-478f-9208-62736aceb7c9}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">D:\Hoc_tap\Nam_3\DataWarehouse\DataWarehouse_Group15\Final_Project_Group15\</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
 </SSIS:Parameters>
