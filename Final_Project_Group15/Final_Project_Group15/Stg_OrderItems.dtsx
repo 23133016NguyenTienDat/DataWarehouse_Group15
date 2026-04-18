@@ -11,18 +11,34 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="60"
-  DTS:VersionGUID="{525CBB99-1A45-40BA-B278-907B69B17FDE}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{F0196E86-444A-4BEE-8058-086D84D3174B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+      DTS:ObjectName="CBG-Ber-2807\MSSQLSERVER01.Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source=" + @[$Project::DB_SERVER] + 
+";Initial Catalog=" + @[$Project::DB_NAME_STAGING] + 
+";Provider=MSOLEDBSQL;Integrated Security=SSPI;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=CBG-Ber-2807\MSSQLSERVER01;Initial Catalog=Staging;Provider=MSOLEDBSQL;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
       DTS:CreationName="FLATFILE"
       DTS:DTSID="{89C1A04C-3585-4BE8-B51B-4654D6517382}"
       DTS:ObjectName="Flat File Connection Manager">
       <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[$Project::PROJECT_ROOT] + "\\Data\\order_items.csv"</DTS:PropertyExpression>
+        DTS:Name="ConnectionString">@[$Project::PROJECT_ROOT] + "Data\\order_items.csv"</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -32,7 +48,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1258"
-          DTS:ConnectionString="C:\Users\LEGION\Documents\HK2_Nam3\DWH\Final\Final_Project_Group15\Data\order_items.csv">
+          DTS:ConnectionString="D:\Hoc_tap\Nam_3\DataWarehouse\DataWarehouse_Group15\Final_Project_Group15\Data\order_items.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -81,22 +97,6 @@
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{253072E7-531F-4923-9EEC-0F7AA7B78C54}"
-      DTS:ObjectName="localhost\SQLEXPRESS.Staging">
-      <DTS:PropertyExpression
-        DTS:Name="ConnectionString">"Data Source=" + @[$Project::DB_SERVER] + 
-";Initial Catalog=" + @[$Project::DB_NAME_STAGING] + 
-";Provider=MSOLEDBSQL;Integrated Security=SSPI;"</DTS:PropertyExpression>
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=Staging;Provider=MSOLEDBSQL;Integrated Security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -181,7 +181,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{253072E7-531F-4923-9EEC-0F7AA7B78C54}"
+          SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
           SQLTask:SqlStatementSource="INSERT INTO adm.Etl_Package_Logs (batch_id, package_name, start_time)&#xA;VALUES (?, 'Stg_OrderItems', GETDATE());&#xA;SELECT SCOPE_IDENTITY() AS package_log_id;"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
@@ -209,7 +209,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{253072E7-531F-4923-9EEC-0F7AA7B78C54}"
+          SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
           SQLTask:SqlStatementSource="&#xA;UPDATE adm.Etl_Package_Logs &#xA;SET status = 'SUCCESS', end_time = GETDATE(), &#xA;    records_inserted = ?, records_error = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -936,6 +936,52 @@
                   exclusionGroup="1"
                   name="Derived Column Output"
                   synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      name="ErrorCode_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      name="ErrorColumn_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
@@ -956,6 +1002,101 @@
                       refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Derived Column 2"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 2"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      name="ErrorCode_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      name="ErrorColumn_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1217,8 +1358,8 @@
               <connections>
                 <connection
                   refId="Package\Load_Stg_OrderItems\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
+                  connectionManagerID="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.Staging]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1236,80 +1377,73 @@
                       cachedLength="50"
                       cachedName="order_id"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="product_id"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[unit_price_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="unit_price_usd"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[quantity]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="quantity"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[line_total_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="line_total_usd"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[source_file_name]"
                       cachedDataType="wstr"
                       cachedLength="15"
                       cachedName="source_file_name"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[batch_id]"
                       cachedDataType="i4"
                       cachedName="batch_id"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ingest_at]"
                       cachedDataType="dbTimeStamp"
                       cachedName="ingest_at"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_valid]"
                       cachedDataType="i4"
                       cachedName="is_valid"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_processed]"
                       cachedDataType="i4"
                       cachedName="is_processed"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]" />
                     <inputColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[error_message]"
                       cachedDataType="wstr"
                       cachedLength="500"
                       cachedName="error_message"
                       externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      lineageId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0].Columns[row_hash]" />
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1357,11 +1491,6 @@
                       name="ingest_at"
                       scale="7" />
                     <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      name="row_hash" />
-                    <externalMetadataColumn
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
                       dataType="bool"
                       name="is_valid" />
@@ -1395,494 +1524,6 @@
                       refId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Load_Stg_OrderItems\OLE DB Destination 1"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="OLE DB Destination 1"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[stg].[order_items]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[order_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="order_id"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[product_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="product_id"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[unit_price_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="unit_price_usd"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[quantity]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="quantity"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[line_total_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="line_total_usd"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="15"
-                      cachedName="source_file_name"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[batch_id]"
-                      cachedDataType="i4"
-                      cachedName="batch_id"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ingest_at]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="ingest_at"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[is_valid]"
-                      cachedDataType="i4"
-                      cachedName="is_valid"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[is_processed]"
-                      cachedDataType="i4"
-                      cachedName="is_processed"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[error_message]"
-                      cachedDataType="wstr"
-                      cachedLength="500"
-                      cachedName="error_message"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      lineageId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0].Columns[row_hash]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[stg_id]"
-                      dataType="i8"
-                      name="stg_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
-                      dataType="wstr"
-                      length="100"
-                      name="order_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      dataType="wstr"
-                      length="100"
-                      name="product_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
-                      dataType="wstr"
-                      length="100"
-                      name="unit_price_usd" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
-                      dataType="wstr"
-                      length="100"
-                      name="quantity" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
-                      dataType="wstr"
-                      length="100"
-                      name="line_total_usd" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      name="source_file_name" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
-                      dataType="i4"
-                      name="batch_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
-                      dataType="dbTimeStamp2"
-                      name="ingest_at"
-                      scale="7" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      name="row_hash" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
-                      dataType="bool"
-                      name="is_valid" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
-                      dataType="bool"
-                      name="is_processed" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
-                      dataType="wstr"
-                      length="500"
-                      name="error_message" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Load_Stg_OrderItems\OLE DB Destination 2"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="OLE DB Destination 2"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[stg].[order_items]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[order_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="order_id"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[product_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="product_id"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[unit_price_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="unit_price_usd"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[quantity]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="quantity"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[line_total_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="line_total_usd"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="15"
-                      cachedName="source_file_name"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[batch_id]"
-                      cachedDataType="i4"
-                      cachedName="batch_id"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[ingest_at]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="ingest_at"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[is_valid]"
-                      cachedDataType="i4"
-                      cachedName="is_valid"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[is_processed]"
-                      cachedDataType="i4"
-                      cachedName="is_processed"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[error_message]"
-                      cachedDataType="wstr"
-                      cachedLength="500"
-                      cachedName="error_message"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
-                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]" />
-                    <inputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      lineageId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0].Columns[row_hash]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[stg_id]"
-                      dataType="i8"
-                      name="stg_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
-                      dataType="wstr"
-                      length="100"
-                      name="order_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      dataType="wstr"
-                      length="100"
-                      name="product_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
-                      dataType="wstr"
-                      length="100"
-                      name="unit_price_usd" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
-                      dataType="wstr"
-                      length="100"
-                      name="quantity" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
-                      dataType="wstr"
-                      length="100"
-                      name="line_total_usd" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      name="source_file_name" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
-                      dataType="i4"
-                      name="batch_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
-                      dataType="dbTimeStamp2"
-                      name="ingest_at"
-                      scale="7" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      name="row_hash" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
-                      dataType="bool"
-                      name="is_valid" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
-                      dataType="bool"
-                      name="is_processed" />
-                    <externalMetadataColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
-                      dataType="wstr"
-                      length="500"
-                      name="error_message" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1978,984 +1619,649 @@
               </outputs>
             </component>
             <component
-              refId="Package\Load_Stg_OrderItems\Script Component"
-              componentClassID="Microsoft.ManagedComponentHost"
-              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;14"
-              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
-              name="Script Component"
-              version="14">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Stores the source code of the component"
-                  isArray="true"
-                  name="SourceCode"
-                  state="cdata">
-                  <arrayElements
-                    arrayElementCount="30">
-                    <arrayElement
-                      dataType="System.String"><![CDATA[SC_bf1fbd335a044bb282ff91587b46a035.csproj]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{807BAE93-72BE-40D2-BED1-D40B763353EF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SC_bf1fbd335a044bb282ff91587b46a035</RootNamespace>
-    <AssemblyName>SC_bf1fbd335a044bb282ff91587b46a035</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>.\bin\Debug\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugSymbols>false</DebugSymbols>
-    <Optimize>true</Optimize>
-    <OutputPath>.\bin\Release\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.SqlServer.TxScript, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-    <Compile Include="main.cs" />
-    <Compile Include="BufferWrapper.cs" />
-    <Compile Include="ComponentWrapper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <AppDesigner Include="Properties\" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <!-- Include the build rules for a C# project.-->
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
-        <ProjectProperties HostName="ScriptComponent" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
-        <Host Name="ScriptComponent" GeneratedNamespace="SC_bf1fbd335a044bb282ff91587b46a035" IconIndex="0"></Host>
-        <ProjectClient>
-          <HostIdentifier>SSIS_SC170</HostIdentifier>
-        </ProjectClient>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-</Project>]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-</root>]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
-/* The Script Component allows you to perform virtually any operation that can be accomplished in
- * a .Net application within the context of an Integration Services data flow.
- *
- * Expand the other regions which have "Help" prefixes for examples of specific ways to use
- * Integration Services features within this script component. */
-#endregion
-
-#region Namespaces
-using System;
-using System.Data;
-using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
-using Microsoft.SqlServer.Dts.Runtime.Wrapper;
-#endregion
-
-/// <summary>
-/// This is the class to which to add your code.  Do not change the name, attributes, or parent
-/// of this class.
-/// </summary>
-[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
-public class ScriptMain : UserComponent
-{
-    #region Help:  Using Integration Services variables and parameters
-    /* To use a variable in this script, first ensure that the variable has been added to
-     * either the list contained in the ReadOnlyVariables property or the list contained in
-     * the ReadWriteVariables property of this script component, according to whether or not your
-     * code needs to write into the variable.  To do so, save this script, close this instance of
-     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
-     * Script Transformation Editor window.
-     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
-     *
-     * Example of reading from a variable or parameter:
-     *  DateTime startTime = Variables.MyStartTime;
-     *
-     * Example of writing to a variable:
-     *  Variables.myStringVariable = "new value";
-     */
-    #endregion
-
-    #region Help:  Using Integration Services Connnection Managers
-    /* Some types of connection managers can be used in this script component.  See the help topic
-     * "Working with Connection Managers Programatically" for details.
-     *
-     * To use a connection manager in this script, first ensure that the connection manager has
-     * been added to either the list of connection managers on the Connection Managers page of the
-     * script component editor.  To add the connection manager, save this script, close this instance of
-     * Visual Studio, and add the Connection Manager to the list.
-     *
-     * If the component needs to hold a connection open while processing rows, override the
-     * AcquireConnections and ReleaseConnections methods.
-     * 
-     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
-     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
-     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
-     *
-     * Example of using a File connection manager to acquire a file path:
-     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
-     *  string filePath = (string)rawConnection;
-     *
-     * Example of releasing a connection manager:
-     *  Connections.SalesDB.ReleaseConnection(rawConnection);
-     */
-    #endregion
-
-    #region Help:  Firing Integration Services Events
-    /* This script component can fire events.
-     *
-     * Example of firing an error event:
-     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
-     *
-     * Example of firing an information event:
-     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
-     *
-     * Example of firing a warning event:
-     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
-     */
-    #endregion
-
-    /// <summary>
-    /// This method is called once, before rows begin to be processed in the data flow.
-    ///
-    /// You can remove this method if you don't need to do anything here.
-    /// </summary>
-    public override void PreExecute()
-    {
-        base.PreExecute();
-        /*
-         * Add your code here
-         */
-    }
-
-    /// <summary>
-    /// This method is called after all the rows have passed through this component.
-    ///
-    /// You can delete this method if you don't need to do anything here.
-    /// </summary>
-    public override void PostExecute()
-    {
-        base.PostExecute();
-        /*
-         * Add your code here
-         */
-    }
-
-    /// <summary>
-    /// This method is called once for every row that passes through the component from Input0.
-    ///
-    /// Example of reading a value from a column in the the row:
-    ///  string zipCode = Row.ZipCode
-    ///
-    /// Example of writing a value to a column in the row:
-    ///  Row.ZipCode = zipCode
-    /// </summary>
-    /// <param name="Row">The row that is currently passing through the component</param>
-    public override void Input0_ProcessInputRow(Input0Buffer Row)
-    {
-        /*
-         * Add your code here
-         */
-    }
-
-}
-]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
-*  Microsoft SQL Server Integration Services buffer wrappers
-*  This module defines classes for accessing data flow buffers
-*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
-
-
-
-using System;
-using System.Data;
-using Microsoft.SqlServer.Dts.Pipeline;
-using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
-
-public class Input0Buffer: ScriptBuffer
-
-{
-    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
-        : base(Buffer, BufferColumnIndexes, OutputMap)
-    {
-    }
-
-    public String orderid
-    {
-        get
-        {
-            return Buffer.GetString(BufferColumnIndexes[0]);
-        }
-    }
-    public bool orderid_IsNull
-    {
-        get
-        {
-            return IsNull(0);
-        }
-    }
-
-    public String productid
-    {
-        get
-        {
-            return Buffer.GetString(BufferColumnIndexes[1]);
-        }
-    }
-    public bool productid_IsNull
-    {
-        get
-        {
-            return IsNull(1);
-        }
-    }
-
-    public String unitpriceusd
-    {
-        get
-        {
-            return Buffer.GetString(BufferColumnIndexes[2]);
-        }
-    }
-    public bool unitpriceusd_IsNull
-    {
-        get
-        {
-            return IsNull(2);
-        }
-    }
-
-    public String quantity
-    {
-        get
-        {
-            return Buffer.GetString(BufferColumnIndexes[3]);
-        }
-    }
-    public bool quantity_IsNull
-    {
-        get
-        {
-            return IsNull(3);
-        }
-    }
-
-    public String linetotalusd
-    {
-        get
-        {
-            return Buffer.GetString(BufferColumnIndexes[4]);
-        }
-    }
-    public bool linetotalusd_IsNull
-    {
-        get
-        {
-            return IsNull(4);
-        }
-    }
-
-    public Byte[] rowhash
-    {
-        set
-        {
-            this[5] = value;
-        }
-    }
-    public bool rowhash_IsNull
-    {
-        set
-        {
-            if (value)
-            {
-                SetNull(5);
-            }
-            else
-            {
-                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
-            }
-        }
-    }
-
-    new public bool NextRow()
-    {
-        return base.NextRow();
-    }
-
-    new public bool EndOfRowset()
-    {
-        return base.EndOfRowset();
-    }
-
-}
-]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("SC_bf1fbd335a044bb282ff91587b46a035")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SC_bf1fbd335a044bb282ff91587b46a035")]
-[assembly: AssemblyCopyright("Copyright @  2026")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.0.0")]
-]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
-*  Microsoft SQL Server Integration Services component wrapper
-*  This module defines the base class for your component
-*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
-
-using System;
-using System.Data;
-using Microsoft.SqlServer.Dts.Pipeline;
-using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
-using Microsoft.SqlServer.Dts.Runtime.Wrapper;
-
-public class UserComponent: ScriptComponent
-{
-    public Connections Connections;
-    public Variables Variables;
-    public UserComponent()
-    {
-        Connections = new Connections(this);
-        Variables = new Variables(this);
-    }
-
-    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
-    {
-
-        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
-        {
-            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
-        }
-
-    }
-
-    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
-    {
-        while (Buffer.NextRow())
-        {
-            Input0_ProcessInputRow(Buffer);
-        }
-    }
-
-    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
-    {
-    }
-
-}
-
-public class Connections
-{
-    ScriptComponent ParentComponent;
-
-    public Connections(ScriptComponent Component)
-    {
-        ParentComponent = Component;
-    }
-
-}
-
-public class Variables
-{
-    ScriptComponent ParentComponent;
-
-    public Variables(ScriptComponent Component)
-    {
-        ParentComponent = Component;
-    }
-
-}
-]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[Project]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
-<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
-  <msb:PropertyGroup>
-    <msb:Language>msBuild</msb:Language>
-    <msb:CodeName>SC_bf1fbd335a044bb282ff91587b46a035</msb:CodeName>
-    <msb:DisplayName>SC_bf1fbd335a044bb282ff91587b46a035</msb:DisplayName>
-    <msb:ProjectId>{7A6D4CB3-7487-49D7-B65D-BE153C28BE42}</msb:ProjectId>
-  </msb:PropertyGroup>
-  <msb:ItemGroup>
-    <msb:Project Include="SC_bf1fbd335a044bb282ff91587b46a035.csproj" />
-    <msb:File Include="main.cs" />
-    <msb:File Include="BufferWrapper.cs" />
-    <msb:File Include="Properties\Settings.Designer.cs" />
-    <msb:File Include="Properties\Settings.settings" />
-    <msb:File Include="Properties\AssemblyInfo.cs" />
-    <msb:File Include="Properties\Resources.resx" />
-    <msb:File Include="Properties\Resources.Designer.cs" />
-    <msb:File Include="ComponentWrapper.cs" />
-  </msb:ItemGroup>
-</c:Project>]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_bf1fbd335a044bb282ff91587b46a035.Properties.Settings.get_Default():SC_bf1fbd335a044bb282ff91587b46a035.Properties.Sett" +
-    "ings")]
-
-namespace SC_bf1fbd335a044bb282ff91587b46a035.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}
-]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_bf1fbd335a044bb282ff91587b46a035.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
-    "rceManager")]
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_bf1fbd335a044bb282ff91587b46a035.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
-    "fo")]
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_bf1fbd335a044bb282ff91587b46a035.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
-    "):Void")]
-
-namespace SC_bf1fbd335a044bb282ff91587b46a035.Properties {
-    
-    
-    /// <summary>
-    ///   A strongly-typed resource class, for looking up localized strings, etc.
-    /// </summary>
-    // This class was auto-generated by the StronglyTypedResourceBuilder
-    // class via a tool like ResGen or Visual Studio.
-    // To add or remove a member, edit your .ResX file then rerun ResGen
-    // with the /str option, or rebuild your VS project.
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    internal class Resources {
-        
-        private static global::System.Resources.ResourceManager resourceMan;
-        
-        private static global::System.Globalization.CultureInfo resourceCulture;
-        
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
-        }
-        
-        /// <summary>
-        ///   Returns the cached ResourceManager instance used by this class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if ((resourceMan == null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_bf1fbd335a044bb282ff91587b46a035.Properties.Resources", typeof(Resources).Assembly);
-                    resourceMan = temp;
-                }
-                return resourceMan;
-            }
-        }
-        
-        /// <summary>
-        ///   Overrides the current thread's CurrentUICulture property for all
-        ///   resource lookups using this strongly typed resource class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
-                return resourceCulture;
-            }
-            set {
-                resourceCulture = value;
-            }
-        }
-    }
-}
-]]></arrayElement>
-                  </arrayElements>
-                </property>
-                <property
-                  dataType="System.String"
-                  description="Stores the binary representation of the component"
-                  isArray="true"
-                  name="BinaryCode"
-                  state="cdata">
-                  <arrayElements
-                    arrayElementCount="2">
-                    <arrayElement
-                      dataType="System.String"><![CDATA[SC_bf1fbd335a044bb282ff91587b46a035.dll]]></arrayElement>
-                    <arrayElement
-                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDAKA432kAAAAAAAAAAOAAIiALATAAABQAAAAIAAAAAAAAYjMA
-AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
-ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAABAzAABPAAAAAEAAAEgEAAAAAAAAAAAAAAAAAAAA
-AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAaBMAAAAgAAAAFAAAAAIA
-AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAQAAAAAYAAAAWAAAAAAAAAAAAAAAAAABAAABA
-LnJlbG9jAAAMAAAAAGAAAAACAAAAHAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABE
-MwAAAAAAAEgAAAACAAUAECIAAEgQAAABAAAAAAAAAFgyAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBAAAAoqHgIoEQAACioGKh4CKBQAAAYqKgIDBAUoEgAA
-CipSAnsTAAAKAnsUAAAKFpRvFQAACioiAhYoFgAACipSAnsTAAAKAnsUAAAKF5RvFQAACioiAhco
-FgAACipSAnsTAAAKAnsUAAAKGJRvFQAACioiAhgoFgAACipSAnsTAAAKAnsUAAAKGZRvFQAACioi
-AhkoFgAACipSAnsTAAAKAnsUAAAKGpRvFQAACioiAhooFgAACiomAhsDKBcAAAoqWgMsCAIbKBgA
-AAoqcgEAAHBzGQAACnoeAigaAAAKKh4CKBsAAAoqfgIoHAAACgICcxgAAAZ9AQAABAICcxkAAAZ9
-AgAABCqSBHKeAABwGm8dAAAKLBUCBQIDKB4AAAoOBHMFAAAGbxYAAAYqSisHAgNvFwAABgNvEgAA
-Bi3xKjoCKB8AAAoCA30DAAAEKjoCKB8AAAoCA30EAAAEKh4CKB8AAAoqrn4FAAAELR5yrgAAcNAH
-AAACKCAAAApvIQAACnMiAAAKgAUAAAR+BQAABCoafgYAAAQqHgKABgAABCoafgcAAAQqHgIoIwAA
-Cioucx8AAAaABwAABCpCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAAA0BgAAI34A
-AKAGAADIBgAAI1N0cmluZ3MAAAAAaA0AACABAAAjVVMAiA4AABAAAAAjR1VJRAAAAJgOAACwAQAA
-I0Jsb2IAAAAAAAAAAgAAAVcVoAEJAQAAAPoBMwAWAAABAAAAHwAAAAgAAAAHAAAAIAAAAA8AAAAj
-AAAAEAAAAAMAAAAPAAAAEAAAAAEAAAAEAAAAAQAAAAAANQMBAAAAAAAGACAC8wQGALQC8wQGAGwB
-4AQPAGcFAAAGAJkBNQQGAAMCNQQGAOQBNQQGAJsCNQQGAEACNQQGAFkCNQQGALABNQQGAMsB7wIK
-AHQCuQAKALIEuQAOAKMEuQAKAH4EuQAKAC0GuQAGAPAF7QMGAE8B4AQGAMMEEwUGAHIEIAQSAB8B
-HwMSAIABHwMSAAcBCwQGADQB8wQGAEcE7QMGAAwD7QMGAGEE7QMGANoA7QMGAIsA7QMGALIGNQQA
-AAAAJQAAAAAAAQABAAEAEAAABAAAEAABAAEAAQAQAJYEAAA5AAEABQABABAADwYAAEUAAQAUAAEA
-EADkBQAASQADABgAAQAQAKUFAABJAAQAGQAAABAAGgV2BUkABQAaAAABEADUBXYFYQAHAB4ABgDk
-BXMABgClBXcAAQAdBnsAAQAdBnsAEQD0A38AEQD3AIMAEQB7AIcAUCAAAAAAxgDSAgYAAQBYIAAA
-AADGAN0CBgABAGAgAAAAAMYAjwaLAAEAYiAAAAAAhhjTBAYAAgBqIAAAAACGGNMEGwACAHUgAAAA
-AIYIPwCRAAUAiiAAAAAAhghdAz0ABQCTIAAAAACGCEsAkQAFAKggAAAAAIYIcAM9AAUAsSAAAAAA
-hghZAJEABQDGIAAAAACGCIUDPQAFAM8gAAAAAIYIuwaRAAUA5CAAAAAAhgjIAz0ABQDtIAAAAACG
-CGoAkQAFAAIhAAAAAIYInQM9AAUACyEAAAAAhggTA5UABQAVIQAAAACGCLUDmwAGACwhAAAAAIYA
-pgY9AAcANCEAAAAAhgD3BT0ABwA8IQAAAACGGNMEBgAHAFwhAAAAAMYAggagAAcAgSEAAAAAxgF7
-BosACwBgIAAAAADGAY8GiwAMAJQhAAAAAIYY0wSqAA0AoyEAAAAAhhjTBKoADgCyIQAAAACDGNME
-BgAPALohAAAAAJMIvwSwAA8A5iEAAAAAkwjfALUADwDtIQAAAACTCOsAugAPAPUhAAAAAJYIAwbA
-ABAA/CEAAAAAhhjTBAYAEAAEIgAAAACRGNkExQAQAAAAAQCqBgAAAQC4BAAAAgCvBQAAAwCMBAAA
-AQDpAgAAAQDpAgAAAQAuAAAAAgCvAAAAAwC4BAAABACMBAAAAQC4BAAAAQCqBgAAAQAzBgAAAQAz
-BgAAAQDpAgkA0wQBABEA0wQGABkA0wQKACkA0wQQADEA0wQQADkA0wQQAEEA0wQQAEkA0wQQAFEA
-0wQQAFkA0wQQAGEA0wQQAGkA0wQGAJkA0wQGALkA0wQVAMkA0wQGAIkA0gIGAIkA3QIGAHEA0wQb
-AHEAuAQlAHEArwUpAHkACQMtAHEA1QMyAHEA5AM3AHEA3AMBANEA0wQQAHEApgY9AHEA9wU9AIkA
-0wQGANkA3QVBAIkAwwVIAJEA0wQGAOkAnQBOAOkArgZVAKEA0wRaAMEA0wQGAC4ACwDlAC4AEwDu
-AC4AGwANAS4AIwAWAS4AKwA/AS4AMwA/AS4AOwA/AS4AQwAWAS4ASwBFAS4AUwA/AS4AWwBcAUMA
-YwCqAeEAewCqAeMAawCqAakBcwANAckBcwANAQMAAQAHAA0ACAAPAAAAQwDJAAAAYQPNAAAATwDJ
-AAAAdAPNAAAAXQDJAAAAiQPNAAAAvwbJAAAAzAPNAAAAbgDJAAAAoQPNAAAAFwPRAAAAuQPNAAAA
-wwTWAAAA/wDbAAAABwbgAAIABgADAAIABwAFAAIACAAHAAIACQAJAAIACgALAAIACwANAAIADAAP
-AAIADQARAAIADgATAAIADwAVAAEAEAAXAAEAEQAZAAIAGwAbAAIAHAAdAAEAHQAdAAIAHgAfAASA
-AAABAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAAAAABhADYAAAAAABEAAAAAAAAAAAAAAGoAPQYA
-AAAAEQAAAAAAAAAAAAAAagBaBgAAAAAEAAAAAAAAAAAAAABhAO0DAAAAAAAAAAABAAAAJAUAAAAA
-AFNDX2JmMWZiZDMzNWEwNDRiYjI4MmZmOTE1ODdiNDZhMDM1ADxNb2R1bGU+AElucHV0SUQAbXNj
-b3JsaWIAZ2V0X29yZGVyaWQAZ2V0X3Byb2R1Y3RpZABnZXRfdW5pdHByaWNldXNkAGdldF9saW5l
-dG90YWx1c2QAZGVmYXVsdEluc3RhbmNlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFu
-ZGxlAElucHV0TmFtZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5QaXBlbGluZQBUeXBlAGdldF9D
-dWx0dXJlAHNldF9DdWx0dXJlAHJlc291cmNlQ3VsdHVyZQBBcHBsaWNhdGlvblNldHRpbmdzQmFz
-ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dl
-ck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxl
-QXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1
-dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0
-ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRy
-aWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRl
-AFNTSVNTY3JpcHRDb21wb25lbnRFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0
-dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBQcmVFeGVjdXRlAFBvc3RFeGVj
-dXRlAHZhbHVlAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAR2V0U3RyaW5nAHNldF9yb3doYXNo
-AFN5c3RlbS5Db21wb25lbnRNb2RlbABTQ19iZjFmYmQzMzVhMDQ0YmIyODJmZjkxNTg3YjQ2YTAz
-NS5kbGwAZ2V0X29yZGVyaWRfSXNOdWxsAGdldF9wcm9kdWN0aWRfSXNOdWxsAGdldF91bml0cHJp
-Y2V1c2RfSXNOdWxsAGdldF9saW5ldG90YWx1c2RfSXNOdWxsAHNldF9yb3doYXNoX0lzTnVsbABn
-ZXRfcXVhbnRpdHlfSXNOdWxsAFNldE51bGwAc2V0X0l0ZW0AU3lzdGVtAHJlc291cmNlTWFuAFNj
-cmlwdE1haW4AU3lzdGVtLkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVt
-LlJlZmxlY3Rpb24ASW52YWxpZE9wZXJhdGlvbkV4Y2VwdGlvbgBTdHJpbmdDb21wYXJpc29uAEN1
-bHR1cmVJbmZvAE91dHB1dE5hbWVNYXAAT3V0cHV0TWFwAElucHV0MEJ1ZmZlcgBQaXBlbGluZUJ1
-ZmZlcgBTY3JpcHRCdWZmZXIAZ2V0X1Jlc291cmNlTWFuYWdlcgAuY3RvcgAuY2N0b3IAU3lzdGVt
-LkRpYWdub3N0aWNzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLlJlc291
-cmNlcwBTQ19iZjFmYmQzMzVhMDQ0YmIyODJmZjkxNTg3YjQ2YTAzNS5Qcm9wZXJ0aWVzLlJlc291
-cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAU0NfYmYxZmJkMzM1YTA0NGJiMjgyZmY5MTU4
-N2I0NmEwMzUuUHJvcGVydGllcwBWYXJpYWJsZXMAQnVmZmVyQ29sdW1uSW5kZXhlcwBHZXRDb2x1
-bW5JbmRleGVzAFNldHRpbmdzAEVxdWFscwBDb25uZWN0aW9ucwBPYmplY3QARW5kT2ZSb3dzZXQA
-Z2V0X0RlZmF1bHQAVXNlckNvbXBvbmVudABQYXJlbnRDb21wb25lbnQAU2NyaXB0Q29tcG9uZW50
-AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuVHhTY3JpcHQATWljcm9zb2Z0LlNxbFNlcnZlci5QaXBlbGlu
-ZUhvc3QASW5wdXQwX1Byb2Nlc3NJbnB1dABJbnB1dDBfUHJvY2Vzc0lucHV0Um93AE5leHRSb3cA
-Z2V0X0Fzc2VtYmx5AGdldF9xdWFudGl0eQAAgJtJAHMATgB1AGwAbAAgAHAAcgBvAHAAZQByAHQA
-eQAgAGMAYQBuAG4AbwB0ACAAYgBlACAAcwBlAHQAIAB0AG8AIABGAGEAbABzAGUALgAgAEEAcwBz
-AGkAZwBuACAAYQAgAHYAYQBsAHUAZQAgAHQAbwAgAHQAaABlACAAYwBvAGwAdQBtAG4AIABpAG4A
-cwB0AGUAYQBkAC4AAA9JAG4AcAB1AHQAIAAwAABxUwBDAF8AYgBmADEAZgBiAGQAMwAzADUAYQAw
-ADQANABiAGIAMgA4ADIAZgBmADkAMQA1ADgANwBiADQANgBhADAAMwA1AC4AUAByAG8AcABlAHIA
-dABpAGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAACd3lqDq9lpTIRplbtNv97tAAQgAQEIAyAAAQUg
-AQEREQQgAQEOBSABARFZCSADARI9HQgSQQMGEj0DBh0IBCABDggEIAECCAUgAgEIHAMgAAIGIAIC
-DhFxBSABHQgIBgABEnUReQQgABJ9BiACAQ4SfQi3elxWGTTgiQiJhF3NgIDMkQMGEhQDBhIYAwYS
-RQMGElEDBhJVAwYSIAUgAQESDAMgAA4FIAEBHQUEIAEBAgkgBAEIDhI9EkEFIAEBEkUEAAASUQQA
-ABJVBQABARJVBAAAEiADAAABAygADgMoAAIEKAAdBQQIABJRBAgAElUECAASIAgBAAgAAAAAAB4B
-AAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU0NfYmYxZmJkMzM1YTA0
-NGJiMjgyZmY5MTU4N2I0NmEwMzUAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAyNgAATQEAHC5O
-RVRGcmFtZXdvcmssVmVyc2lvbj12NC43LjIBAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lFC5ORVQg
-RnJhbWV3b3JrIDQuNy4yBAEAAAAAtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJl
-c291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWws
-IFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1l
-UmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAADgzAAAAAAAAAAAAAFIzAAAAIAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAABEMwAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAA
-AAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAA
-SAAAAFhAAADsAwAAAAAAAAAAAADsAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAA
-AAAAvQTv/gAAAQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
-AAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBu
-AAAAAAAAALAETAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAA
-MAAwADQAYgAwAAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBu
-AHkATgBhAG0AZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAA
-AABTAEMAXwBiAGYAMQBmAGIAZAAzADMANQBhADAANAA0AGIAYgAyADgAMgBmAGYAOQAxADUAOAA3
-AGIANAA2AGEAMAAzADUAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4A
-MAAuADAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfAGIAZgAxAGYAYgBk
-ADMAMwA1AGEAMAA0ADQAYgBiADIAOAAyAGYAZgA5ADEANQA4ADcAYgA0ADYAYQAwADMANQAuAGQA
-bABsAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBo
-AHQAIABAACAAIAAyADAAMgA2AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMA
-AAAAAAAAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBDAF8AYgBm
-ADEAZgBiAGQAMwAzADUAYQAwADQANABiAGIAMgA4ADIAZgBmADkAMQA1ADgANwBiADQANgBhADAA
-MwA1AC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAQwBfAGIAZgAx
-AGYAYgBkADMAMwA1AGEAMAA0ADQAYgBiADIAOAAyAGYAZgA5ADEANQA4ADcAYgA0ADYAYQAwADMA
-NQAAADQACAABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4
-AAgAAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAZDMAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
-                  </arrayElements>
-                </property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
-                  name="VSTAProjectName"
-                  typeConverter="NOTBROWSABLE">SC_bf1fbd335a044bb282ff91587b46a035</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the programming language used by the script."
-                  name="ScriptLanguage"
-                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a comma-separated list of read-only variables."
-                  name="ReadOnlyVariables"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a comma-separated list of read/write variables."
-                  name="ReadWriteVariables"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
-                <property
-                  dataType="System.String"
-                  description="List of breakpoints present on the script."
-                  isArray="true"
-                  name="BreakpointCollection"
-                  typeConverter="NOTBROWSABLE">
-                  <arrayElements
-                    arrayElementCount="0" />
-                </property>
-                <property
-                  dataType="System.String"
-                  description="Checksum to match component metedata against compiled codes."
-                  name="MetadataChecksum140"
-                  typeConverter="NOTBROWSABLE">E1</property>
-                <property
-                  dataType="System.String"
-                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
-              </properties>
+              refId="Package\Load_Stg_OrderItems\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
               <inputs>
                 <input
-                  refId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0]"
-                  hasSideEffects="true"
-                  name="Input 0">
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0].Columns[order_id]"
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[order_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="order_id"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]" />
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
                     <inputColumn
-                      refId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0].Columns[product_id]"
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[product_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="product_id"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]" />
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
                     <inputColumn
-                      refId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0].Columns[unit_price_usd]"
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[unit_price_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="unit_price_usd"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]" />
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]}</property>
+                      </properties>
+                    </inputColumn>
                     <inputColumn
-                      refId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0].Columns[quantity]"
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[quantity]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="quantity"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]" />
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]}</property>
+                      </properties>
+                    </inputColumn>
                     <inputColumn
-                      refId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0].Columns[line_total_usd]"
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[line_total_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="line_total_usd"
-                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]" />
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[ErrorCode_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[ErrorColumn_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[ErrorCode_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[ErrorColumn_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 4]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 4">
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0]"
-                  name="Output 0"
-                  synchronousInputId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0]">
+                  refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0].Columns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      lineageId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0].Columns[row_hash]"
-                      name="row_hash" />
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]"
+                      name="unit_price_usd" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]"
+                      name="quantity" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]"
+                      name="line_total_usd" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
+                      name="source_file_name" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]"
+                      name="batch_id" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]"
+                      name="ingest_at" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]"
+                      name="is_valid" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]"
+                      name="is_processed" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]"
+                      name="error_message" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      name="ErrorCode" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      name="ErrorColumn" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2980,47 +2286,52 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               startId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output]" />
             <path
               refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output]"
-              endId="Package\Load_Stg_OrderItems\Script Component.Inputs[Input 0]"
-              name="Derived Column Output"
-              startId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output1]"
               endId="Package\Load_Stg_OrderItems\Row Count 2.Inputs[Row Count Input 1]"
               name="Derived Column Output"
               startId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Output]" />
             <path
-              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output2]"
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output1]"
               endId="Package\Load_Stg_OrderItems\Row Count.Inputs[Row Count Input 1]"
               name="Derived Column Output"
               startId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output2]"
+              endId="Package\Load_Stg_OrderItems\Row Count 1.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output3]"
+              endId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output]" />
             <path
               refId="Package\Load_Stg_OrderItems.Paths[Flat File Source Output]"
               endId="Package\Load_Stg_OrderItems\Derived Column.Inputs[Derived Column Input]"
               name="Flat File Source Output"
               startId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output]" />
             <path
-              refId="Package\Load_Stg_OrderItems.Paths[Output 0]"
-              endId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input]"
-              name="Output 0"
-              startId="Package\Load_Stg_OrderItems\Script Component.Outputs[Output 0]" />
-            <path
               refId="Package\Load_Stg_OrderItems.Paths[Row Count Output 1]"
-              endId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              endId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1]"
               name="Row Count Output 1"
-              startId="Package\Load_Stg_OrderItems\Row Count.Outputs[Row Count Output 1]" />
+              startId="Package\Load_Stg_OrderItems\Row Count 2.Outputs[Row Count Output 1]" />
             <path
               refId="Package\Load_Stg_OrderItems.Paths[Row Count Output 11]"
-              endId="Package\Load_Stg_OrderItems\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              endId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2]"
               name="Row Count Output 1"
               startId="Package\Load_Stg_OrderItems\Row Count 1.Outputs[Row Count Output 1]" />
             <path
               refId="Package\Load_Stg_OrderItems.Paths[Row Count Output 12]"
-              endId="Package\Load_Stg_OrderItems\OLE DB Destination 2.Inputs[OLE DB Destination Input]"
+              endId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3]"
               name="Row Count Output 1"
-              startId="Package\Load_Stg_OrderItems\Row Count 2.Outputs[Row Count Output 1]" />
+              startId="Package\Load_Stg_OrderItems\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Union All Output 1]"
+              endId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1]" />
             <path
               refId="Package\Load_Stg_OrderItems.Paths[ValidRows]"
-              endId="Package\Load_Stg_OrderItems\Row Count 1.Inputs[Row Count Input 1]"
+              endId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]"
               name="ValidRows"
               startId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[ValidRows]" />
           </paths>
@@ -3075,23 +2386,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="164,42.6666666666667"
+          Size="164,42.4"
           Id="Package\Execute SQL Task"
           TopLeft="368.749983515591,111.149994699955" />
         <NodeLayout
-          Size="173.333333333334,42.6666666666667"
+          Size="173.6,42.4"
           Id="Package\Execute SQL Task 1"
           TopLeft="358.749983962626,460.84997802496" />
         <NodeLayout
-          Size="154.666666666667,42.6666666666667"
+          Size="154.4,42.4"
           Id="Package\Expression Task"
           TopLeft="373.749983292074,281.449986579419" />
         <NodeLayout
-          Size="164,42.6666666666667"
+          Size="164,42.4"
           Id="Package\Expression Task 1"
           TopLeft="362.499983794988,363.349982674122" />
         <NodeLayout
-          Size="182.666666666667,42.6666666666667"
+          Size="182.4,42.4"
           Id="Package\Load_Stg_OrderItems"
           TopLeft="355.624984102325,198.249990546704" />
         <EdgeLayout
@@ -3191,243 +2502,67 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="140,42.6666666666667"
-          Id="Package\Load_Stg_OrderItems\Row Count 2"
-          TopLeft="792.968714551536,543.541645358007" />
-        <NodeLayout
-          Size="164,57.3333333333334"
-          Id="Package\Load_Stg_OrderItems\Derived Column 1"
-          TopLeft="771.540144080896,377.580339138424" />
-        <NodeLayout
-          Size="140,42.6666666666667"
+          Size="140,42.4"
           Id="Package\Load_Stg_OrderItems\Row Count 1"
-          TopLeft="523.549083738389,736.008893475789" />
+          TopLeft="522.120512306777,723.773599368867" />
         <NodeLayout
-          Size="130.666666666667,42.6666666666667"
+          Size="130.4,42.4"
           Id="Package\Load_Stg_OrderItems\Row Count"
-          TopLeft="156.517848581342,739.455322168981" />
+          TopLeft="237.946420183254,722.631792771963" />
         <NodeLayout
-          Size="181.333333333334,42.6666666666667"
-          Id="Package\Load_Stg_OrderItems\OLE DB Destination 2"
-          TopLeft="781.584786489008,625.624970167876" />
+          Size="164,57.6"
+          Id="Package\Load_Stg_OrderItems\Derived Column 1"
+          TopLeft="837.25442993507,606.992103643218" />
         <NodeLayout
-          Size="194,64"
-          Id="Package\Load_Stg_OrderItems\Flat File Source"
-          TopLeft="328.482128172846,119.599994297027" />
-        <NodeLayout
-          Size="181.333333333334,42.6666666666667"
-          Id="Package\Load_Stg_OrderItems\OLE DB Destination 1"
-          TopLeft="511.71872712439,819.696389485258" />
-        <NodeLayout
-          Size="157.333333333334,42.6666666666667"
-          Id="Package\Load_Stg_OrderItems\Data Conversion"
-          TopLeft="348.906234402675,449.219621436682" />
-        <NodeLayout
-          Size="172,42.6666666666667"
+          Size="170.4,41.6"
           Id="Package\Load_Stg_OrderItems\OLE DB Destination"
-          TopLeft="154.821421650372,838.052342262496" />
+          TopLeft="532.653062358368,906.80672232999" />
         <NodeLayout
-          Size="181.333333333334,42.6666666666667"
-          Id="Package\Load_Stg_OrderItems\Derived Column"
-          TopLeft="338.482127725813,279.407129533973" />
+          Size="162.4,41.6"
+          Id="Package\Load_Stg_OrderItems\Derived Column 2"
+          TopLeft="515.714286812106,619.411764162944" />
         <NodeLayout
-          Size="164,57.3333333333334"
+          Size="164,57.6"
           Id="Package\Load_Stg_OrderItems\Derived Column 1 1"
-          TopLeft="151.249991897494,544.166645590465" />
+          TopLeft="228.392849204568,616.048998468634" />
         <NodeLayout
-          Size="156,42.6666666666667"
+          Size="157.6,42.4"
+          Id="Package\Load_Stg_OrderItems\Data Conversion"
+          TopLeft="417.477663120074,449.219621436682" />
+        <NodeLayout
+          Size="181.6,42.4"
+          Id="Package\Load_Stg_OrderItems\Derived Column"
+          TopLeft="407.053556443212,279.407129533973" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Load_Stg_OrderItems\Union All"
+          TopLeft="524.489797034869,814.68907521467" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Load_Stg_OrderItems\Row Count 2"
+          TopLeft="834.397286068298,724.012233435112" />
+        <NodeLayout
+          Size="156,42.4"
           Id="Package\Load_Stg_OrderItems\Conditional Split"
-          TopLeft="471.348198042783,551.508902464169" />
+          TopLeft="421.348197936346,527.038314250324" />
         <NodeLayout
-          Size="164,42.6666666666667"
-          Id="Package\Load_Stg_OrderItems\Script Component"
-          TopLeft="356.584805487988,353.321411723751" />
+          Size="193.6,54.4"
+          Id="Package\Load_Stg_OrderItems\Flat File Source"
+          TopLeft="397.053556890245,128.599994308422" />
         <EdgeLayout
-          Id="Package\Load_Stg_OrderItems.Paths[ValidRows]"
-          TopLeft="549.348198042783,594.175569130836">
+          Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output3]"
+          TopLeft="497.065609781643,321.807129533973">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="44.200885695606,141.833324344953"
+              EndConnector="0,127.412491902709"
               Start="0,0"
-              End="44.200885695606,134.333324344953">
+              End="0,119.912491902709">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,66.9166621724767" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,66.9166621724767"
-                    Point2="0,70.9166621724767"
-                    Point3="4,70.9166621724767" />
-                  <mssgle:LineSegment
-                    End="40.200885695606,70.9166621724767" />
-                  <mssgle:CubicBezierSegment
-                    Point1="40.200885695606,70.9166621724767"
-                    Point2="44.200885695606,70.9166621724767"
-                    Point3="44.200885695606,74.9166621724767" />
-                  <mssgle:LineSegment
-                    End="44.200885695606,134.333324344953" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-1.25031887094702,75.9166621724767,46.7015234375,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 12]"
-          TopLeft="862.968714551536,586.208312024674">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="9.28273860413924,39.4166581432025"
-              Start="0,0"
-              End="9.28273860413924,31.9166581432025">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,15.7083290716013" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.7083290716013"
-                    Point2="0,19.7083290716013"
-                    Point3="4,19.7083290716013" />
-                  <mssgle:LineSegment
-                    End="5.28273860413924,19.7083290716013" />
-                  <mssgle:CubicBezierSegment
-                    Point1="5.28273860413924,19.7083290716013"
-                    Point2="9.28273860413924,19.7083290716013"
-                    Point3="9.28273860413924,23.7083290716013" />
-                  <mssgle:LineSegment
-                    End="9.28273860413924,31.9166581432025" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 11]"
-          TopLeft="593.549083738389,778.675560142456">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="8.83631005266705,41.0208293428026"
-              Start="0,0"
-              End="8.83631005266705,33.5208293428026">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.5104146714013" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.5104146714013"
-                    Point2="0,20.5104146714013"
-                    Point3="4,20.5104146714013" />
-                  <mssgle:LineSegment
-                    End="4.83631005266705,20.5104146714013" />
-                  <mssgle:CubicBezierSegment
-                    Point1="4.83631005266705,20.5104146714013"
-                    Point2="8.83631005266705,20.5104146714013"
-                    Point3="8.83631005266705,24.5104146714013" />
-                  <mssgle:LineSegment
-                    End="8.83631005266705,33.5208293428026" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 1]"
-          TopLeft="221.851181914675,782.121988835648">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="18.9702397356967,55.9303534268489"
-              Start="0,0"
-              End="18.9702397356967,48.4303534268489">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.9651767134245" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.9651767134245"
-                    Point2="0,27.9651767134245"
-                    Point3="4,27.9651767134245" />
-                  <mssgle:LineSegment
-                    End="14.9702397356967,27.9651767134245" />
-                  <mssgle:CubicBezierSegment
-                    Point1="14.9702397356967,27.9651767134245"
-                    Point2="18.9702397356967,27.9651767134245"
-                    Point3="18.9702397356967,31.9651767134245" />
-                  <mssgle:LineSegment
-                    End="18.9702397356967,48.4303534268489" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load_Stg_OrderItems.Paths[Output 0]"
-          TopLeft="438.584805487988,395.988078390417">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-35.9007933075353,53.2315430462646"
-              Start="0,0"
-              End="-35.9007933075353,45.7315430462646">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,27.6173930174122" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,27.6173930174122"
-                    Point2="0,31.6173930174122"
-                    Point3="-4,31.6173930174122" />
-                  <mssgle:LineSegment
-                    End="-31.9007933075353,31.6173930174122" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-31.9007933075353,31.6173930174122"
-                    Point2="-35.9007933075353,31.6173930174122"
-                    Point3="-35.9007933075353,35.6173930174122" />
-                  <mssgle:LineSegment
-                    End="-35.9007933075353,45.7315430462646" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load_Stg_OrderItems.Paths[Flat File Source Output]"
-          TopLeft="427.315461282663,183.599994297027">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,95.8071352369459"
-              Start="0,0"
-              End="0,88.3071352369459">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,88.3071352369459" />
+                    End="0,119.912491902709" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3438,30 +2573,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output2]"
-          TopLeft="233.249991897494,601.499978923798">
+          TopLeft="594.517399559441,661.011764162944">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-11.3988099828186,137.955343245183"
+              EndConnector="0,62.7618352059226"
               Start="0,0"
-              End="-11.3988099828186,130.455343245183">
+              End="0,55.2618352059226">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,64.9776716225913" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,64.9776716225913"
-                    Point2="0,68.9776716225913"
-                    Point3="-4,68.9776716225913" />
-                  <mssgle:LineSegment
-                    End="-7.39880998281865,68.9776716225913" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-7.39880998281865,68.9776716225913"
-                    Point2="-11.3988099828186,68.9776716225913"
-                    Point3="-11.3988099828186,72.9776716225913" />
-                  <mssgle:LineSegment
-                    End="-11.3988099828186,130.455343245183" />
+                    End="0,55.2618352059226" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3472,30 +2595,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output1]"
-          TopLeft="853.540144080896,434.913672471757">
+          TopLeft="306.769634693911,673.648998468634">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="9.42857047063956,108.62797288625"
+              EndConnector="0,48.9827943033289"
               Start="0,0"
-              End="9.42857047063956,101.12797288625">
+              End="0,41.4827943033289">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.3139864431251" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,50.3139864431251"
-                    Point2="0,54.3139864431251"
-                    Point3="4,54.3139864431251" />
-                  <mssgle:LineSegment
-                    End="5.42857047063956,54.3139864431251" />
-                  <mssgle:CubicBezierSegment
-                    Point1="5.42857047063956,54.3139864431251"
-                    Point2="9.42857047063956,54.3139864431251"
-                    Point3="9.42857047063956,58.3139864431251" />
-                  <mssgle:LineSegment
-                    End="9.42857047063956,101.12797288625" />
+                    End="0,41.4827943033289" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3506,30 +2617,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output]"
-          TopLeft="429.148794392479,322.07379620064">
+          TopLeft="919.25442993507,664.592103643218">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="9.436011095509,31.2476155231109"
+              EndConnector="-15.2571438667725,59.4201297918938"
               Start="0,0"
-              End="9.436011095509,23.7476155231109">
+              End="-15.2571438667725,51.9201297918938">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.6238077615554" />
+                    End="0,25.7100648959469" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,11.6238077615554"
-                    Point2="0,15.6238077615554"
-                    Point3="4,15.6238077615554" />
+                    Point1="0,25.7100648959469"
+                    Point2="0,29.7100648959469"
+                    Point3="-4,29.7100648959469" />
                   <mssgle:LineSegment
-                    End="5.436011095509,15.6238077615554" />
+                    End="-11.2571438667725,29.7100648959469" />
                   <mssgle:CubicBezierSegment
-                    Point1="5.436011095509,15.6238077615554"
-                    Point2="9.436011095509,15.6238077615554"
-                    Point3="9.436011095509,19.6238077615554" />
+                    Point1="-11.2571438667725,29.7100648959469"
+                    Point2="-15.2571438667725,29.7100648959469"
+                    Point3="-15.2571438667725,33.7100648959469" />
                   <mssgle:LineSegment
-                    End="9.436011095509,23.7476155231109" />
+                    End="-15.2571438667725,51.9201297918938" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3540,30 +2651,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load_Stg_OrderItems.Paths[Data Conversion Output]"
-          TopLeft="427.406234402675,492.219621436682">
+          TopLeft="497.81293052821,491.619621436682">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="121.941963640108,59.2892810274869"
+              EndConnector="0,35.418692813642"
               Start="0,0"
-              End="121.941963640108,51.7892810274869">
+              End="0,27.918692813642">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.6446405137435" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.6446405137435"
-                    Point2="0,29.6446405137435"
-                    Point3="4,29.6446405137435" />
-                  <mssgle:LineSegment
-                    End="117.941963640108,29.6446405137435" />
-                  <mssgle:CubicBezierSegment
-                    Point1="117.941963640108,29.6446405137435"
-                    Point2="121.941963640108,29.6446405137435"
-                    Point3="121.941963640108,33.6446405137435" />
-                  <mssgle:LineSegment
-                    End="121.941963640108,51.7892810274869" />
+                    End="0,27.918692813642" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3574,93 +2673,273 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load_Stg_OrderItems.Paths[Data Conversion Error Output]"
-          TopLeft="506.239567736009,470.552954770015">
+          TopLeft="521.210996453407,491.619621436682">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="265.300576344887,-64.305948964925"
+              EndConnector="398.043433481663,115.372482206536"
               Start="0,0"
-              End="257.800576344887,-64.305948964925">
+              End="398.043433481663,107.872482206536">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="128.650288172444,0" />
+                    End="0,42.8447063431563" />
                   <mssgle:CubicBezierSegment
-                    Point1="128.650288172444,0"
-                    Point2="132.650288172444,0"
-                    Point3="132.650288172444,-4" />
+                    Point1="0,42.8447063431563"
+                    Point2="0,46.8447063431563"
+                    Point3="4,46.8447063431563" />
                   <mssgle:LineSegment
-                    End="132.650288172444,-60.305948964925" />
+                    End="394.043433481663,46.8447063431563" />
                   <mssgle:CubicBezierSegment
-                    Point1="132.650288172444,-60.305948964925"
-                    Point2="132.650288172444,-64.305948964925"
-                    Point3="136.650288172444,-64.305948964925" />
+                    Point1="394.043433481663,46.8447063431563"
+                    Point2="398.043433481663,46.8447063431563"
+                    Point3="398.043433481663,50.8447063431563" />
                   <mssgle:LineSegment
-                    End="257.800576344887,-64.305948964925" />
+                    End="398.043433481663,107.872482206536" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="66.5639014536937,1,132.1727734375,11.43359375"
+              BoundingBox="132.935330022082,51.8447063431563,132.1727734375,11.43359375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load_Stg_OrderItems.Paths[Conditional Split Default Output]"
-          TopLeft="471.348198042783,572.837774027317">
+          TopLeft="474.681531269679,569.438314250324">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-156.098206145289,0"
+              EndConnector="-164.288682065111,46.6106842183099"
               Start="0,0"
-              End="-148.598206145289,0">
+              End="-164.288682065111,39.1106842183099">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-148.598206145289,0" />
+                    End="0,14.9281966368771" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.9281966368771"
+                    Point2="0,18.9281966368771"
+                    Point3="-4,18.9281966368771" />
+                  <mssgle:LineSegment
+                    End="-160.288682065111,18.9281966368771" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.288682065111,18.9281966368771"
+                    Point2="-164.288682065111,18.9281966368771"
+                    Point3="-164.288682065111,22.9281966368771" />
+                  <mssgle:LineSegment
+                    End="-164.288682065111,39.1106842183099" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-144.913009322645,5,141.2278125,11.658203125"
+              BoundingBox="-152.758247282556,23.9281966368771,141.2278125,11.658203125"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[ValidRows]"
+          TopLeft="524.014864603013,569.438314250324">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.8994222090935,49.97344991262"
+              Start="0,0"
+              End="72.8994222090935,42.47344991262">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.2937867665462" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.2937867665462"
+                    Point2="0,20.2937867665462"
+                    Point3="4,20.2937867665462" />
+                  <mssgle:LineSegment
+                    End="68.8994222090935,20.2937867665462" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.8994222090935,20.2937867665462"
+                    Point2="72.8994222090935,20.2937867665462"
+                    Point3="72.8994222090935,24.2937867665462" />
+                  <mssgle:LineSegment
+                    End="72.8994222090935,42.47344991262" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="13.0989493857968,25.2937867665462,46.7015234375,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Union All Output 1]"
+          TopLeft="584.489797034869,856.28907521467">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="33.3632653234999,50.5176471153197"
+              Start="0,0"
+              End="33.3632653234999,43.0176471153197">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.2588235576599" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.2588235576599"
+                    Point2="0,25.2588235576599"
+                    Point3="4,25.2588235576599" />
+                  <mssgle:LineSegment
+                    End="29.3632653234999,25.2588235576599" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.3632653234999,25.2588235576599"
+                    Point2="33.3632653234999,25.2588235576599"
+                    Point3="33.3632653234999,29.2588235576599" />
+                  <mssgle:LineSegment
+                    End="33.3632653234999,43.0176471153197" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 12]"
+          TopLeft="303.146420183254,765.031792771963">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="253.343376851615,49.6572824427071"
+              Start="0,0"
+              End="253.343376851615,42.1572824427071">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.3851842017655" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.3851842017655"
+                    Point2="0,32.3851842017655"
+                    Point3="4,32.3851842017655" />
+                  <mssgle:LineSegment
+                    End="249.343376851615,32.3851842017655" />
+                  <mssgle:CubicBezierSegment
+                    Point1="249.343376851615,32.3851842017655"
+                    Point2="253.343376851615,32.3851842017655"
+                    Point3="253.343376851615,36.3851842017655" />
+                  <mssgle:LineSegment
+                    End="253.343376851615,42.1572824427071" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 11]"
+          TopLeft="592.120512306777,766.173599368867">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-26.2973819385746,48.5154758458033"
+              Start="0,0"
+              End="-26.2973819385746,41.0154758458033">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.7262685929098" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.7262685929098"
+                    Point2="0,28.7262685929098"
+                    Point3="-4,28.7262685929098" />
+                  <mssgle:LineSegment
+                    End="-22.2973819385746,28.7262685929098" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.2973819385746,28.7262685929098"
+                    Point2="-26.2973819385746,28.7262685929098"
+                    Point3="-26.2973819385746,32.7262685929098" />
+                  <mssgle:LineSegment
+                    End="-26.2973819385746,41.0154758458033" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 1]"
+          TopLeft="903.997286068298,765.612233435112">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-319.507489033429,49.0768417795581"
+              Start="0,0"
+              End="-319.507489033429,41.5768417795581">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.538420889779" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.538420889779"
+                    Point2="0,24.538420889779"
+                    Point3="-4,24.538420889779" />
+                  <mssgle:LineSegment
+                    End="-315.507489033429,24.538420889779" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-315.507489033429,24.538420889779"
+                    Point2="-319.507489033429,24.538420889779"
+                    Point3="-319.507489033429,28.538420889779" />
+                  <mssgle:LineSegment
+                    End="-319.507489033429,41.5768417795581" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Flat File Source Output]"
+          TopLeft="495.853556666729,182.999994308422">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96.407135225551"
+              Start="0,0"
+              End="0,88.907135225551">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,88.907135225551" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load_Stg_OrderItems\OLE DB Destination 2">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load_Stg_OrderItems\OLE DB Destination 1">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load_Stg_OrderItems\OLE DB Destination">
     <Properties>
