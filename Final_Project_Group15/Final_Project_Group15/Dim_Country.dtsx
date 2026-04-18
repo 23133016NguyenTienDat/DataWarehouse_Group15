@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="4/12/2026 8:17:51 PM"
@@ -11,9 +11,1283 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionGUID="{508937D3-E344-40CF-B556-0581C8CE4715}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{E2F7F5C6-45D8-4EA8-B9B0-C505100953D3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4BE0E9FF-9030-4DA2-9D0E-162276910008}"
+      DTS:ObjectName="LAPTOP-528QRPG1.DataWarehouse">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source=" + @[$Project::DB_SERVER] + 
+";Initial Catalog=" + @[$Project::DB_NAME_DW] + 
+";Provider=MSOLEDBSQL;Integrated Security=SSPI;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-528QRPG1;Initial Catalog=DataWarehouse;Provider=MSOLEDBSQL;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-528QRPG1.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C944998A-C04D-492D-B868-B28F7BB58048}"
+      DTS:ObjectName="LAPTOP-528QRPG1.Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source=" + @[$Project::DB_SERVER] + 
+";Initial Catalog=" + @[$Project::DB_NAME_STAGING] + 
+";Provider=MSOLEDBSQL;Integrated Security=SSPI;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-528QRPG1;Initial Catalog=Staging;Provider=MSOLEDBSQL;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load_Dim_Country"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C415FAF5-28C9-414D-917F-55C6924000C8}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load_Dim_Country"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load_Dim_Country\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input].Columns[country_name_old]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="country_name_old"
+                      lineageId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_name_old]" />
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="country"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Dim_Country\Conditional Split.Outputs[change]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="change"
+                  synchronousInputId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]} != #{Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_name_old]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">country != country_name_old</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Dim_Country\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Dim_Country\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Dim_Country\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from dw.dim_country</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from dw.dim_country) [refTable]
+where [refTable].[country_name] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="country_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="country_name" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load_Dim_Country\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load_Dim_Country\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\Lookup.Inputs[Lookup Input].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="country"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">country_name</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load_Dim_Country\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_name_old]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_name_old]"
+                      name="country_name_old"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">country_name</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_key]"
+                      name="country_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">country_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load_Dim_Country\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load_Dim_Country\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Dim_Country\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE dw.dim_country
+SET
+    country_name = ?
+WHERE country_key = ?
+</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load_Dim_Country\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input].Columns[country_key]"
+                      cachedDataType="i4"
+                      cachedName="country_key"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output].Columns[country_key]" />
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="country"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Dim_Country\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Dim_Country\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Dim_Country\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[dim_country]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load_Dim_Country\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="country"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_name]"
+                      lineageId="Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_key]"
+                      dataType="i4"
+                      name="country_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="country_name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Dim_Country\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Dim_Country\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[sessions]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT country
+FROM Staging.stg.sessions
+WHERE country IS NOT NULL</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load_Dim_Country\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[stg_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[stg_id]"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[stg_id]"
+                      name="stg_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[session_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[session_id]"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[session_id]"
+                      name="session_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_time]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[start_time]"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_time]"
+                      name="start_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[device]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[device]"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[device]"
+                      name="device"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source]"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]"
+                      name="source"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source_file_name]"
+                      length="255"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]"
+                      name="source_file_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[batch_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[batch_id]"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[batch_id]"
+                      name="batch_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[ingest_at]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ingest_at]"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[ingest_at]"
+                      name="ingest_at"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[row_hash]"
+                      length="255"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]"
+                      name="row_hash"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_valid]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_valid]"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_valid]"
+                      name="is_valid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_processed]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_processed]"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_processed]"
+                      name="is_processed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[error_message]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[error_message]"
+                      length="500"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[error_message]"
+                      name="error_message"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="100"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[stg_id]"
+                      dataType="i8"
+                      name="stg_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[session_id]"
+                      dataType="wstr"
+                      length="100"
+                      name="session_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="wstr"
+                      length="100"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[start_time]"
+                      dataType="wstr"
+                      length="100"
+                      name="start_time" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[device]"
+                      dataType="wstr"
+                      length="100"
+                      name="device" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source]"
+                      dataType="wstr"
+                      length="100"
+                      name="source" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source_file_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="source_file_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[batch_id]"
+                      dataType="i4"
+                      name="batch_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ingest_at]"
+                      dataType="dbTimeStamp2"
+                      name="ingest_at"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[row_hash]"
+                      dataType="wstr"
+                      length="255"
+                      name="row_hash" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_valid]"
+                      dataType="bool"
+                      name="is_valid" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_processed]"
+                      dataType="bool"
+                      name="is_processed" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[error_message]"
+                      dataType="wstr"
+                      length="500"
+                      name="error_message" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[stg_id]"
+                      dataType="i8"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[stg_id]"
+                      name="stg_id" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[session_id]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[session_id]"
+                      name="session_id" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[start_time]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[start_time]"
+                      name="start_time" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[device]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[device]"
+                      name="device" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source]"
+                      name="source" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source_file_name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source_file_name]"
+                      name="source_file_name" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[batch_id]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[batch_id]"
+                      name="batch_id" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ingest_at]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ingest_at]"
+                      name="ingest_at"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
+                      name="row_hash" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_valid]"
+                      dataType="bool"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_valid]"
+                      name="is_valid" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_processed]"
+                      dataType="bool"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_processed]"
+                      name="is_processed" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[error_message]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[error_message]"
+                      name="error_message" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Dim_Country\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load_Dim_Country\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Dim_Country\Sort.Inputs[Sort Input].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="country"
+                      lineageId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Dim_Country\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load_Dim_Country\Sort.Outputs[Sort Output].Columns[country]"
+                      name="country"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load_Dim_Country.Paths[change]"
+              endId="Package\Load_Dim_Country\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="change"
+              startId="Package\Load_Dim_Country\Conditional Split.Outputs[change]" />
+            <path
+              refId="Package\Load_Dim_Country.Paths[Lookup Match Output]"
+              endId="Package\Load_Dim_Country\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Load_Dim_Country\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load_Dim_Country.Paths[Lookup No Match Output]"
+              endId="Package\Load_Dim_Country\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load_Dim_Country\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load_Dim_Country.Paths[OLE DB Source Output]"
+              endId="Package\Load_Dim_Country\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load_Dim_Country\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Load_Dim_Country.Paths[Sort Output]"
+              endId="Package\Load_Dim_Country\Lookup.Inputs[Lookup Input]"
+              name="Sort Output"
+              startId="Package\Load_Dim_Country\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\Load_Dim_Country"
+          TopLeft="210.833321813908,144.733332326876" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load_Dim_Country">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Load_Dim_Country\Sort"
+          TopLeft="498.999992564321,210.999996855855" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Load_Dim_Country\Lookup"
+          TopLeft="491.999992668629,303.999995470047" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Load_Dim_Country\OLE DB Source"
+          TopLeft="466.999993041158,86.999998703599" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Load_Dim_Country\OLE DB Command"
+          TopLeft="422.49999370426,512.499992363155" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Load_Dim_Country\OLE DB Destination"
+          TopLeft="726.249989178032,456.749993238598" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Load_Dim_Country\Conditional Split"
+          TopLeft="470.49999307096,397.74999415502" />
+        <EdgeLayout
+          Id="Package\Load_Dim_Country.Paths[Sort Output]"
+          TopLeft="548.099992616475,252.599996855855">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.399998614192"
+              Start="0,0"
+              End="0,43.899998614192">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.899998614192" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Dim_Country.Paths[OLE DB Source Output]"
+          TopLeft="545.399992802739,128.599998703599">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,82.399998152256"
+              Start="0,0"
+              End="0,74.899998152256">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.899998152256" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Dim_Country.Paths[Lookup No Match Output]"
+          TopLeft="565.866659335295,345.599995470047">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="245.983329842736,111.149997768551"
+              Start="0,0"
+              End="245.983329842736,103.649997768551">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.3927263614223" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.3927263614223"
+                    Point2="0,45.3927263614223"
+                    Point3="4,45.3927263614223" />
+                  <mssgle:LineSegment
+                    End="241.983329842736,45.3927263614223" />
+                  <mssgle:CubicBezierSegment
+                    Point1="241.983329842736,45.3927263614223"
+                    Point2="245.983329842736,45.3927263614223"
+                    Point3="245.983329842736,49.3927263614223" />
+                  <mssgle:LineSegment
+                    End="245.983329842736,103.649997768551" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="67.1852782026182,50.3927263614223,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Dim_Country.Paths[Lookup Match Output]"
+          TopLeft="547.849992869795,345.599995470047">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.1499986849726"
+              Start="0,0"
+              End="0,44.6499986849726">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.6499986849726" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,16.5203118424863,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Dim_Country.Paths[change]"
+          TopLeft="547.29999307096,439.34999415502">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-41.1999993667006,73.1499982081353"
+              Start="0,0"
+              End="-41.1999993667006,65.6499982081353">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5749991040677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5749991040677"
+                    Point2="0,36.5749991040677"
+                    Point3="-4,36.5749991040677" />
+                  <mssgle:LineSegment
+                    End="-37.1999993667006,36.5749991040677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-37.1999993667006,36.5749991040677"
+                    Point2="-41.1999993667006,36.5749991040677"
+                    Point3="-41.1999993667006,40.5749991040677" />
+                  <mssgle:LineSegment
+                    End="-41.1999993667006,65.6499982081353" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-37.2309567146003,41.5749991040677,33.2619140625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load_Dim_Country\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load_Dim_Country\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load_Dim_Country\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
