@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="57"
-  DTS:VersionGUID="{9CA2A7BF-09C8-4FD7-95C1-9100F6EA9435}">
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{E323D952-A9D1-467F-9957-C4D584FA4177}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1127,11 +1127,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination 1"
+              refId="Package\Data Flow Task\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination 1"
+              name="OLE DB Destination"
               usesDispositions="true"
               version="4">
               <properties>
@@ -1184,7 +1184,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination 1.Connections[OleDbConnection]"
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[Staging]"
                   connectionManagerRefId="Package.ConnectionManagers[Staging]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1192,165 +1192,165 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="product_id"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[product_id]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[category]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[category]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="category"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[category]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[category]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[name]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[name]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[name]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[price_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[price_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="price_usd"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[price_usd]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[price_usd]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[price_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[cost_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cost_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="cost_usd"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[cost_usd]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[cost_usd]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cost_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[margin_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[margin_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="margin_usd"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[margin_usd]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[margin_usd]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[margin_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[source_file_name]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[source_file_name]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="source_file_name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[source_file_name]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[batch_id]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[batch_id]"
                       cachedDataType="i4"
                       cachedName="batch_id"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[batch_id]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[batch_id]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ingest_at]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ingest_at]"
                       cachedDataType="dbTimeStamp"
                       cachedName="ingest_at"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ingest_at]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ingest_at]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[is_valid]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_valid]"
                       cachedDataType="bool"
                       cachedName="is_valid"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_valid]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_valid]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[is_processed]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_processed]"
                       cachedDataType="bool"
                       cachedName="is_processed"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_processed]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_processed]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[error_message]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[error_message]"
                       cachedDataType="wstr"
                       cachedLength="500"
                       cachedName="error_message"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[error_message]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[error_message]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[row_hash]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
                       cachedName="row_hash"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[row_hash]" />
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[stg_id]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[stg_id]"
                       dataType="i8"
                       name="stg_id" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
                       dataType="wstr"
                       length="100"
                       name="product_id" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[category]"
                       dataType="wstr"
                       length="100"
                       name="category" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
                       dataType="wstr"
                       length="100"
                       name="name" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[price_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[price_usd]"
                       dataType="wstr"
                       length="100"
                       name="price_usd" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[cost_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cost_usd]"
                       dataType="wstr"
                       length="100"
                       name="cost_usd" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[margin_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[margin_usd]"
                       dataType="wstr"
                       length="100"
                       name="margin_usd" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
                       dataType="wstr"
                       length="255"
                       name="source_file_name" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
                       dataType="i4"
                       name="batch_id" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
                       dataType="dbTimeStamp2"
                       name="ingest_at"
                       scale="7" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
                       dataType="bytes"
                       length="32"
                       name="row_hash" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
                       dataType="bool"
                       name="is_valid" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
                       dataType="bool"
                       name="is_processed" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
                       dataType="wstr"
                       length="500"
                       name="error_message" />
@@ -1359,22 +1359,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1392,7 +1392,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the variable to hold the row count."
-                  name="VariableName">User::count_valid</property>
+                  name="VariableName">User::product_count_inserted</property>
               </properties>
               <inputs>
                 <input
@@ -2415,19 +2415,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Union All 1"
+              refId="Package\Data Flow Task\Union All"
               componentClassID="Microsoft.UnionAll"
               contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
-              name="Union All 1"
+              name="Union All"
               version="1">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1]"
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
                   name="Union All Input 1">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[product_id]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[product_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="product_id"
@@ -2437,11 +2437,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[product_id]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[category]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[category]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="category"
@@ -2451,11 +2451,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[category]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[name]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[name]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="name"
@@ -2465,11 +2465,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[name]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[price_usd]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[price_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="price_usd"
@@ -2479,11 +2479,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[price_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[cost_usd]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[cost_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="cost_usd"
@@ -2493,11 +2493,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[cost_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[margin_usd]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[margin_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="margin_usd"
@@ -2507,11 +2507,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[margin_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[source_file_name]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[source_file_name]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="source_file_name"
@@ -2521,11 +2521,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[batch_id]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[batch_id]"
                       cachedDataType="i4"
                       cachedName="batch_id"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
@@ -2534,11 +2534,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[ingest_at]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[ingest_at]"
                       cachedDataType="dbTimeStamp"
                       cachedName="ingest_at"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
@@ -2547,11 +2547,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[is_valid]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[is_valid]"
                       cachedDataType="bool"
                       cachedName="is_valid"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
@@ -2560,11 +2560,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[is_processed]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[is_processed]"
                       cachedDataType="bool"
                       cachedName="is_processed"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
@@ -2573,11 +2573,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[error_message]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[error_message]"
                       cachedDataType="wstr"
                       cachedLength="500"
                       cachedName="error_message"
@@ -2587,11 +2587,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[error_message]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[row_hash]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
                       cachedName="row_hash"
@@ -2601,11 +2601,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[row_hash]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[ErrorCode]"
                       cachedDataType="i4"
                       cachedName="ErrorCode"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]">
@@ -2614,11 +2614,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[ErrorColumn]"
                       cachedDataType="i4"
                       cachedName="ErrorColumn"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]">
@@ -2627,19 +2627,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
                 <input
-                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2]"
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
                   hasSideEffects="true"
                   name="Union All Input 2">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[product_id]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[product_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="product_id"
@@ -2649,11 +2649,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[product_id]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[category]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[category]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="category"
@@ -2663,11 +2663,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[category]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[name]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[name]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="name"
@@ -2677,11 +2677,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[name]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[price_usd]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[price_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="price_usd"
@@ -2691,11 +2691,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[price_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[cost_usd]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[cost_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="cost_usd"
@@ -2705,11 +2705,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[cost_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[margin_usd]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[margin_usd]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="margin_usd"
@@ -2719,11 +2719,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[margin_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[source_file_name]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[source_file_name]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="source_file_name"
@@ -2733,11 +2733,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[batch_id]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[batch_id]"
                       cachedDataType="i4"
                       cachedName="batch_id"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
@@ -2746,11 +2746,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[ingest_at]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[ingest_at]"
                       cachedDataType="dbTimeStamp"
                       cachedName="ingest_at"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
@@ -2759,11 +2759,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[is_valid]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[is_valid]"
                       cachedDataType="bool"
                       cachedName="is_valid"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
@@ -2772,11 +2772,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[is_processed]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[is_processed]"
                       cachedDataType="bool"
                       cachedName="is_processed"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
@@ -2785,11 +2785,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[error_message]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[error_message]"
                       cachedDataType="wstr"
                       cachedLength="500"
                       cachedName="error_message"
@@ -2799,11 +2799,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[error_message]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[row_hash]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
                       cachedName="row_hash"
@@ -2813,223 +2813,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[row_hash]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[ErrorCode_Dummy]"
-                      cachedDataType="i4"
-                      cachedName="ErrorCode_Dummy"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[ErrorColumn_Dummy]"
-                      cachedDataType="i4"
-                      cachedName="ErrorColumn_Dummy"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-                <input
-                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3]"
-                  hasSideEffects="true"
-                  name="Union All Input 3">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[product_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="product_id"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[product_id]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[category]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="category"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[category]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[category]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[name]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="name"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[name]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[name]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[price_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="price_usd"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[price_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[price_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[cost_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="cost_usd"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[cost_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[cost_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[margin_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="margin_usd"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[margin_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[margin_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="source_file_name"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[source_file_name]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[batch_id]"
-                      cachedDataType="i4"
-                      cachedName="batch_id"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[batch_id]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[ingest_at]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="ingest_at"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ingest_at]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[is_valid]"
-                      cachedDataType="bool"
-                      cachedName="is_valid"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_valid]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[is_processed]"
-                      cachedDataType="bool"
-                      cachedName="is_processed"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_processed]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[error_message]"
-                      cachedDataType="wstr"
-                      cachedLength="500"
-                      cachedName="error_message"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[error_message]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[row_hash]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[row_hash]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[ErrorCode_Dummy]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[ErrorCode_Dummy]"
                       cachedDataType="i4"
                       cachedName="ErrorCode_Dummy"
                       lineageId="Package\Data Flow Task\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
@@ -3038,11 +2826,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[ErrorColumn_Dummy]"
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[ErrorColumn_Dummy]"
                       cachedDataType="i4"
                       cachedName="ErrorColumn_Dummy"
                       lineageId="Package\Data Flow Task\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
@@ -3051,14 +2839,226 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
                 <input
-                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 4]"
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[category]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="category"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[category]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="name"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="price_usd"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[cost_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="cost_usd"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[cost_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[margin_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="margin_usd"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[margin_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="source_file_name"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[is_valid]"
+                      cachedDataType="bool"
+                      cachedName="is_valid"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[is_processed]"
+                      cachedDataType="bool"
+                      cachedName="is_processed"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[row_hash]"
+                      cachedDataType="bytes"
+                      cachedLength="32"
+                      cachedName="row_hash"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[row_hash]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[ErrorCode_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode_Dummy"
+                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3].Columns[ErrorColumn_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn_Dummy"
+                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 4]"
                   dangling="true"
                   hasSideEffects="true"
                   name="Union All Input 4">
@@ -3067,92 +3067,92 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1]"
+                  refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]"
                   name="Union All Output 1">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[product_id]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[product_id]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]"
                       name="product_id" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[category]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[category]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category]"
                       name="category" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[name]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[name]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]"
                       name="name" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[price_usd]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[price_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]"
                       name="price_usd" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[cost_usd]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[cost_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]"
                       name="cost_usd" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[margin_usd]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[margin_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]"
                       name="margin_usd" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[source_file_name]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
                       dataType="wstr"
                       length="255"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[source_file_name]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
                       name="source_file_name" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[batch_id]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[batch_id]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[batch_id]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[batch_id]"
                       name="batch_id" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ingest_at]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ingest_at]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ingest_at]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ingest_at]"
                       name="ingest_at" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_valid]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_valid]"
                       dataType="bool"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_valid]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_valid]"
                       name="is_valid" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_processed]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_processed]"
                       dataType="bool"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[is_processed]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[is_processed]"
                       name="is_processed" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[error_message]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[error_message]"
                       dataType="wstr"
                       length="500"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[error_message]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[error_message]"
                       name="error_message" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[row_hash]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]"
                       dataType="bytes"
                       length="32"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[row_hash]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]"
                       name="row_hash" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorCode]"
                       name="ErrorCode" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]"
                       name="ErrorColumn" />
                   </outputColumns>
                   <externalMetadataColumns />
@@ -3193,7 +3193,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
               startId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Derived Column Output3]"
-              endId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 3]"
               name="Derived Column Output"
               startId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output]" />
             <path
@@ -3208,24 +3208,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
               startId="Package\Data Flow Task\Script Component.Outputs[Output 0]" />
             <path
               refId="Package\Data Flow Task.Paths[Row Count Output 1]"
-              endId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
               name="Row Count Output 1"
               startId="Package\Data Flow Task\Row Count 2.Outputs[Row Count Output 1]" />
             <path
               refId="Package\Data Flow Task.Paths[Row Count Output 11]"
-              endId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2]"
-              name="Row Count Output 1"
-              startId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
-            <path
-              refId="Package\Data Flow Task.Paths[Row Count Output 12]"
-              endId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
               name="Row Count Output 1"
               startId="Package\Data Flow Task\Row Count 1.Outputs[Row Count Output 1]" />
             <path
+              refId="Package\Data Flow Task.Paths[Row Count Output 12]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+            <path
               refId="Package\Data Flow Task.Paths[Union All Output 1]"
-              endId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              endId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
               name="Union All Output 1"
-              startId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1]" />
+              startId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]" />
             <path
               refId="Package\Data Flow Task.Paths[ValidRows]"
               endId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input]"
@@ -3272,7 +3272,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task 1"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3300,19 +3300,39 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Expression Task"
-      DTS:CreationName="Microsoft.ExpressionTask"
-      DTS:Description="Expression Task"
-      DTS:DTSID="{93357031-F5FE-43AA-846A-E1A408667B0E}"
-      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:refId="Package\Execute SQL Task 1 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{64db2b65-2ee2-4ce6-90ff-9c24be5b9bc3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Expression Task"
-      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ObjectName="Execute SQL Task 1 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <ExpressionTask
-          Expression="@[User::product_count_inserted] =  @[User::count_invalid_1] + @[User::count_invalid_2] + @[User::count_valid]" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B26013E9-50E9-4703-AE70-4A4C4058C8D9}"
+          SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET status = 'FAILURE', end_time = GETDATE(), &#xA;    records_inserted = ?, records_error = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::product_count_inserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::product_count_error"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::package_log_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -3324,8 +3344,130 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       DTS:LocaleID="-1"
       DTS:ObjectName="Expression Task 1"
       DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Expression Task 1.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{3B52A703-B92C-4380-B2AD-C63DA4C13334}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{C0FED306-2FA8-41A4-99E4-D607D5C9DB68}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Expression Task 1.EventHandlers[OnError]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{A37948C2-1A80-4909-AFBD-198CE0FB397E}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B26013E9-50E9-4703-AE70-4A4C4058C8D9}"
+                  SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET error_message = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::package_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::product_count_error] = @[User::count_invalid_1] + @[User::count_invalid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Expression Task 1 1"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{26a3aee4-e58a-4716-b592-4620c670b44b}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Expression Task 1 1"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Expression Task 1 1.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{a26bac63-595d-456a-8d70-60c157ff6a71}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{92f64f63-3b3f-4829-8c62-07b67c8035c9}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Expression Task 1 1.EventHandlers[OnError]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{c8e7aac9-c20e-41c3-bb74-d82556674d88}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B26013E9-50E9-4703-AE70-4A4C4058C8D9}"
+                  SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET error_message = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::package_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
       <DTS:ObjectData>
         <ExpressionTask
           Expression="@[User::product_count_error] = @[User::count_invalid_1] + @[User::count_invalid_2]" />
@@ -3336,19 +3478,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{213B20CF-B58B-47E7-A886-6EF80A07453C}"
+      DTS:DTSID="{CCA7AD18-18BE-46DE-A053-7E4516BF657B}"
       DTS:From="Package\Data Flow Task"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Expression Task" />
+      DTS:To="Package\Expression Task 1" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{A184763E-08B0-4C6E-8D7B-530C4EFCC669}"
-      DTS:From="Package\Expression Task"
+      DTS:DTSID="{D1199EDA-0E4D-42F0-8266-E47C932F45C8}"
+      DTS:From="Package\Data Flow Task"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Expression Task 1" />
+      DTS:To="Package\Expression Task 1 1"
+      DTS:Value="1" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -3365,7 +3508,68 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\Execute SQL Task 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{101a428c-be99-4b36-8caa-093d32ce3c94}"
+      DTS:From="Package\Expression Task 1 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3 1"
+      DTS:To="Package\Execute SQL Task 1 1" />
   </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{BFD002E3-29AC-4787-A019-F922FE937FE9}"
+      DTS:EventID="9437328"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{E80C36BE-DF32-42B7-8627-AD0CF896462D}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{691986FC-9D1F-4D6E-A86B-D3233A7EB2E3}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B26013E9-50E9-4703-AE70-4A4C4058C8D9}"
+              SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET error_message = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::package_log_id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -3377,7 +3581,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task"
@@ -3389,29 +3593,45 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         <NodeLayout
           Size="172,41.6"
           Id="Package\Execute SQL Task 1"
-          TopLeft="335.714286428933,409.882352581899" />
+          TopLeft="330.000000702483,344.882352638874" />
         <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Expression Task"
-          TopLeft="335.000000713127,246.999999783495" />
+          Size="172,41.6"
+          Id="Package\Execute SQL Task 1 1"
+          TopLeft="552.142858318224,325.658823333016" />
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Expression Task 1"
-          TopLeft="336.42857214474,329.588235005221" />
+          TopLeft="325.714286407646,255.411764482004" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Expression Task 1 1"
+          TopLeft="547.857144023387,236.188235176146" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="413.857143576352,202.952941035038">
+          TopLeft="415.914286439577,202.952941035038">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,44.0470587484569"
+              EndConnector="-8.60000003193073,52.4588234469662"
               Start="0,0"
-              End="0,36.5470587484569">
+              End="-8.60000003193073,44.9588234469662">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.5470587484569" />
+                    End="0,22.2294117234831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2294117234831"
+                    Point2="0,26.2294117234831"
+                    Point3="-4,26.2294117234831" />
+                  <mssgle:LineSegment
+                    End="-4.60000003193073,26.2294117234831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.60000003193073,26.2294117234831"
+                    Point2="-8.60000003193073,26.2294117234831"
+                    Point3="-8.60000003193073,30.2294117234831" />
+                  <mssgle:LineSegment
+                    End="-8.60000003193073,44.9588234469662" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3422,24 +3642,38 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="414.914286428933,288.599999783495">
+          TopLeft="439.64761977291,202.952941035038">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.9882352217259"
+              EndConnector="189.809524250477,33.2352941411082"
               Start="0,0"
-              End="0,33.4882352217259">
+              End="189.809524250477,25.7352941411082">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.4882352217259" />
+                    End="0,9.50402477733449" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.50402477733449"
+                    Point2="0,13.5040247773345"
+                    Point3="4,13.5040247773345" />
+                  <mssgle:LineSegment
+                    End="185.809524250477,13.5040247773345" />
+                  <mssgle:CubicBezierSegment
+                    Point1="185.809524250477,13.5040247773345"
+                    Point2="189.809524250477,13.5040247773345"
+                    Point3="189.809524250477,17.5040247773345" />
+                  <mssgle:LineSegment
+                    End="189.809524250477,25.7352941411082" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="79.6634144689885,18.5040247773345,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3466,18 +3700,64 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="419.871429286836,371.188235005221">
+          TopLeft="407.314286407646,297.011764482004">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.6941175766778"
+              EndConnector="8.68571429483688,47.8705881568698"
               Start="0,0"
-              End="0,31.1941175766778">
+              End="8.68571429483688,40.3705881568698">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.1941175766778" />
+                    End="0,19.9352940784349" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.9352940784349"
+                    Point2="0,23.9352940784349"
+                    Point3="4,23.9352940784349" />
+                  <mssgle:LineSegment
+                    End="4.68571429483688,23.9352940784349" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.68571429483688,23.9352940784349"
+                    Point2="8.68571429483688,23.9352940784349"
+                    Point3="8.68571429483688,27.9352940784349" />
+                  <mssgle:LineSegment
+                    End="8.68571429483688,40.3705881568698" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 1]"
+          TopLeft="629.457144023387,277.788235176146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.68571429483688,47.8705881568698"
+              Start="0,0"
+              End="8.68571429483688,40.3705881568698">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.9352940784349" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.9352940784349"
+                    Point2="0,23.9352940784349"
+                    Point3="4,23.9352940784349" />
+                  <mssgle:LineSegment
+                    End="4.68571429483688,23.9352940784349" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.68571429483688,23.9352940784349"
+                    Point2="8.68571429483688,23.9352940784349"
+                    Point3="8.68571429483688,27.9352940784349" />
+                  <mssgle:LineSegment
+                    End="8.68571429483688,40.3705881568698" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3489,6 +3769,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="504.999992474914,174.999997392297" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <TaskHost
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
@@ -3513,19 +3805,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         <NodeLayout
           Size="129.6,41.6"
           Id="Package\Data Flow Task\Row Count"
-          TopLeft="222.789116120518,545.854341258232" />
+          TopLeft="490.13605546514,637.61904706015" />
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task\Flat File Source"
           TopLeft="315.714286386359,58.8823528895638" />
         <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Data Flow Task\Union All 1"
-          TopLeft="477.380953397171,581.176470078811" />
+          Size="120,41.6"
+          Id="Package\Data Flow Task\Union All"
+          TopLeft="493.877552071744,573.663865154575" />
         <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\Data Flow Task\OLE DB Destination 1"
-          TopLeft="459.158164242732,670.901960196242" />
+          Size="170.4,41.6"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="472.448980597557,701.815125466307" />
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\Data Flow Task\Derived Column 1"
@@ -3584,18 +3876,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Union All Output 1]"
-          TopLeft="545.469558819952,622.776470078811">
+          TopLeft="493.877552071744,594.463865154575">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,48.1254901174306"
+              EndConnector="-3.74149660660413,63.9551819055745"
               Start="0,0"
-              End="0,40.6254901174306">
+              End="-11.2414966066041,63.9551819055745">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40.6254901174306" />
+                    End="-22.2414966066041,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.2414966066041,0"
+                    Point2="-26.2414966066041,0"
+                    Point3="-26.2414966066041,4" />
+                  <mssgle:LineSegment
+                    End="-26.2414966066041,59.9551819055745" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-26.2414966066041,59.9551819055745"
+                    Point2="-26.2414966066041,63.9551819055745"
+                    Point3="-22.2414966066041,63.9551819055745" />
+                  <mssgle:LineSegment
+                    End="-11.2414966066041,63.9551819055745" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3608,30 +3912,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Row Count Output 12]"
-          TopLeft="551.232654086494,536.473949146056">
+          TopLeft="556.292518031348,679.21904706015">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-29.3183673559895,44.7025209327555"
+              EndConnector="0,22.5960784061569"
               Start="0,0"
-              End="-29.3183673559895,37.2025209327555">
+              End="0,15.0960784061569">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.4944209430722" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.4944209430722"
-                    Point2="0,26.4944209430722"
-                    Point3="-4,26.4944209430722" />
-                  <mssgle:LineSegment
-                    End="-25.3183673559895,26.4944209430722" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-25.3183673559895,26.4944209430722"
-                    Point2="-29.3183673559895,26.4944209430722"
-                    Point3="-29.3183673559895,30.4944209430722" />
-                  <mssgle:LineSegment
-                    End="-29.3183673559895,37.2025209327555" />
+                    End="0,15.0960784061569" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3644,30 +3936,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Row Count Output 11]"
-          TopLeft="352.389116120518,566.654341258232">
+          TopLeft="551.232654086494,536.473949146056">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="124.991837276653,35.3221288205792"
+              EndConnector="21.3115646519165,37.1899160085193"
               Start="0,0"
-              End="117.491837276653,35.3221288205792">
+              End="21.3115646519165,29.6899160085193">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="58.4959186383265,0" />
+                    End="0,18.0203450050443" />
                   <mssgle:CubicBezierSegment
-                    Point1="58.4959186383265,0"
-                    Point2="62.4959186383265,0"
-                    Point3="62.4959186383265,4" />
+                    Point1="0,18.0203450050443"
+                    Point2="0,22.0203450050443"
+                    Point3="4,22.0203450050443" />
                   <mssgle:LineSegment
-                    End="62.4959186383265,31.3221288205792" />
+                    End="17.3115646519165,22.0203450050443" />
                   <mssgle:CubicBezierSegment
-                    Point1="62.4959186383265,31.3221288205792"
-                    Point2="62.4959186383265,35.3221288205792"
-                    Point3="66.4959186383265,35.3221288205792" />
+                    Point1="17.3115646519165,22.0203450050443"
+                    Point2="21.3115646519165,22.0203450050443"
+                    Point3="21.3115646519165,26.0203450050443" />
                   <mssgle:LineSegment
-                    End="117.491837276653,35.3221288205792" />
+                    End="21.3115646519165,29.6899160085193" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3680,30 +3972,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Row Count Output 1]"
-          TopLeft="839.582994836371,556.046778260552">
+          TopLeft="769.982994836371,535.246778260552">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-277.135374772533,25.1296918182591"
+              EndConnector="-156.105442764627,59.2170868940232"
               Start="0,0"
-              End="-277.135374772533,17.6296918182591">
+              End="-148.605442764627,59.2170868940232">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.8939392971633" />
+                    End="-74.0527213823136,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,10.8939392971633"
-                    Point2="0,14.8939392971633"
-                    Point3="-4,14.8939392971633" />
+                    Point1="-74.0527213823136,0"
+                    Point2="-78.0527213823136,0"
+                    Point3="-78.0527213823136,4" />
                   <mssgle:LineSegment
-                    End="-273.135374772533,14.8939392971633" />
+                    End="-78.0527213823136,55.2170868940232" />
                   <mssgle:CubicBezierSegment
-                    Point1="-273.135374772533,14.8939392971633"
-                    Point2="-277.135374772533,14.8939392971633"
-                    Point3="-277.135374772533,18.8939392971633" />
+                    Point1="-78.0527213823136,55.2170868940232"
+                    Point2="-78.0527213823136,59.2170868940232"
+                    Point3="-82.0527213823136,59.2170868940232" />
                   <mssgle:LineSegment
-                    End="-277.135374772533,17.6296918182591" />
+                    End="-148.605442764627,59.2170868940232" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3764,18 +4056,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Derived Column Output3]"
-          TopLeft="287.965986852164,506.79607802361">
+          TopLeft="288.34285758381,506.79607802361">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.058263234622"
+              EndConnector="246.868027821267,66.8677871309652"
               Start="0,0"
-              End="0,31.558263234622">
+              End="246.868027821267,59.3677871309652">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.558263234622" />
+                    End="0,35.5927686959662" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.5927686959662"
+                    Point2="0,39.5927686959662"
+                    Point3="4,39.5927686959662" />
+                  <mssgle:LineSegment
+                    End="242.868027821267,39.5927686959662" />
+                  <mssgle:CubicBezierSegment
+                    Point1="242.868027821267,39.5927686959662"
+                    Point2="246.868027821267,39.5927686959662"
+                    Point3="246.868027821267,43.5927686959662" />
+                  <mssgle:LineSegment
+                    End="246.868027821267,59.3677871309652" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3964,7 +4268,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination 1">
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3976,5 +4280,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Expression Task 1.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Expression Task 1.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="510.999992385507,249.99999627471" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Expression Task 1 1.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Expression Task 1 1.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="510.999992385507,249.99999627471" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
