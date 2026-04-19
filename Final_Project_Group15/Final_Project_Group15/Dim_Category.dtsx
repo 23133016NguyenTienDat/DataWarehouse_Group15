@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Dim_Category"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{03B2E83B-753D-4B9D-9421-0B180A0A0F9F}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{469CB0CD-C6E0-4986-B8CA-4678F2AA9BF5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -742,73 +742,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[margin_usd]"
                       name="margin_usd"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source_file_name]"
-                      length="255"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]"
-                      name="source_file_name"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[batch_id]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[batch_id]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[batch_id]"
-                      name="batch_id"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ingest_at]"
-                      dataType="dbTimeStamp2"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ingest_at]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ingest_at]"
-                      name="ingest_at"
-                      scale="7"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]"
-                      dataType="bytes"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[row_hash]"
-                      length="32"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]"
-                      name="row_hash"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_valid]"
-                      dataType="bool"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_valid]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_valid]"
-                      name="is_valid"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_processed]"
-                      dataType="bool"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_processed]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_processed]"
-                      name="is_processed"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[error_message]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[error_message]"
-                      length="500"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[error_message]"
-                      name="error_message"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -921,51 +854,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cost_usd]"
                       name="cost_usd" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[margin_usd]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[margin_usd]"
-                      name="margin_usd" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source_file_name]"
-                      name="source_file_name" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[batch_id]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[batch_id]"
-                      name="batch_id" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ingest_at]"
-                      dataType="dbTimeStamp2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ingest_at]"
-                      name="ingest_at"
-                      scale="7" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
-                      name="row_hash" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_valid]"
-                      dataType="bool"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_valid]"
-                      name="is_valid" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_processed]"
-                      dataType="bool"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_processed]"
-                      name="is_processed" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[error_message]"
-                      dataType="wstr"
-                      length="500"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[error_message]"
-                      name="error_message" />
-                    <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -977,6 +865,12 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[margin_usd]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[margin_usd]"
+                      name="margin_usd" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1181,122 +1075,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                           name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="source_file_name"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[batch_id]"
-                      cachedDataType="i4"
-                      cachedName="batch_id"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[batch_id]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[ingest_at]"
-                      cachedDataType="dbTimeStamp2"
-                      cachedName="ingest_at"
-                      cachedScale="7"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ingest_at]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[is_valid]"
-                      cachedDataType="bool"
-                      cachedName="is_valid"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_valid]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[is_processed]"
-                      cachedDataType="bool"
-                      cachedName="is_processed"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_processed]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[error_message]"
-                      cachedDataType="wstr"
-                      cachedLength="500"
-                      cachedName="error_message"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[error_message]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1403,101 +1181,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
                           name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[margin_usd]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source_file_name]"
-                      name="source_file_name">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[batch_id]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[batch_id]"
-                      name="batch_id">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[batch_id]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[ingest_at]"
-                      dataType="dbTimeStamp2"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[ingest_at]"
-                      name="ingest_at"
-                      scale="7">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ingest_at]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[row_hash]"
-                      name="row_hash">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[is_valid]"
-                      dataType="bool"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[is_valid]"
-                      name="is_valid">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_valid]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[is_processed]"
-                      dataType="bool"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[is_processed]"
-                      name="is_processed">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_processed]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[error_message]"
-                      dataType="wstr"
-                      length="500"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[error_message]"
-                      name="error_message">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[error_message]}</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1780,9 +1463,25 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           Id="Package\Data Flow Task"
           TopLeft="257.857143406053,112.411764607349" />
         <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="271.428572006372,28.2941176222579" />
+        <NodeLayout
+          Size="172,41.6"
+          Id="Package\Execute SQL Task 1"
+          TopLeft="262.14285770089,284.470587985945" />
+        <NodeLayout
+          Size="172,41.6"
+          Id="Package\Execute SQL Task 1 1"
+          TopLeft="460.714286695025,288.294117394358" />
+        <NodeLayout
           Size="153.6,41.6"
           Id="Package\Expression Task"
           TopLeft="259.285714837666,198.058823355806" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Expression Task 1"
+          TopLeft="457.857143831801,201.882352764219" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="334.571429121859,154.011764607349">
@@ -1805,10 +1504,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\Execute SQL Task"
-          TopLeft="271.428572006372,28.2941176222579" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="352.628572006372,69.894117622258">
@@ -1843,10 +1538,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="172,41.6"
-          Id="Package\Execute SQL Task 1"
-          TopLeft="262.14285770089,284.470587985945" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="336.085714837666,239.658823355806">
@@ -1881,14 +1572,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Expression Task 1"
-          TopLeft="457.857143831801,201.882352764219" />
-        <NodeLayout
-          Size="172,41.6"
-          Id="Package\Execute SQL Task 1 1"
-          TopLeft="460.714286695025,288.294117394358" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 1]"
           TopLeft="534.657143831801,243.482352764219">
@@ -1962,15 +1645,27 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="527.999992132187,177.999997347593" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <TaskHost
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\Data Flow Task\Sort"
-          TopLeft="338.357143565708,178.323529260278" />
+          Size="129.6,41.6"
+          Id="Package\Data Flow Task\Row Count"
+          TopLeft="605.714287003693,282.388235050801" />
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\Data Flow Task\Lookup"
@@ -1988,111 +1683,13 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           Id="Package\Data Flow Task\OLE DB Destination"
           TopLeft="564.285715486931,376.999999669545" />
         <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Data Flow Task\Row Count 1"
+          TopLeft="165.714286067048,405.647058520556" />
+        <NodeLayout
           Size="154.4,41.6"
           Id="Package\Data Flow Task\Conditional Split"
           TopLeft="205.000000436391,325.294117382963" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Sort Output]"
-          TopLeft="387.157143565708,219.923529260278">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="44.2428572325682,43.899999920235"
-              Start="0,0"
-              End="44.2428572325682,36.399999920235">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.9499999601175" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.9499999601175"
-                    Point2="0,21.9499999601175"
-                    Point3="4,21.9499999601175" />
-                  <mssgle:LineSegment
-                    End="40.2428572325682,21.9499999601175" />
-                  <mssgle:CubicBezierSegment
-                    Point1="40.2428572325682,21.9499999601175"
-                    Point2="44.2428572325682,21.9499999601175"
-                    Point3="44.2428572325682,25.9499999601175" />
-                  <mssgle:LineSegment
-                    End="44.2428572325682,36.399999920235" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="395.514286397002,132.599999920235">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-8.35714283129397,45.7235293400432"
-              Start="0,0"
-              End="-8.35714283129397,38.2235293400432">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.8617646700216" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.8617646700216"
-                    Point2="0,22.8617646700216"
-                    Point3="-4,22.8617646700216" />
-                  <mssgle:LineSegment
-                    End="-4.35714283129397,22.8617646700216" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.35714283129397,22.8617646700216"
-                    Point2="-8.35714283129397,22.8617646700216"
-                    Point3="-8.35714283129397,26.8617646700216" />
-                  <mssgle:LineSegment
-                    End="-8.35714283129397,38.2235293400432" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="375.000000798277,284.623529180513">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-92.8000003618858,40.6705882024502"
-              Start="0,0"
-              End="-92.8000003618858,33.1705882024502">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-88.8000003618858,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-88.8000003618858,0"
-                    Point2="-92.8000003618858,0"
-                    Point3="-92.8000003618858,4" />
-                  <mssgle:LineSegment
-                    End="-92.8000003618858,33.1705882024502" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-140.991387080636,-17.609375,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Data Flow Task\Row Count"
-          TopLeft="605.714287003693,282.388235050801" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
           TopLeft="487.800000798277,284.623529180513">
@@ -2130,43 +1727,35 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Row Count Output 1]"
-          TopLeft="670.514287003693,323.988235050801">
+          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="375.000000798277,284.623529180513">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-21.0285715167619,53.0117646187447"
+              EndConnector="-92.8000003618858,40.6705882024502"
               Start="0,0"
-              End="-21.0285715167619,45.5117646187447">
+              End="-92.8000003618858,33.1705882024502">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.5058823093724" />
+                    End="-88.8000003618858,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.5058823093724"
-                    Point2="0,26.5058823093724"
-                    Point3="-4,26.5058823093724" />
+                    Point1="-88.8000003618858,0"
+                    Point2="-92.8000003618858,0"
+                    Point3="-92.8000003618858,4" />
                   <mssgle:LineSegment
-                    End="-17.0285715167619,26.5058823093724" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-17.0285715167619,26.5058823093724"
-                    Point2="-21.0285715167619,26.5058823093724"
-                    Point3="-21.0285715167619,30.5058823093724" />
-                  <mssgle:LineSegment
-                    End="-21.0285715167619,45.5117646187447" />
+                    End="-92.8000003618858,33.1705882024502" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-140.991387080636,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Data Flow Task\Row Count 1"
-          TopLeft="165.714286067048,405.647058520556" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[change]"
           TopLeft="282.200000436391,366.894117382963">
@@ -2237,6 +1826,112 @@ WHERE is_valid = 1 AND is_processed = 0</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Row Count Output 1]"
+          TopLeft="670.514287003693,323.988235050801">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21.0285715167619,53.0117646187447"
+              Start="0,0"
+              End="-21.0285715167619,45.5117646187447">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5058823093724" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5058823093724"
+                    Point2="0,26.5058823093724"
+                    Point3="-4,26.5058823093724" />
+                  <mssgle:LineSegment
+                    End="-17.0285715167619,26.5058823093724" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17.0285715167619,26.5058823093724"
+                    Point2="-21.0285715167619,26.5058823093724"
+                    Point3="-21.0285715167619,30.5058823093724" />
+                  <mssgle:LineSegment
+                    End="-21.0285715167619,45.5117646187447" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Data Flow Task\Sort"
+          TopLeft="365.714286492796,178.094117565283" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="395.514286397002,132.599999920235">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.0000000957935,45.4941176450479"
+              Start="0,0"
+              End="19.0000000957935,37.9941176450479">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.7470588225239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.7470588225239"
+                    Point2="0,22.7470588225239"
+                    Point3="4,22.7470588225239" />
+                  <mssgle:LineSegment
+                    End="15.0000000957935,22.7470588225239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.0000000957935,22.7470588225239"
+                    Point2="19.0000000957935,22.7470588225239"
+                    Point3="19.0000000957935,26.7470588225239" />
+                  <mssgle:LineSegment
+                    End="19.0000000957935,37.9941176450479" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Sort Output]"
+          TopLeft="414.514286492796,219.694117565283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.8857143054815,44.1294116152301"
+              Start="0,0"
+              End="16.8857143054815,36.6294116152301">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0647058076151" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.0647058076151"
+                    Point2="0,22.0647058076151"
+                    Point3="4,22.0647058076151" />
+                  <mssgle:LineSegment
+                    End="12.8857143054815,22.0647058076151" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.8857143054815,22.0647058076151"
+                    Point2="16.8857143054815,22.0647058076151"
+                    Point3="16.8857143054815,26.0647058076151" />
+                  <mssgle:LineSegment
+                    End="16.8857143054815,36.6294116152301" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -2246,7 +1941,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2256,7 +1951,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2284,17 +1979,5 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package.EventHandlers[OnError]\Execute SQL Task"
-          TopLeft="527.999992132187,177.999997347593" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

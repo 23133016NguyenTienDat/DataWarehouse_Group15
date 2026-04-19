@@ -12,8 +12,8 @@
   DTS:MaxConcurrentExecutables="3"
   DTS:ObjectName="Main_package"
   DTS:PackageType="5"
-  DTS:VersionBuild="84"
-  DTS:VersionGUID="{1558856C-841F-4818-98C9-F4518A74FC7D}">
+  DTS:VersionBuild="85"
+  DTS:VersionGUID="{671EE1CB-D49C-4F60-8BDB-6E2A267AAD45}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -843,6 +843,7 @@
           <DTS:ObjectData>
             <FileSystemData
               TaskOperationType="CreateDirectory"
+              TaskOverwriteDestFile="True"
               TaskSourcePath="User::batch_archive_path"
               TaskIsSourceVariable="True" />
           </DTS:ObjectData>
@@ -886,7 +887,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Event"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="3">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -906,7 +907,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Order"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="3">
+              DTS:ThreadHint="4">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -926,7 +927,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive OrderItem"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="4">
+              DTS:ThreadHint="5">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -946,7 +947,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Product"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="5">
+              DTS:ThreadHint="6">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -966,7 +967,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Review"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="6">
+              DTS:ThreadHint="7">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -986,7 +987,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Session"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="7">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
