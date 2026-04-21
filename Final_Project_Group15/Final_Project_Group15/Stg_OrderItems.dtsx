@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="4/12/2026 4:12:48 PM"
@@ -11,9 +11,3231 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionGUID="{628422E7-12EA-4A05-9D2D-C2E6D463EE0C}">
+  DTS:VersionBuild="85"
+  DTS:VersionGUID="{22B169C1-6A65-481F-9FE1-C06C221169DB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
-  <DTS:Executables />
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+      DTS:ObjectName="CBG-Ber-2807\MSSQLSERVER01.Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source=" + @[$Project::DB_SERVER] + 
+";Initial Catalog=" + @[$Project::DB_NAME_STAGING] + 
+";Provider=MSOLEDBSQL;Integrated Security=SSPI;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=CBG-Ber-2807\MSSQLSERVER01;Initial Catalog=Staging;Provider=MSOLEDBSQL;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{89C1A04C-3585-4BE8-B51B-4654D6517382}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::PROJECT_ROOT] + "Data\\order_items.csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1066"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1258"
+          DTS:ConnectionString="D:\Hoc_tap\Nam_3\DataWarehouse\DataWarehouse_Group15\Final_Project_Group15\Data\order_items.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="order_id"
+              DTS:DTSID="{6A9F21A4-7816-4814-AE2C-CEF703450A2C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="product_id"
+              DTS:DTSID="{6FA619C8-31E3-40E4-A823-76B6F28A78B3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="unit_price_usd"
+              DTS:DTSID="{0BF63271-0F26-435D-AE83-E090E061EE9A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="quantity"
+              DTS:DTSID="{D24AEB31-5E35-4288-937C-F51871FE038D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="line_total_usd"
+              DTS:DTSID="{9608D630-2D4E-481C-9B80-8F5D3C30E719}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{73BA456E-565F-4541-9554-BF272C8E5733}"
+      DTS:ObjectName="p_batch_id">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE101378-6A0E-403C-86C4-F5F5358C7E61}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="count_error">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AF460013-E9D9-4306-BF40-8378E92E1EEC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="count_inserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C1E60782-8D9C-4620-B524-A685E0E6522C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="count_invalid_1">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DF9244B8-32B9-4AC2-975A-242C0BBF919E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="count_invalid_2">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D57F3FC8-1F69-4BF7-94FC-A0E101C4FDEF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="package_log_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BECC9FB8-CBAD-4D4C-B5C4-DEAF4C672019}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+          SQLTask:SqlStatementSource="INSERT INTO adm.Etl_Package_Logs (batch_id, package_name, start_time)&#xA;VALUES (?, 'Stg_OrderItems', GETDATE());&#xA;SELECT SCOPE_IDENTITY() AS package_log_id;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="package_log_id"
+            SQLTask:DtsVariableName="User::package_log_id" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Package::p_batch_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B4D62611-4766-4D31-975F-C61EA96D6F9E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+          SQLTask:SqlStatementSource="&#xA;UPDATE adm.Etl_Package_Logs &#xA;SET status = 'SUCCESS', end_time = GETDATE(), &#xA;    records_inserted = ?, records_error = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::count_inserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::count_error"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::package_log_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task 1 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a7c71936-bd7a-49b7-909d-6e14f4bc5e88}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task 1 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+          SQLTask:SqlStatementSource="&#xA;UPDATE adm.Etl_Package_Logs &#xA;SET status = 'FAILURE', end_time = GETDATE(), &#xA;    records_inserted = ?, records_error = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::count_inserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::count_error"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::package_log_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Expression Task 1"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{9687AEEE-8DA1-4544-8036-E86A2D054277}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Expression Task 1"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Expression Task 1.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{7C03A197-9BB7-45AB-AD00-ABDE0B72A575}"
+          DTS:EventID="65"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{3C9CD3C9-C692-470A-9AD3-181A9BC54784}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Expression Task 1.EventHandlers[OnError]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{A0F41F6F-147D-4B0C-BA22-C0FC7FAA0BEA}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+                  SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET error_message = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::package_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::count_error] = @[User::count_invalid_1] + @[User::count_invalid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Expression Task 1 1"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{16e1cd24-64d9-4588-aade-8330285bdb31}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Expression Task 1 1"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Expression Task 1 1.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{60fce993-a577-46e2-a520-f74d82a5208a}"
+          DTS:EventID="65"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{9a15370e-5908-4a87-87aa-ca0da37b4e52}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Expression Task 1 1.EventHandlers[OnError]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{5e0c9abd-92b8-404f-88a1-a561a0eb8424}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+                  SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET error_message = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::ErrorDescription"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::package_log_id"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::count_error] = @[User::count_invalid_1] + @[User::count_invalid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load_Stg_OrderItems"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{EB83F090-B75A-4F4F-92C7-AAD97F4DDD24}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load_Stg_OrderItems"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load_Stg_OrderItems\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[ValidRows]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ValidRows"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]}) &amp;&amp; ![ISNULL](#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(order_id) &amp;&amp; !ISNULL(product_id)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of line_total_usd]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of line_total_usd]"
+                      name="Copy of line_total_usd"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of quantity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of quantity]"
+                      name="Copy of quantity"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of unit_price_usd]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of unit_price_usd]"
+                      name="Copy of unit_price_usd"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of order_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of order_id]"
+                      name="Copy of order_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]"
+                      name="Copy of product_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of batch_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of batch_id]"
+                      name="Copy of batch_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]"
+                      name="source_file_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"order_items.csv"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"order_items.csv"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]"
+                      name="batch_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)@[$Package::p_batch_id]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)@[$Package::p_batch_id]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]"
+                      name="ingest_at"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]"
+                      name="is_valid"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]"
+                      name="is_processed"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="500"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]"
+                      name="error_message"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,500)""</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,500)""</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1.Inputs[Derived Column Input].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_BOOL)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_BOOL)0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1.Inputs[Derived Column Input].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Lỗi định dạng"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Lỗi định dạng"</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 1.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Derived Column 1 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_BOOL)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_BOOL)0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"product_id null hoặc order_id null"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"product_id null hoặc order_id null"</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      name="ErrorCode_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      name="ErrorColumn_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Derived Column 2"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 2"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]"
+                      name="ErrorCode_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]"
+                      name="ErrorColumn_Dummy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1066"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load_Stg_OrderItems\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[order_id]"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]"
+                      name="order_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[product_id]"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[unit_price_usd]"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]"
+                      name="unit_price_usd"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[quantity]"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]"
+                      name="quantity"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[line_total_usd]"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]"
+                      name="line_total_usd"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[order_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[product_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[unit_price_usd]"
+                      dataType="wstr"
+                      length="50"
+                      name="unit_price_usd" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[quantity]"
+                      dataType="wstr"
+                      length="50"
+                      name="quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[line_total_usd]"
+                      dataType="wstr"
+                      length="50"
+                      name="line_total_usd" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1258"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[order_items]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load_Stg_OrderItems\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]" />
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      externalMetadataColumnId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[stg_id]"
+                      dataType="i8"
+                      name="stg_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      dataType="wstr"
+                      length="100"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      dataType="wstr"
+                      length="100"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[unit_price_usd]"
+                      dataType="wstr"
+                      length="100"
+                      name="unit_price_usd" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                      dataType="wstr"
+                      length="100"
+                      name="quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_total_usd]"
+                      dataType="wstr"
+                      length="100"
+                      name="line_total_usd" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_file_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="source_file_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_id]"
+                      dataType="i4"
+                      name="batch_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ingest_at]"
+                      dataType="dbTimeStamp2"
+                      name="ingest_at"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_valid]"
+                      dataType="bool"
+                      name="is_valid" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_processed]"
+                      dataType="bool"
+                      name="is_processed" />
+                    <externalMetadataColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[error_message]"
+                      dataType="wstr"
+                      length="500"
+                      name="error_message" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_invalid_1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Row Count 1"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count 1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_inserted</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Row Count 1.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Row Count 1.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Row Count 1.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Row Count 2"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count 2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_invalid_2</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Row Count 2.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Row Count 2.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Load_Stg_OrderItems\Row Count 2.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load_Stg_OrderItems\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1]"
+                  hasSideEffects="true"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[ErrorCode_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2].Columns[ErrorColumn_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="product_id"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[product_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[unit_price_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="unit_price_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[unit_price_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[quantity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="quantity"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[quantity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[line_total_usd]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="line_total_usd"
+                      lineageId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output].Columns[line_total_usd]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[source_file_name]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="source_file_name"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[source_file_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[batch_id]"
+                      cachedDataType="i4"
+                      cachedName="batch_id"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[batch_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[ingest_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ingest_at"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[ingest_at]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[is_valid]"
+                      cachedDataType="i4"
+                      cachedName="is_valid"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_valid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[is_processed]"
+                      cachedDataType="i4"
+                      cachedName="is_processed"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[is_processed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[error_message]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="error_message"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output].Columns[error_message]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[ErrorCode_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorCode_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3].Columns[ErrorColumn_Dummy]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn_Dummy"
+                      lineageId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output].Columns[ErrorColumn_Dummy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 4]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 4">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[unit_price_usd]"
+                      name="unit_price_usd" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[quantity]"
+                      name="quantity" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[line_total_usd]"
+                      name="line_total_usd" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
+                      name="source_file_name" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[batch_id]"
+                      name="batch_id" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ingest_at]"
+                      name="ingest_at" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_valid]"
+                      name="is_valid" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[is_processed]"
+                      name="is_processed" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[error_message]"
+                      name="error_message" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      name="ErrorCode" />
+                    <outputColumn
+                      refId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      name="ErrorColumn" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Conditional Split Default Output]"
+              endId="Package\Load_Stg_OrderItems\Derived Column 1 1.Inputs[Derived Column Input]"
+              name="Conditional Split Default Output"
+              startId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[Conditional Split Default Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Data Conversion Error Output]"
+              endId="Package\Load_Stg_OrderItems\Derived Column 1.Inputs[Derived Column Input]"
+              name="Data Conversion Error Output"
+              startId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Error Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Data Conversion Output]"
+              endId="Package\Load_Stg_OrderItems\Conditional Split.Inputs[Conditional Split Input]"
+              name="Data Conversion Output"
+              startId="Package\Load_Stg_OrderItems\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output]"
+              endId="Package\Load_Stg_OrderItems\Row Count 2.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Load_Stg_OrderItems\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output1]"
+              endId="Package\Load_Stg_OrderItems\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Load_Stg_OrderItems\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output2]"
+              endId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\Load_Stg_OrderItems\Derived Column 2.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Derived Column Output3]"
+              endId="Package\Load_Stg_OrderItems\Row Count.Inputs[Row Count Input 1]"
+              name="Derived Column Output"
+              startId="Package\Load_Stg_OrderItems\Derived Column 1 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Flat File Source Output]"
+              endId="Package\Load_Stg_OrderItems\Derived Column.Inputs[Derived Column Input]"
+              name="Flat File Source Output"
+              startId="Package\Load_Stg_OrderItems\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Row Count Output 1]"
+              endId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 1]"
+              name="Row Count Output 1"
+              startId="Package\Load_Stg_OrderItems\Row Count 2.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Row Count Output 11]"
+              endId="Package\Load_Stg_OrderItems\Union All.Inputs[Union All Input 3]"
+              name="Row Count Output 1"
+              startId="Package\Load_Stg_OrderItems\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Row Count Output 12]"
+              endId="Package\Load_Stg_OrderItems\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Load_Stg_OrderItems\Row Count 1.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[Union All Output 1]"
+              endId="Package\Load_Stg_OrderItems\Row Count 1.Inputs[Row Count Input 1]"
+              name="Union All Output 1"
+              startId="Package\Load_Stg_OrderItems\Union All.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\Load_Stg_OrderItems.Paths[ValidRows]"
+              endId="Package\Load_Stg_OrderItems\Derived Column 2.Inputs[Derived Column Input]"
+              name="ValidRows"
+              startId="Package\Load_Stg_OrderItems\Conditional Split.Outputs[ValidRows]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{AF596179-225D-4E82-90ED-197941AA479C}"
+      DTS:From="Package\Load_Stg_OrderItems"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Expression Task 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DA971A78-9BBB-4D82-BA14-87E99709E3FD}"
+      DTS:From="Package\Load_Stg_OrderItems"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Expression Task 1 1"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{E8C54CD9-E20B-4156-96D1-4DD936D1BF3A}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load_Stg_OrderItems" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{3183C5AC-24B9-47B6-9794-5ED1CAB6195C}"
+      DTS:From="Package\Expression Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Execute SQL Task 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8b9c7358-16ec-4c7e-b24e-64a578797c3e}"
+      DTS:From="Package\Expression Task 1 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3 1"
+      DTS:To="Package\Execute SQL Task 1 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{17FD55E8-44B3-4BDF-BA23-BF97B99183F6}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{843933AA-19FE-45FD-9557-55220C88FD14}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E849B928-895B-47D0-8640-2BF71A006B82}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3CB37CF3-08E7-4A65-94D5-2C8006FE4383}"
+              SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET error_message = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::package_log_id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="164,42.4"
+          Id="Package\Execute SQL Task"
+          TopLeft="368.749983515591,111.149994699955" />
+        <NodeLayout
+          Size="173.6,42.4"
+          Id="Package\Execute SQL Task 1"
+          TopLeft="365.178555404882,386.673507501743" />
+        <NodeLayout
+          Size="173.6,42.4"
+          Id="Package\Execute SQL Task 1 1"
+          TopLeft="572.767841707422,380.867620679949" />
+        <NodeLayout
+          Size="164,42.4"
+          Id="Package\Expression Task 1"
+          TopLeft="369.64284095305,297.585276849414" />
+        <NodeLayout
+          Size="164,42.4"
+          Id="Package\Expression Task 1 1"
+          TopLeft="577.232127255591,291.77939002762" />
+        <NodeLayout
+          Size="182.4,42.4"
+          Id="Package\Load_Stg_OrderItems"
+          TopLeft="355.624984102325,198.249990546704" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="449.233912527688,240.649990546704">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.9352863027104"
+              Start="0,0"
+              End="0,49.4352863027104">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.4352863027104" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="475.891650768992,240.649990546704">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="183.340476486599,51.1293994809163"
+              Start="0,0"
+              End="183.340476486599,43.6293994809163">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7185218766148" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.7185218766148"
+                    Point2="0,20.7185218766148"
+                    Point3="4,20.7185218766148" />
+                  <mssgle:LineSegment
+                    End="179.340476486599,20.7185218766148" />
+                  <mssgle:CubicBezierSegment
+                    Point1="179.340476486599,20.7185218766148"
+                    Point2="183.340476486599,20.7185218766148"
+                    Point3="183.340476486599,24.7185218766148" />
+                  <mssgle:LineSegment
+                    End="183.340476486599,43.6293994809163" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="76.4288905870495,25.7185218766148,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="448.854150475625,153.816661366622">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.4333291800822"
+              Start="0,0"
+              End="0,36.9333291800822">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.9333291800822" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="451.810698178966,339.985276849414">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.6882306523289"
+              Start="0,0"
+              End="0,39.1882306523289">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.1882306523289" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 1]"
+          TopLeft="659.399984481507,334.17939002762">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.6882306523289"
+              Start="0,0"
+              End="0,39.1882306523289">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.1882306523289" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="534.999992027879,191.999997138977" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Expression Task 1.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Expression Task 1.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="419.999993741512,159.999997615814" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Expression Task 1 1.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Expression Task 1 1.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="419.999993741512,159.999997615814" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Load_Stg_OrderItems">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="140,42.4"
+          Id="Package\Load_Stg_OrderItems\Row Count 1"
+          TopLeft="530.45384565785,732.695167988498" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Load_Stg_OrderItems\Row Count"
+          TopLeft="233.184515411212,627.043557561632" />
+        <NodeLayout
+          Size="164,57.6"
+          Id="Package\Load_Stg_OrderItems\Derived Column 1"
+          TopLeft="806.302048916799,413.266613616947" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Load_Stg_OrderItems\OLE DB Destination"
+          TopLeft="522.619048731567,813.117646396349" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Load_Stg_OrderItems\Derived Column 2"
+          TopLeft="518.095239198127,542.941175994679" />
+        <NodeLayout
+          Size="164,57.6"
+          Id="Package\Load_Stg_OrderItems\Derived Column 1 1"
+          TopLeft="226.011896818547,515.362724047086" />
+        <NodeLayout
+          Size="157.6,42.4"
+          Id="Package\Load_Stg_OrderItems\Data Conversion"
+          TopLeft="411.525282155022,301.37648431137" />
+        <NodeLayout
+          Size="181.6,42.4"
+          Id="Package\Load_Stg_OrderItems\Derived Column"
+          TopLeft="409.434508829233,224.603208013383" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Load_Stg_OrderItems\Union All"
+          TopLeft="539.285715433712,646.176470021836" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Load_Stg_OrderItems\Row Count 2"
+          TopLeft="828.444905103246,541.757331634081" />
+        <NodeLayout
+          Size="156,42.4"
+          Id="Package\Load_Stg_OrderItems\Conditional Split"
+          TopLeft="391.586293111086,418.704981011949" />
+        <NodeLayout
+          Size="193.6,54.4"
+          Id="Package\Load_Stg_OrderItems\Flat File Source"
+          TopLeft="397.053556890245,128.599994308422" />
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output3]"
+          TopLeft="308.011896818547,572.962724047086">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.0273814073348,54.0808335145464"
+              Start="0,0"
+              End="-10.0273814073348,46.5808335145464">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.0404167572732" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.0404167572732"
+                    Point2="0,27.0404167572732"
+                    Point3="-4,27.0404167572732" />
+                  <mssgle:LineSegment
+                    End="-6.02738140733476,27.0404167572732" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.02738140733476,27.0404167572732"
+                    Point2="-10.0273814073348,27.0404167572732"
+                    Point3="-10.0273814073348,31.0404167572732" />
+                  <mssgle:LineSegment
+                    End="-10.0273814073348,46.5808335145464" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output2]"
+          TopLeft="599.295239198127,584.541175994679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-18.6761904310814,61.6352940271572"
+              Start="0,0"
+              End="-18.6761904310814,54.1352940271572">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.4945819897641" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.4945819897641"
+                    Point2="0,36.4945819897641"
+                    Point3="-4,36.4945819897641" />
+                  <mssgle:LineSegment
+                    End="-14.6761904310814,36.4945819897641" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-14.6761904310814,36.4945819897641"
+                    Point2="-18.6761904310814,36.4945819897641"
+                    Point3="-18.6761904310814,40.4945819897641" />
+                  <mssgle:LineSegment
+                    End="-18.6761904310814,54.1352940271572" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output1]"
+          TopLeft="500.234508829233,267.003208013383">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.90922667421086,34.3732762979871"
+              Start="0,0"
+              End="-9.90922667421086,26.8732762979871">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.1866381489936" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.1866381489936"
+                    Point2="0,17.1866381489936"
+                    Point3="-4,17.1866381489936" />
+                  <mssgle:LineSegment
+                    End="-5.90922667421086,17.1866381489936" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.90922667421086,17.1866381489936"
+                    Point2="-9.90922667421086,17.1866381489936"
+                    Point3="-9.90922667421086,21.1866381489936" />
+                  <mssgle:LineSegment
+                    End="-9.90922667421086,26.8732762979871" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Derived Column Output]"
+          TopLeft="888.302048916799,470.866613616947">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.74285618644637,70.8907180171336"
+              Start="0,0"
+              End="9.74285618644637,63.3907180171336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.4453590085668" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.4453590085668"
+                    Point2="0,35.4453590085668"
+                    Point3="4,35.4453590085668" />
+                  <mssgle:LineSegment
+                    End="5.74285618644637,35.4453590085668" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.74285618644637,35.4453590085668"
+                    Point2="9.74285618644637,35.4453590085668"
+                    Point3="9.74285618644637,39.4453590085668" />
+                  <mssgle:LineSegment
+                    End="9.74285618644637,63.3907180171336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Data Conversion Output]"
+          TopLeft="467.489120966387,343.77648431137">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74.9284967005786"
+              Start="0,0"
+              End="0,67.4284967005786">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.4284967005786" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Data Conversion Error Output]"
+          TopLeft="515.258615488355,343.77648431137">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="373.043433428444,69.4901293055771"
+              Start="0,0"
+              End="373.043433428444,61.9901293055771">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.2150876778424" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.2150876778424"
+                    Point2="0,28.2150876778424"
+                    Point3="4,28.2150876778424" />
+                  <mssgle:LineSegment
+                    End="369.043433428444,28.2150876778424" />
+                  <mssgle:CubicBezierSegment
+                    Point1="369.043433428444,28.2150876778424"
+                    Point2="373.043433428444,28.2150876778424"
+                    Point3="373.043433428444,32.2150876778424" />
+                  <mssgle:LineSegment
+                    End="373.043433428444,61.9901293055771" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="120.435329995472,33.2150876778424,132.1727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Conditional Split Default Output]"
+          TopLeft="444.919626444419,461.104981011949">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-136.907729625872,54.2577430351366"
+              Start="0,0"
+              End="-136.907729625872,46.7577430351366">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0336012325428" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.0336012325428"
+                    Point2="0,22.0336012325428"
+                    Point3="-4,22.0336012325428" />
+                  <mssgle:LineSegment
+                    End="-132.907729625872,22.0336012325428" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-132.907729625872,22.0336012325428"
+                    Point2="-136.907729625872,22.0336012325428"
+                    Point3="-136.907729625872,26.0336012325428" />
+                  <mssgle:LineSegment
+                    End="-136.907729625872,46.7577430351366" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-139.067771062936,27.0336012325428,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[ValidRows]"
+          TopLeft="494.252959777753,461.104981011949">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="105.042279420374,81.8361949827302"
+              Start="0,0"
+              End="105.042279420374,74.3361949827302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.2329725818194" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.2329725818194"
+                    Point2="0,33.2329725818194"
+                    Point3="4,33.2329725818194" />
+                  <mssgle:LineSegment
+                    End="101.042279420374,33.2329725818194" />
+                  <mssgle:CubicBezierSegment
+                    Point1="101.042279420374,33.2329725818194"
+                    Point2="105.042279420374,33.2329725818194"
+                    Point3="105.042279420374,37.2329725818194" />
+                  <mssgle:LineSegment
+                    End="105.042279420374,74.3361949827302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="29.1703779914371,38.2329725818194,46.7015234375,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Union All Output 1]"
+          TopLeft="599.869780545781,687.776470021836">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.9186979666613"
+              Start="0,0"
+              End="0,37.4186979666613">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.4186979666613" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 12]"
+          TopLeft="604.136447194708,775.095167988498">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.0224784078517"
+              Start="0,0"
+              End="0,30.5224784078517">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5224784078517" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 11]"
+          TopLeft="362.784515411212,647.843557561632">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="176.5012000225,19.1329124602045"
+              Start="0,0"
+              End="169.0012000225,19.1329124602045">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="84.2506000112498,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.2506000112498,0"
+                    Point2="88.2506000112498,0"
+                    Point3="88.2506000112498,4" />
+                  <mssgle:LineSegment
+                    End="88.2506000112498,15.1329124602045" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88.2506000112498,15.1329124602045"
+                    Point2="88.2506000112498,19.1329124602045"
+                    Point3="92.2506000112498,19.1329124602045" />
+                  <mssgle:LineSegment
+                    End="169.0012000225,19.1329124602045" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Row Count Output 1]"
+          TopLeft="898.044905103246,583.357331634081">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-298.759189669534,62.8191383877553"
+              Start="0,0"
+              End="-298.759189669534,55.3191383877553">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.4095691938776" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.4095691938776"
+                    Point2="0,31.4095691938776"
+                    Point3="-4,31.4095691938776" />
+                  <mssgle:LineSegment
+                    End="-294.759189669534,31.4095691938776" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-294.759189669534,31.4095691938776"
+                    Point2="-298.759189669534,31.4095691938776"
+                    Point3="-298.759189669534,35.4095691938776" />
+                  <mssgle:LineSegment
+                    End="-298.759189669534,55.3191383877553" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load_Stg_OrderItems.Paths[Flat File Source Output]"
+          TopLeft="497.044032859739,182.999994308422">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.6032137049613"
+              Start="0,0"
+              End="0,34.1032137049613">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.1032137049613" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load_Stg_OrderItems\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
