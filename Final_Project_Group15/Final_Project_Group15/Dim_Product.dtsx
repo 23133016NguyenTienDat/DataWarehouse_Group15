@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{0611C8DA-6D9F-49F0-8472-4DACBC133E73}">
+  DTS:VersionBuild="65"
+  DTS:VersionGUID="{70DA3E94-D9E5-4686-8644-4499781E0076}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -118,7 +118,7 @@
                     <inputColumn
                       refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[row_hash_old]"
                       cachedDataType="wstr"
-                      cachedLength="50"
+                      cachedLength="64"
                       cachedName="row_hash_old"
                       lineageId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]" />
                   </inputColumns>
@@ -140,13 +140,13 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]} != #{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[row_hash_dt]}</property>
+                      name="Expression">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[row_hash_dt]} != #{Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">row_hash_old != row_hash_dt</property>
+                      name="FriendlyExpression">row_hash_dt != row_hash_old</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -205,13 +205,6 @@
                   name="Data Conversion Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[product_id]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="product_id"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[product_id]" />
-                    <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[price_usd]"
                       cachedDataType="wstr"
                       cachedLength="100"
@@ -224,17 +217,18 @@
                       cachedName="cost_usd"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[cost_usd]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[margin_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="margin_usd"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[margin_usd]" />
-                    <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
                       cachedName="row_hash"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[row_hash]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="product_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[product_id]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -247,32 +241,12 @@
                   synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]"
-                      dataType="i4"
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[base_price_usd]"
+                      dataType="r8"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]"
-                      name="Copy of product_id"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[product_id]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of price_usd]"
-                      dataType="i8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of price_usd]"
-                      name="Copy of price_usd"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[base_price_usd]"
+                      name="base_price_usd"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -287,12 +261,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of cost_usd]"
-                      dataType="i8"
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[cost_usd_dt]"
+                      dataType="r8"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of cost_usd]"
-                      name="Copy of cost_usd"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[cost_usd_dt]"
+                      name="cost_usd_dt"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -300,26 +274,6 @@
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[cost_usd]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of margin_usd]"
-                      dataType="i8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of margin_usd]"
-                      name="Copy of margin_usd"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[margin_usd]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -341,6 +295,26 @@
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[row_hash]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[product_id_dt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[product_id_dt]"
+                      name="product_id_dt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[product_id]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -492,6 +466,28 @@
                           name="FriendlyExpression">GETDATE()</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]"
+                      name="is_current"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_BOOL)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_BOOL)0</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -607,13 +603,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from dw.dim_category</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select category_key, category_name from dw.dim_category</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from dw.dim_category) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select category_key, category_name from dw.dim_category) [refTable]
 where [refTable].[category_name] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -629,7 +625,7 @@ where [refTable].[category_name] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
+                  typeConverter="LookupNoMatchBehavior">0</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -698,6 +694,7 @@ where [refTable].[category_name] = ?</property>
                 <output
                   refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
@@ -765,13 +762,13 @@ where [refTable].[category_name] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dw].[dim_products]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select product_key, product_id, row_hash from dw.dim_products where is_current = 1</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dw].[dim_products]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select product_key, product_id, row_hash from dw.dim_products where is_current = 1) [refTable]
 where [refTable].[product_id] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -803,12 +800,12 @@ where [refTable].[product_id] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="product_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="product_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="category_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="product_name" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="base_price_usd" dataType="DT_NUMERIC" length="0" precision="12" scale="2" codePage="0"/&gt;&lt;referenceColumn name="cost_usd" dataType="DT_NUMERIC" length="0" precision="12" scale="2" codePage="0"/&gt;&lt;referenceColumn name="row_hash" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="effective_from" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="effective_to" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="is_current" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="product_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="product_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="row_hash" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]};</property>
+                  name="ParameterMap">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[product_id_dt]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -832,10 +829,10 @@ where [refTable].[product_id] = ?</property>
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Lookup 1.Inputs[Lookup Input].Columns[Copy of product_id]"
+                      refId="Package\Data Flow Task\Lookup 1.Inputs[Lookup Input].Columns[product_id_dt]"
                       cachedDataType="i4"
-                      cachedName="Copy of product_id"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]">
+                      cachedName="product_id_dt"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[product_id_dt]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -860,6 +857,21 @@ where [refTable].[product_id] = ?</property>
                   synchronousInputId="Package\Data Flow Task\Lookup 1.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
+                      refId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="64"
+                      lineageId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]"
+                      name="row_hash_old"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">row_hash</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
                       refId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[product_key]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
@@ -871,21 +883,6 @@ where [refTable].[product_id] = ?</property>
                           dataType="System.String"
                           description="Specifies the column in the reference table from which a column is copied."
                           name="CopyFromReferenceColumn">product_key</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[row_hash_old]"
-                      name="row_hash_old"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">row_hash</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -945,17 +942,17 @@ where [refTable].[product_id] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 2]"
+                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 3]"
                   deleteOutputOnPathDetached="true"
-                  name="Multicast Output 2"
+                  name="Multicast Output 3"
                   synchronousInputId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 3]"
+                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 2]"
                   dangling="true"
                   deleteOutputOnPathDetached="true"
-                  name="Multicast Output 3"
+                  name="Multicast Output 2"
                   synchronousInputId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
@@ -1151,38 +1148,29 @@ WHERE product_key = ?</property>
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="product_id"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cost_usd]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="cost_usd"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cost_usd]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]" />
-                    <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[category_key]"
                       cachedDataType="i4"
                       cachedName="category_key"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[category_key]"
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category_key]" />
                     <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[base_price_usd]"
+                      cachedDataType="r8"
+                      cachedName="base_price_usd"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[base_price_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[base_price_usd]" />
+                    <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[effective_from]"
                       cachedDataType="dbTimeStamp"
                       cachedName="effective_from"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[effective_from]"
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[effective_from]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="product_id_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id_dt]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
                       cachedDataType="wstr"
@@ -1191,12 +1179,18 @@ WHERE product_key = ?</property>
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_name]"
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[name]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[price_usd]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cost_usd_dt]"
+                      cachedDataType="r8"
+                      cachedName="cost_usd_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cost_usd]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd_dt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[row_hash_dt]"
                       cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="price_usd"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[base_price_usd]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[price_usd]" />
+                      cachedLength="64"
+                      cachedName="row_hash_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1232,7 +1226,7 @@ WHERE product_key = ?</property>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
                       dataType="wstr"
-                      length="50"
+                      length="64"
                       name="row_hash" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[effective_from]"
@@ -1301,8 +1295,7 @@ WHERE product_key = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM stg.products
-WHERE is_valid = 1 AND is_processed = 0</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from stg.products where is_valid = 1 and is_processed = 0</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1406,16 +1399,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       length="100"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[margin_usd]"
                       name="margin_usd"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source_file_name]"
-                      length="255"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]"
-                      name="source_file_name"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[row_hash]"
@@ -1544,12 +1527,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       length="100"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[margin_usd]"
                       name="margin_usd" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source_file_name]"
-                      name="source_file_name" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
                       dataType="bytes"
@@ -1744,23 +1721,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="source_file_name"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
                       refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
@@ -1883,20 +1843,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
                           name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[margin_usd]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source_file_name]"
-                      name="source_file_name">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source_file_name]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -2029,20 +1975,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="source_file_name"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source_file_name]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
                       refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
@@ -2070,55 +2002,29 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of product_id]"
-                      cachedDataType="i4"
-                      cachedName="Copy of product_id"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]">
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[base_price_usd]"
+                      cachedDataType="r8"
+                      cachedName="base_price_usd"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[base_price_usd]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of product_id]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[base_price_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of price_usd]"
-                      cachedDataType="i8"
-                      cachedName="Copy of price_usd"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of price_usd]">
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[cost_usd_dt]"
+                      cachedDataType="r8"
+                      cachedName="cost_usd_dt"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[cost_usd_dt]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of price_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of cost_usd]"
-                      cachedDataType="i8"
-                      cachedName="Copy of cost_usd"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of cost_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of cost_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of margin_usd]"
-                      cachedDataType="i8"
-                      cachedName="Copy of margin_usd"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of margin_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of margin_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd_dt]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2133,6 +2039,19 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[product_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="product_id_dt"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[product_id_dt]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id_dt]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2255,20 +2174,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[source_file_name]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="source_file_name"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source_file_name]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
                       refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[row_hash]"
                       cachedDataType="bytes"
                       cachedLength="32"
@@ -2296,55 +2201,29 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Copy of product_id]"
-                      cachedDataType="i4"
-                      cachedName="Copy of product_id"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of product_id]">
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[base_price_usd]"
+                      cachedDataType="r8"
+                      cachedName="base_price_usd"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[base_price_usd]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of product_id]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[base_price_usd]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Copy of price_usd]"
-                      cachedDataType="i8"
-                      cachedName="Copy of price_usd"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of price_usd]">
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[cost_usd_dt]"
+                      cachedDataType="r8"
+                      cachedName="cost_usd_dt"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[cost_usd_dt]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of price_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Copy of cost_usd]"
-                      cachedDataType="i8"
-                      cachedName="Copy of cost_usd"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of cost_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of cost_usd]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Copy of margin_usd]"
-                      cachedDataType="i8"
-                      cachedName="Copy of margin_usd"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of margin_usd]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of margin_usd]}</property>
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd_dt]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2359,6 +2238,19 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[product_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="product_id_dt"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[product_id_dt]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id_dt]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2432,12 +2324,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[margin_usd]"
                       name="margin_usd" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[source_file_name]"
-                      name="source_file_name" />
-                    <outputColumn
                       refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash]"
                       dataType="bytes"
                       length="32"
@@ -2449,31 +2335,26 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[category_key]"
                       name="category_key" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of product_id]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of product_id]"
-                      name="Copy of product_id" />
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[base_price_usd]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[base_price_usd]"
+                      name="base_price_usd" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of price_usd]"
-                      dataType="i8"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of price_usd]"
-                      name="Copy of price_usd" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of cost_usd]"
-                      dataType="i8"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of cost_usd]"
-                      name="Copy of cost_usd" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of margin_usd]"
-                      dataType="i8"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of margin_usd]"
-                      name="Copy of margin_usd" />
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd_dt]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[cost_usd_dt]"
+                      name="cost_usd_dt" />
                     <outputColumn
                       refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]"
                       dataType="wstr"
                       length="64"
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]"
                       name="row_hash_dt" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id_dt]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[product_id_dt]"
+                      name="product_id_dt" />
                     <outputColumn
                       refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[effective_from]"
                       dataType="dbTimeStamp"
@@ -2513,14 +2394,14 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               startId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Lookup Match Output]"
-              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
-              name="Lookup Match Output"
-              startId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Data Flow Task.Paths[Lookup Match Output1]"
               endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
               name="Lookup Match Output"
               startId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Lookup Match Output1]"
+              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Lookup No Match Output]"
               endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
@@ -2532,10 +2413,10 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               name="Multicast Output 1"
               startId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 1]" />
             <path
-              refId="Package\Data Flow Task.Paths[Multicast Output 2]"
+              refId="Package\Data Flow Task.Paths[Multicast Output 3]"
               endId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input]"
-              name="Multicast Output 2"
-              startId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 2]" />
+              name="Multicast Output 3"
+              startId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 3]" />
             <path
               refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
               endId="Package\Data Flow Task\Sort.Inputs[Sort Input]"
@@ -2597,7 +2478,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task 1"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -2633,7 +2514,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task 1 1"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -2888,37 +2769,33 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="120,41.6"
-          Id="Package\Data Flow Task\Multicast"
-          TopLeft="344.642857876511,503.764705460067" />
-        <NodeLayout
-          Size="121.6,41.6"
-          Id="Package\Data Flow Task\Lookup 1"
-          TopLeft="350.714286460864,363.141176165604" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Data Flow Task\Derived Column"
-          TopLeft="564.28571548693,365.364705619598" />
+          Size="129.6,41.6"
+          Id="Package\Data Flow Task\Row Count"
+          TopLeft="670.266214479974,592.31970104384" />
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\Data Flow Task\Lookup"
-          TopLeft="358.357143608283,222.236044039387" />
+          TopLeft="307.365079888816,212.418300467402" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="892.346940675083,662.044117066752" />
+          TopLeft="646.938776887367,675.008403006089" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="339.285715007964,82.3882352331209" />
+          TopLeft="314.507937046879,50.9803921121765" />
         <NodeLayout
           Size="152.8,41.6"
           Id="Package\Data Flow Task\Derived Column 2"
           TopLeft="462.642858115994,572.686134040856" />
         <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Data Flow Task\Lookup 1"
+          TopLeft="353.742857892477,353.047058782641" />
+        <NodeLayout
           Size="155.2,41.6"
           Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="333.571429281514,295.952940978063" />
+          TopLeft="339.904762497767,275.947712273815" />
         <NodeLayout
           Size="174.4,41.6"
           Id="Package\Data Flow Task\OLE DB Command 1"
@@ -2928,39 +2805,51 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           Id="Package\Data Flow Task\Derived Column 1"
           TopLeft="218.57142903671,584.702940753012" />
         <NodeLayout
+          Size="120,41.6"
+          Id="Package\Data Flow Task\Multicast"
+          TopLeft="339.285715007964,531.485293671063" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Data Flow Task\Union All"
+          TopLeft="617.34694008968,489.294117454589" />
+        <NodeLayout
           Size="154.4,41.6"
           Id="Package\Data Flow Task\Conditional Split"
-          TopLeft="325.714286407646,432.647058486371" />
+          TopLeft="340.171429292158,437.341176268159" />
         <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Data Flow Task\Row Count"
-          TopLeft="728.54285859496,682.870587985944" />
+          Size="97.6,41.6"
+          Id="Package\Data Flow Task\Sort"
+          TopLeft="323.238095795622,130.849673087919" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="564.28571548693,365.364705619598" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Row Count Output 1]"
-          TopLeft="858.14285859496,703.670587985944">
+          Id="Package\Data Flow Task.Paths[Union All Output 1]"
+          TopLeft="696.013606756346,530.894117454589">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="34.2040820801227,-20.8264709191918"
+              EndConnector="39.0526077236279,61.4255835892517"
               Start="0,0"
-              End="26.7040820801227,-20.8264709191918">
+              End="39.0526077236279,53.9255835892517">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="13.1020410400614,0" />
+                    End="0,21.0551722535106" />
                   <mssgle:CubicBezierSegment
-                    Point1="13.1020410400614,0"
-                    Point2="17.1020410400614,0"
-                    Point3="17.1020410400614,-4" />
+                    Point1="0,21.0551722535106"
+                    Point2="0,25.0551722535106"
+                    Point3="4,25.0551722535106" />
                   <mssgle:LineSegment
-                    End="17.1020410400614,-16.8264709191918" />
+                    End="35.0526077236279,25.0551722535106" />
                   <mssgle:CubicBezierSegment
-                    Point1="17.1020410400614,-16.8264709191918"
-                    Point2="17.1020410400614,-20.8264709191918"
-                    Point3="21.1020410400614,-20.8264709191918" />
+                    Point1="35.0526077236279,25.0551722535106"
+                    Point2="39.0526077236279,25.0551722535106"
+                    Point3="39.0526077236279,29.0551722535106" />
                   <mssgle:LineSegment
-                    End="26.7040820801227,-20.8264709191918" />
+                    End="39.0526077236279,53.9255835892517" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2970,31 +2859,115 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Multicast Output 2]"
-          TopLeft="423.309524543178,545.364705460067">
+          Id="Package\Data Flow Task.Paths[Sort Output]"
+          TopLeft="372.038095795622,172.449673087919">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="115.733333572816,27.3214285807891"
+              EndConnector="-8.27301590680537,39.9686273794824"
               Start="0,0"
-              End="115.733333572816,19.8214285807891">
+              End="-8.27301590680537,32.4686273794824">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,7.14426692111133" />
+                    End="0,15.9843136897412" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,7.14426692111133"
-                    Point2="0,11.1442669211113"
-                    Point3="4,11.1442669211113" />
+                    Point1="0,15.9843136897412"
+                    Point2="0,19.9843136897412"
+                    Point3="-4,19.9843136897412" />
                   <mssgle:LineSegment
-                    End="111.733333572816,11.1442669211113" />
+                    End="-4.27301590680537,19.9843136897412" />
                   <mssgle:CubicBezierSegment
-                    Point1="111.733333572816,11.1442669211113"
-                    Point2="115.733333572816,11.1442669211113"
-                    Point3="115.733333572816,15.1442669211113" />
+                    Point1="-4.27301590680537,19.9843136897412"
+                    Point2="-8.27301590680537,19.9843136897412"
+                    Point3="-8.27301590680537,23.9843136897412" />
                   <mssgle:LineSegment
-                    End="115.733333572816,19.8214285807891" />
+                    End="-8.27301590680537,32.4686273794824" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Row Count Output 1]"
+          TopLeft="733.602495683671,633.919701043841">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.088701962248"
+              Start="0,0"
+              End="0,33.588701962248">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.588701962248" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="389.307937046879,92.5803921121765">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17.2698412512572,38.269280975743"
+              Start="0,0"
+              End="-17.2698412512572,30.769280975743">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.1346404878715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.1346404878715"
+                    Point2="0,19.1346404878715"
+                    Point3="-4,19.1346404878715" />
+                  <mssgle:LineSegment
+                    End="-13.2698412512572,19.1346404878715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13.2698412512572,19.1346404878715"
+                    Point2="-17.2698412512572,19.1346404878715"
+                    Point3="-17.2698412512572,23.1346404878715" />
+                  <mssgle:LineSegment
+                    End="-17.2698412512572,30.769280975743" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Multicast Output 3]"
+          TopLeft="459.285715007964,550.186134040856">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="79.7571431080298,22.5"
+              Start="0,0"
+              End="79.7571431080298,15">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="75.7571431080298,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="75.7571431080298,0"
+                    Point2="79.7571431080298,0"
+                    Point3="79.7571431080298,4" />
+                  <mssgle:LineSegment
+                    End="79.7571431080298,15" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3005,30 +2978,24 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Multicast Output 1]"
-          TopLeft="404.642857876511,545.364705460067">
+          TopLeft="339.285715007964,552.285293671063">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-109.671428839802,39.338235292945"
+              EndConnector="-44.3142859712543,32.4176470819491"
               Start="0,0"
-              End="-109.671428839802,31.838235292945">
+              End="-44.3142859712543,24.9176470819491">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.6691176464725" />
+                    End="-40.3142859712543,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.6691176464725"
-                    Point2="0,19.6691176464725"
-                    Point3="-4,19.6691176464725" />
+                    Point1="-40.3142859712543,0"
+                    Point2="-44.3142859712543,0"
+                    Point3="-44.3142859712543,4" />
                   <mssgle:LineSegment
-                    End="-105.671428839802,19.6691176464725" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-105.671428839802,19.6691176464725"
-                    Point2="-109.671428839802,19.6691176464725"
-                    Point3="-109.671428839802,23.6691176464725" />
-                  <mssgle:LineSegment
-                    End="-109.671428839802,31.838235292945" />
+                    End="-44.3142859712543,24.9176470819491" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3039,86 +3006,160 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
-          TopLeft="472.314286460864,385.052940892601">
+          TopLeft="475.342857892477,373.847058782641">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="91.9714290260663,0"
+              EndConnector="88.9428575944532,12.3176468369566"
               Start="0,0"
-              End="84.4714290260663,0">
+              End="81.4428575944532,12.3176468369566">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="84.4714290260663,0" />
+                    End="40.4714287972266,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.4714287972266,0"
+                    Point2="44.4714287972266,0"
+                    Point3="44.4714287972266,4" />
+                  <mssgle:LineSegment
+                    End="44.4714287972266,8.31764683695656" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44.4714287972266,8.31764683695656"
+                    Point2="44.4714287972266,12.3176468369566"
+                    Point3="48.4714287972266,12.3176468369566" />
+                  <mssgle:LineSegment
+                    End="81.4428575944532,12.3176468369566" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-13.5706722057169,5,111.6127734375,11.609375"
+              BoundingBox="-11.3349579215234,-17.609375,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
-          TopLeft="412.964286444899,263.836044039387">
+          TopLeft="415.957143592318,394.647058782641">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,32.1168969386769"
+              EndConnector="0,42.6941174855179"
               Start="0,0"
-              End="0,24.6168969386769">
+              End="0,35.1941174855179">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.6168969386769" />
+                    End="0,35.1941174855179" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,6.50376096933845,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,11.792371242759,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="411.514286460864,404.741176165604">
+          TopLeft="420.165079888816,233.218300467402">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-8.60000005321825,27.905882320767"
+              EndConnector="-2.66031739104886,42.729411806413"
               Start="0,0"
-              End="-8.60000005321825,20.405882320767">
+              End="-2.66031739104886,35.229411806413">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,9.95294116038349" />
+                    End="1.33968260895114,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,9.95294116038349"
-                    Point2="0,13.9529411603835"
-                    Point3="-4,13.9529411603835" />
+                    Point1="1.33968260895114,0"
+                    Point2="-2.66031739104886,0"
+                    Point3="-2.66031739104886,4" />
                   <mssgle:LineSegment
-                    End="-4.60000005321825,13.9529411603835" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.60000005321825,13.9529411603835"
-                    Point2="-8.60000005321825,13.9529411603835"
-                    Point3="-8.60000005321825,17.9529411603835" />
-                  <mssgle:LineSegment
-                    End="-8.60000005321825,20.405882320767" />
+                    End="-2.66031739104886,35.229411806413" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-52.4913867453591,18.9529411603835,96.3827734375,11.609375"
+              BoundingBox="-50.8517041097989,-17.609375,96.3827734375,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output2]"
+          TopLeft="563.176191449327,572.686134040856">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="95.5040819736857,-41.7920165862672"
+              Start="0,0"
+              End="95.5040819736857,-34.2920165862672">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-16.8234096709814" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-16.8234096709814"
+                    Point2="0,-20.8234096709814"
+                    Point3="4,-20.8234096709814" />
+                  <mssgle:LineSegment
+                    End="91.5040819736857,-20.8234096709814" />
+                  <mssgle:CubicBezierSegment
+                    Point1="91.5040819736857,-20.8234096709814"
+                    Point2="95.5040819736857,-20.8234096709814"
+                    Point3="95.5040819736857,-24.8234096709814" />
+                  <mssgle:LineSegment
+                    End="95.5040819736857,-34.2920165862672" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
+          TopLeft="640.68571548693,406.964705619598">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.6612246027497,82.3294118349908"
+              Start="0,0"
+              End="36.6612246027497,74.8294118349908">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.1647059174954" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.1647059174954"
+                    Point2="0,41.1647059174954"
+                    Point3="4,41.1647059174954" />
+                  <mssgle:LineSegment
+                    End="32.6612246027497,41.1647059174954" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.6612246027497,41.1647059174954"
+                    Point2="36.6612246027497,41.1647059174954"
+                    Point3="36.6612246027497,45.1647059174954" />
+                  <mssgle:LineSegment
+                    End="36.6612246027497,74.8294118349908" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3157,90 +3198,18 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="411.342857871189,337.552940978063">
+          TopLeft="416.023810195122,317.547712273815">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,25.5882351875408"
+              EndConnector="0,35.4993465088264"
               Start="0,0"
-              End="0,18.0882351875408">
+              End="0,27.9993465088264">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.0882351875408" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\Data Flow Task\Sort"
-          TopLeft="348.428572166027,146.499999914538" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="414.085715007964,123.988235233121">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-16.857142841937,22.5117646814166"
-              Start="0,0"
-              End="-16.857142841937,15.0117646814166">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,7.25588234070831" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,7.25588234070831"
-                    Point2="0,11.2558823407083"
-                    Point3="-4,11.2558823407083" />
-                  <mssgle:LineSegment
-                    End="-12.857142841937,11.2558823407083" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-12.857142841937,11.2558823407083"
-                    Point2="-16.857142841937,11.2558823407083"
-                    Point3="-16.857142841937,15.2558823407083" />
-                  <mssgle:LineSegment
-                    End="-16.857142841937,15.0117646814166" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Sort Output]"
-          TopLeft="397.228572166027,188.099999914538">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="17.528571442256,34.1360441248495"
-              Start="0,0"
-              End="17.528571442256,26.6360441248495">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.0680220624247" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.0680220624247"
-                    Point2="0,17.0680220624247"
-                    Point3="4,17.0680220624247" />
-                  <mssgle:LineSegment
-                    End="13.528571442256,17.0680220624247" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13.528571442256,17.0680220624247"
-                    Point2="17.528571442256,17.0680220624247"
-                    Point3="17.528571442256,21.0680220624247" />
-                  <mssgle:LineSegment
-                    End="17.528571442256,26.6360441248495" />
+                    End="0,27.9993465088264" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3251,167 +3220,50 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[change]"
-          TopLeft="403.778572142078,474.247058486371">
+          TopLeft="417.371429292158,478.941176268159">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5176469736959"
+              EndConnector="-18.0857142841944,52.5441174029036"
               Start="0,0"
-              End="0,22.0176469736959">
+              End="-18.0857142841944,45.0441174029036">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.0176469736959" />
+                    End="0,22.2720587014518" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2720587014518"
+                    Point2="0,26.2720587014518"
+                    Point3="-4,26.2720587014518" />
+                  <mssgle:LineSegment
+                    End="-14.0857142841944,26.2720587014518" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-14.0857142841944,26.2720587014518"
+                    Point2="-18.0857142841944,26.2720587014518"
+                    Point3="-18.0857142841944,30.2720587014518" />
+                  <mssgle:LineSegment
+                    End="-18.0857142841944,45.0441174029036" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-16.63095703125,5.17728051809797,33.2619140625,11.6630859375"
+              BoundingBox="-25.6738141733472,31.2720587014518,33.2619140625,11.6630859375"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="120,41.6"
-          Id="Package\Data Flow Task\Union All"
-          TopLeft="741.964287293733,538.220587840658" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
-          TopLeft="640.68571548693,406.964705619598">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="161.278571806803,131.25588222106"
-              Start="0,0"
-              End="161.278571806803,123.75588222106">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,61.6279411105301" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,61.6279411105301"
-                    Point2="0,65.6279411105301"
-                    Point3="4,65.6279411105301" />
-                  <mssgle:LineSegment
-                    End="157.278571806803,65.6279411105301" />
-                  <mssgle:CubicBezierSegment
-                    Point1="157.278571806803,65.6279411105301"
-                    Point2="161.278571806803,65.6279411105301"
-                    Point3="161.278571806803,69.6279411105301" />
-                  <mssgle:LineSegment
-                    End="161.278571806803,123.75588222106" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output2]"
-          TopLeft="615.442858115994,593.486134040856">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="126.521429177739,-34.4655462001978"
-              Start="0,0"
-              End="119.021429177739,-34.4655462001978">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="59.2607145888695,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="59.2607145888695,0"
-                    Point2="63.2607145888695,0"
-                    Point3="63.2607145888695,-4" />
-                  <mssgle:LineSegment
-                    End="63.2607145888695,-30.4655462001978" />
-                  <mssgle:CubicBezierSegment
-                    Point1="63.2607145888695,-30.4655462001978"
-                    Point2="63.2607145888695,-34.4655462001978"
-                    Point3="67.2607145888695,-34.4655462001978" />
-                  <mssgle:LineSegment
-                    End="119.021429177739,-34.4655462001978" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Union All Output 1]"
-          TopLeft="801.964287293733,579.820587840658">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-8.62142869877312,103.050000145286"
-              Start="0,0"
-              End="-8.62142869877312,95.5500001452857">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,47.5250000726429" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,47.5250000726429"
-                    Point2="0,51.5250000726429"
-                    Point3="-4,51.5250000726429" />
-                  <mssgle:LineSegment
-                    End="-4.62142869877312,51.5250000726429" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.62142869877312,51.5250000726429"
-                    Point2="-8.62142869877312,51.5250000726429"
-                    Point3="-8.62142869877312,55.5250000726429" />
-                  <mssgle:LineSegment
-                    End="-8.62142869877312,95.5500001452857" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Lookup 1">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dw].[dim_products]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -3421,7 +3273,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3444,6 +3296,29 @@ WHERE is_valid = 1 AND is_processed = 0</property>
   <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\OLE DB Source">
     <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Lookup 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

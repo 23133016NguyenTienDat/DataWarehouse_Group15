@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{F0B7AC02-39CF-43A5-9573-2F541E511EAD}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{3B76BE67-709D-460B-AC68-D268CD33EDE2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -731,6 +731,147 @@ where [refTable].[product_id] = ?</property>
               </outputs>
             </component>
             <component
+              refId="Package\Data Flow Task\Lookup 2"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup 2"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select review_id from dw.fact_review</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select review_id from dw.fact_review) [refTable]
+where [refTable].[review_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="review_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[review_id_dt]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Lookup 2.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[CBG-Ber-2807\MSSQLSERVER01.DataWarehouse]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Lookup 2.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Lookup 2.Inputs[Lookup Input].Columns[review_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="review_id_dt"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[review_id_dt]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">review_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Lookup 2.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup 2.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup 2.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup 2.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup 2.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup 2.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Data Flow Task\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -803,38 +944,41 @@ where [refTable].[product_id] = ?</property>
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_id]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="order_id"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="order_id_dt"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[order_id]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rating]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="rating"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rating]"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[rating]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_text]"
-                      cachedDataType="nText"
-                      cachedName="review_text"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_text]"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[review_text]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_date]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="review_date"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_date]"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[review_date]" />
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[order_id_dt]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_key_old]"
                       cachedDataType="i4"
                       cachedName="product_key_old"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
                       lineageId="Package\Data Flow Task\Lookup 1.Outputs[Lookup Match Output].Columns[product_key_old]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rating_dt]"
+                      cachedDataType="r8"
+                      cachedName="rating_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rating]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[rating_dt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_date_dt]"
+                      cachedDataType="dbDate"
+                      cachedName="review_date_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_date]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[review_date_dt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="review_id_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_id]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[review_id_dt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_text_dt]"
+                      cachedDataType="nText"
+                      cachedName="review_text_dt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_text]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[review_text_dt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -862,6 +1006,10 @@ where [refTable].[product_id] = ?</property>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_date]"
                       dataType="dbDate"
                       name="review_date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_id]"
+                      dataType="i4"
+                      name="review_id" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1760,7 +1908,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           <paths>
             <path
               refId="Package\Data Flow Task.Paths[Data Conversion Output]"
-              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              endId="Package\Data Flow Task\Lookup 2.Inputs[Lookup Input]"
               name="Data Conversion Output"
               startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
             <path
@@ -1788,6 +1936,11 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               endId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]"
               name="Lookup No Match Output"
               startId="Package\Data Flow Task\Lookup 1.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Lookup No Match Output2]"
+              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              name="Lookup No Match Output"
+              startId="Package\Data Flow Task\Lookup 2.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
               endId="Package\Data Flow Task\Sort.Inputs[Sort Input]"
@@ -2238,57 +2391,249 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         <NodeLayout
           Size="152.8,41.6"
           Id="Package\Data Flow Task\Derived Column"
-          TopLeft="334.920635633593,173.3333331814" />
-        <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Data Flow Task\Row Count 2"
-          TopLeft="341.964286442238,494.558823122208" />
-        <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\Data Flow Task\Sort"
-          TopLeft="357.14285790312,95.1633986093961" />
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Data Flow Task\Row Count 1"
-          TopLeft="665.178572844562,414.852940812836" />
-        <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="317.460318136107,566.732025647028" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Data Flow Task\Lookup"
-          TopLeft="348.571429313446,303.588235028011" />
+          TopLeft="332.063492770368,138.156862623998" />
         <NodeLayout
           Size="129.6,41.6"
           Id="Package\Data Flow Task\Row Count"
           TopLeft="667.857144278835,341.249999700881" />
         <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Data Flow Task\Sort"
+          TopLeft="355.714286471507,67.6339868688208" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="335.000000713127,563.988235005221" />
+        <NodeLayout
           Size="149.6,41.6"
           Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="331.428572134096,25.2352940955273" />
+          TopLeft="331.428572134096,1.52941176336525" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Data Flow Task\Lookup 2"
+          TopLeft="375.000000798277,268.105882263792" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Data Flow Task\Lookup"
+          TopLeft="320.000000681196,331.117646768586" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Data Flow Task\Row Count 2"
+          TopLeft="341.964286442238,494.558823122208" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Data Flow Task\Row Count 1"
+          TopLeft="665.178572844562,414.852940812836" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="331.746032452232,238.75816972536" />
+          TopLeft="331.031746736425,200.522875641228" />
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\Data Flow Task\Lookup 1"
-          TopLeft="355.396826153372,376.320261108049" />
+          TopLeft="354.682540437566,412.261437547133" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Sort Output]"
-          TopLeft="408.631746768357,136.763398609396">
+          Id="Package\Data Flow Task.Paths[Lookup No Match Output1]"
+          TopLeft="476.282540437566,434.357189179985">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36.5699345720038"
+              EndConnector="188.896032406996,0"
               Start="0,0"
-              End="0,29.0699345720038">
+              End="181.396032406996,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.0699345720038" />
+                    End="181.396032406996,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="34.8916294847481,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
+          TopLeft="432.800000681196,351.917646768586">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="235.057143597639,10.1323529322947"
+              Start="0,0"
+              End="227.557143597639,10.1323529322947">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="113.528571798819,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="113.528571798819,0"
+                    Point2="117.528571798819,0"
+                    Point3="117.528571798819,4" />
+                  <mssgle:LineSegment
+                    End="117.528571798819,6.13235293229468" />
+                  <mssgle:CubicBezierSegment
+                    Point1="117.528571798819,6.13235293229468"
+                    Point2="117.528571798819,10.1323529322947"
+                    Point3="121.528571798819,10.1323529322947" />
+                  <mssgle:LineSegment
+                    End="227.557143597639,10.1323529322947" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="61.7221850800693,-17.609375,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
+          TopLeft="413.523413439902,453.861437547133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.6973855750746"
+              Start="0,0"
+              End="0,33.1973855750746">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.1973855750746" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,10.7940052875373,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="376.400000681196,372.717646768586">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39.0825397563694,39.5437907785471"
+              Start="0,0"
+              End="39.0825397563694,32.0437907785471">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.7718953892735" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.7718953892735"
+                    Point2="0,19.7718953892735"
+                    Point3="4,19.7718953892735" />
+                  <mssgle:LineSegment
+                    End="35.0825397563694,19.7718953892735" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.0825397563694,19.7718953892735"
+                    Point2="39.0825397563694,19.7718953892735"
+                    Point3="39.0825397563694,23.7718953892735" />
+                  <mssgle:LineSegment
+                    End="39.0825397563694,32.0437907785471" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.6501168405653,24.7718953892735,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="332.063492770368,158.956862623998">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-1.0317460339428,62.3660130172294"
+              Start="0,0"
+              End="-8.5317460339428,62.3660130172294">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-19.5317460339428,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19.5317460339428,0"
+                    Point2="-23.5317460339428,0"
+                    Point3="-23.5317460339428,4" />
+                  <mssgle:LineSegment
+                    End="-23.5317460339428,58.3660130172294" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23.5317460339428,58.3660130172294"
+                    Point2="-23.5317460339428,62.3660130172294"
+                    Point3="-19.5317460339428,62.3660130172294" />
+                  <mssgle:LineSegment
+                    End="-8.5317460339428,62.3660130172294" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="408.631746736425,242.122875641228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.1682540618512,25.9830066225644"
+              Start="0,0"
+              End="27.1682540618512,18.4830066225644">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.9915033112822" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.9915033112822"
+                    Point2="0,12.9915033112822"
+                    Point3="4,12.9915033112822" />
+                  <mssgle:LineSegment
+                    End="23.1682540618512,12.9915033112822" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.1682540618512,12.9915033112822"
+                    Point2="27.1682540618512,12.9915033112822"
+                    Point3="27.1682540618512,16.9915033112822" />
+                  <mssgle:LineSegment
+                    End="27.1682540618512,18.4830066225644" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Sort Output]"
+          TopLeft="406.488889620938,109.233986868821">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.9228757551774"
+              Start="0,0"
+              End="0,21.4228757551774">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.4228757551774" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2303,26 +2648,26 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-8.90396830613099,30.5732025248203"
+              EndConnector="8.63571427088908,27.8294118830128"
               Start="0,0"
-              End="-8.90396830613099,23.0732025248203">
+              End="8.63571427088908,20.3294118830128">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.2866012624102" />
+                    End="0,9.91470594150638" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,11.2866012624102"
-                    Point2="0,15.2866012624102"
-                    Point3="-4,15.2866012624102" />
+                    Point1="0,9.91470594150638"
+                    Point2="0,13.9147059415064"
+                    Point3="4,13.9147059415064" />
                   <mssgle:LineSegment
-                    End="-4.90396830613099,15.2866012624102" />
+                    End="4.63571427088908,13.9147059415064" />
                   <mssgle:CubicBezierSegment
-                    Point1="-4.90396830613099,15.2866012624102"
-                    Point2="-8.90396830613099,15.2866012624102"
-                    Point3="-8.90396830613099,19.2866012624102" />
+                    Point1="4.63571427088908,13.9147059415064"
+                    Point2="8.63571427088908,13.9147059415064"
+                    Point3="8.63571427088908,17.9147059415064" />
                   <mssgle:LineSegment
-                    End="-8.90396830613099,23.0732025248203" />
+                    End="8.63571427088908,20.3294118830128" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2333,18 +2678,18 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="406.085715018608,66.8352940955273">
+          TopLeft="405.371429302802,43.1294117633652">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28.3281045138688"
+              EndConnector="0,24.5045751054556"
               Start="0,0"
-              End="0,20.8281045138688">
+              End="0,17.0045751054556">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.8281045138688" />
+                    End="0,17.0045751054556" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2354,179 +2699,33 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup No Match Output1]"
-          TopLeft="476.996826153372,397.120261108049">
+          Id="Package\Data Flow Task.Paths[Lookup No Match Output2]"
+          TopLeft="375.000000798277,288.905882263792">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="188.18174669119,38.5326797047867"
+              EndConnector="1.39999988291976,42.2117645047942"
               Start="0,0"
-              End="180.68174669119,38.5326797047867">
+              End="1.39999988291976,34.7117645047942">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="90.0908733455951,0" />
+                    End="-2.60000011708024,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="90.0908733455951,0"
-                    Point2="94.0908733455951,0"
-                    Point3="94.0908733455951,4" />
+                    Point1="-2.60000011708024,0"
+                    Point2="1.39999988291976,0"
+                    Point3="1.39999988291976,4" />
                   <mssgle:LineSegment
-                    End="94.0908733455951,34.5326797047867" />
-                  <mssgle:CubicBezierSegment
-                    Point1="94.0908733455951,34.5326797047867"
-                    Point2="94.0908733455951,38.5326797047867"
-                    Point3="98.0908733455951,38.5326797047867" />
-                  <mssgle:LineSegment
-                    End="180.68174669119,38.5326797047867" />
+                    End="1.39999988291976,34.7117645047942" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="38.2844866268451,-17.609375,111.6127734375,11.609375"
+              BoundingBox="-54.4063868358302,-17.609375,111.6127734375,11.609375"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
-          TopLeft="461.371429313446,324.388235028011">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="206.485714965389,37.6617646728704"
-              Start="0,0"
-              End="198.985714965389,37.6617646728704">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="99.2428574826947,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="99.2428574826947,0"
-                    Point2="103.242857482695,0"
-                    Point3="103.242857482695,4" />
-                  <mssgle:LineSegment
-                    End="103.242857482695,33.6617646728704" />
-                  <mssgle:CubicBezierSegment
-                    Point1="103.242857482695,33.6617646728704"
-                    Point2="103.242857482695,37.6617646728704"
-                    Point3="107.242857482695,37.6617646728704" />
-                  <mssgle:LineSegment
-                    End="198.985714965389,37.6617646728704" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="47.4364707639447,-17.609375,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
-          TopLeft="413.880556297805,417.920261108049">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,76.6385620141585"
-              Start="0,0"
-              End="0,69.1385620141585">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,69.1385620141585" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,28.7645935070793,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="404.971429313446,345.188235028011">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="11.2253968399263,31.1320260800384"
-              Start="0,0"
-              End="11.2253968399263,23.6320260800384">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,11.5660130400192" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,11.5660130400192"
-                    Point2="0,15.5660130400192"
-                    Point3="4,15.5660130400192" />
-                  <mssgle:LineSegment
-                    End="7.2253968399263,15.5660130400192" />
-                  <mssgle:CubicBezierSegment
-                    Point1="7.2253968399263,15.5660130400192"
-                    Point2="11.2253968399263,15.5660130400192"
-                    Point3="11.2253968399263,19.5660130400192" />
-                  <mssgle:LineSegment
-                    End="11.2253968399263,23.6320260800384" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-42.5786882987869,20.5660130400192,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="410.333334042912,214.9333331814">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,23.8248365439597"
-              Start="0,0"
-              End="0,16.3248365439597">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.3248365439597" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="407.158730882839,280.35816972536">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,23.2300653026508"
-              Start="0,0"
-              End="0,15.7300653026508">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,15.7300653026508" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2542,6 +2741,37 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Lookup 2">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -2563,14 +2793,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         <Value
           type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Source">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

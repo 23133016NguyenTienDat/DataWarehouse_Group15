@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="45"
-  DTS:VersionGUID="{1D3B2E5F-5E01-4CC9-98E8-01260C94638F}">
+  DTS:VersionBuild="68"
+  DTS:VersionGUID="{257896AC-11CF-4DEB-86D5-0B6766E1A7DE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -96,28 +96,28 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT_Load_Dim_Customers\Conditional Split 1"
+              refId="Package\DFT_Load_Dim_Customers\Conditional Split"
               componentClassID="Microsoft.ConditionalSplit"
               contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split 1"
+              name="Conditional Split"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input]"
+                  refId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input]"
                   description="Input to the Conditional Split Transformation"
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input].Columns[row_hash_dt]"
+                      refId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input].Columns[row_hash_dt]"
                       cachedDataType="wstr"
-                      cachedLength="100"
+                      cachedLength="64"
                       cachedName="row_hash_dt"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[row_hash_dt]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input].Columns[row_hash_old]"
+                      refId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input].Columns[row_hash_old]"
                       cachedDataType="wstr"
-                      cachedLength="50"
+                      cachedLength="64"
                       cachedName="row_hash_old"
                       lineageId="Package\DFT_Load_Dim_Customers\Lookup.Outputs[Lookup Match Output].Columns[row_hash_old]" />
                   </inputColumns>
@@ -126,13 +126,13 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[change]"
+                  refId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[change]"
                   description="Output 1 of the Conditional Split Transformation"
                   errorOrTruncationOperation="Computation"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="change"
-                  synchronousInputId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input]"
+                  synchronousInputId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input]"
                   truncationRowDisposition="FailComponent">
                   <properties>
                     <property
@@ -154,11 +154,11 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[Conditional Split Default Output]"
+                  refId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[Conditional Split Default Output]"
                   description="Default Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   name="Conditional Split Default Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input]">
                   <properties>
                     <property
                       dataType="System.Boolean"
@@ -167,23 +167,23 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[Conditional Split Error Output]"
+                  refId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[Conditional Split Error Output]"
                   description="Error Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Conditional Split Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -267,7 +267,7 @@
                     </outputColumn>
                     <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[age_dt]"
-                      dataType="i8"
+                      dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[age_dt]"
@@ -330,7 +330,7 @@
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="100"
+                      length="64"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[row_hash_dt]"
                       name="row_hash_dt"
                       truncationRowDisposition="FailComponent">
@@ -500,12 +500,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Derived Column 1.Outputs[Derived Column Output].Columns[is_curent]"
+                      refId="Package\DFT_Load_Dim_Customers\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]"
                       dataType="bool"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\DFT_Load_Dim_Customers\Derived Column 1.Outputs[Derived Column Output].Columns[is_curent]"
-                      name="is_curent"
+                      lineageId="Package\DFT_Load_Dim_Customers\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]"
+                      name="is_current"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -592,6 +592,28 @@
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
                           name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customers\Derived Column 2.Outputs[Derived Column Output].Columns[is_current]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Load_Dim_Customers\Derived Column 2.Outputs[Derived Column Output].Columns[is_current]"
+                      name="is_current"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_BOOL)0</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_BOOL)0</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -731,13 +753,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select customer_key,customer_id, row_hash from dw.dim_customers</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select customer_id, customer_key, row_hash from dw.dim_customers where is_current = 1</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select customer_key,customer_id, row_hash from dw.dim_customers) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select customer_id, customer_key, row_hash from dw.dim_customers where is_current = 1) [refTable]
 where [refTable].[customer_id] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -769,12 +791,12 @@ where [refTable].[customer_id] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="customer_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_id" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="row_hash" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="customer_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="row_hash" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[customer_id]};</property>
+                  name="ParameterMap">#{Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[customer_id_dt]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -798,12 +820,10 @@ where [refTable].[customer_id] = ?</property>
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Lookup.Inputs[Lookup Input].Columns[customer_id]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="customer_id"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[customer_id]">
+                      refId="Package\DFT_Load_Dim_Customers\Lookup.Inputs[Lookup Input].Columns[customer_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="customer_id_dt"
+                      lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[customer_id_dt]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -845,7 +865,7 @@ where [refTable].[customer_id] = ?</property>
                       refId="Package\DFT_Load_Dim_Customers\Lookup.Outputs[Lookup Match Output].Columns[row_hash_old]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
-                      length="50"
+                      length="64"
                       lineageId="Package\DFT_Load_Dim_Customers\Lookup.Outputs[Lookup Match Output].Columns[row_hash_old]"
                       name="row_hash_old"
                       truncationRowDisposition="FailComponent">
@@ -1119,13 +1139,6 @@ WHERE customer_key = ?</property>
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[customer_id]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="customer_id"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
-                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[customer_id]" />
-                    <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
                       cachedDataType="wstr"
                       cachedLength="100"
@@ -1140,27 +1153,6 @@ WHERE customer_key = ?</property>
                       externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[email]"
                       lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[email]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[signup_date]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="signup_date"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[signup_date]"
-                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[signup_date]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[marketing_opt_in]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="marketing_opt_in"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[marketing_opt_in]"
-                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[marketing_opt_in]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[row_hash]"
-                      cachedDataType="bytes"
-                      cachedLength="32"
-                      cachedName="row_hash"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
-                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[row_hash]" />
-                    <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[birth_year]"
                       cachedDataType="i2"
                       cachedName="birth_year"
@@ -1173,11 +1165,17 @@ WHERE customer_key = ?</property>
                       externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[effective_from]"
                       lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[effective_from]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_curent]"
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_current]"
                       cachedDataType="bool"
-                      cachedName="is_curent"
+                      cachedName="is_current"
                       externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_current]"
-                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_curent]" />
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_current]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[customer_id_dt]"
+                      cachedDataType="i4"
+                      cachedName="customer_id_dt"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[customer_id_dt]" />
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
                       cachedDataType="wstr"
@@ -1185,6 +1183,25 @@ WHERE customer_key = ?</property>
                       cachedName="country"
                       externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_name]"
                       lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[country]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[signup_date_dt]"
+                      cachedDataType="dbDate"
+                      cachedName="signup_date_dt"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[signup_date]"
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[signup_date_dt]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[marketing_opt_in_dt]"
+                      cachedDataType="bool"
+                      cachedName="marketing_opt_in_dt"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[marketing_opt_in]"
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[marketing_opt_in_dt]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[row_hash_dt]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="row_hash_dt"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1194,8 +1211,7 @@ WHERE customer_key = ?</property>
                       name="customer_key" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
-                      dataType="wstr"
-                      length="100"
+                      dataType="i4"
                       name="customer_id" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
@@ -1241,7 +1257,7 @@ WHERE customer_key = ?</property>
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[row_hash]"
                       dataType="wstr"
-                      length="50"
+                      length="64"
                       name="row_hash" />
                   </externalMetadataColumns>
                 </input>
@@ -1287,7 +1303,7 @@ WHERE customer_key = ?</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[stg].[customers]</property>
+                  name="OpenRowset"></property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1296,7 +1312,7 @@ WHERE customer_key = ?</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from stg.customers where is_valid = 1 and is_processed = 0</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from stg.customers where is_valid =1 and is_processed = 0</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1332,6 +1348,15 @@ WHERE customer_key = ?</property>
                   refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].Columns[stg_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[stg_id]"
+                      lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].Columns[stg_id]"
+                      name="stg_id"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
                       dataType="wstr"
@@ -1420,38 +1445,6 @@ WHERE customer_key = ?</property>
                       dataType="i8"
                       name="stg_id" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source_file_name]"
-                      dataType="wstr"
-                      length="255"
-                      name="source_file_name" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[batch_id]"
-                      dataType="i4"
-                      name="batch_id" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ingest_at]"
-                      dataType="dbTimeStamp2"
-                      name="ingest_at"
-                      scale="7" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      name="row_hash" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_valid]"
-                      dataType="bool"
-                      name="is_valid" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_processed]"
-                      dataType="bool"
-                      name="is_processed" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[error_message]"
-                      dataType="wstr"
-                      length="500"
-                      name="error_message" />
-                    <externalMetadataColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
                       dataType="wstr"
                       length="100"
@@ -1486,6 +1479,38 @@ WHERE customer_key = ?</property>
                       dataType="wstr"
                       length="100"
                       name="marketing_opt_in" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source_file_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="source_file_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[batch_id]"
+                      dataType="i4"
+                      name="batch_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ingest_at]"
+                      dataType="dbTimeStamp2"
+                      name="ingest_at"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[row_hash]"
+                      dataType="bytes"
+                      length="32"
+                      name="row_hash" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_valid]"
+                      dataType="bool"
+                      name="is_valid" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_processed]"
+                      dataType="bool"
+                      name="is_processed" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[error_message]"
+                      dataType="wstr"
+                      length="500"
+                      name="error_message" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1493,6 +1518,11 @@ WHERE customer_key = ?</property>
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[stg_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[stg_id]"
+                      name="stg_id" />
                     <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
                       dataType="wstr"
@@ -1536,6 +1566,12 @@ WHERE customer_key = ?</property>
                       lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[marketing_opt_in]"
                       name="marketing_opt_in" />
                     <outputColumn
+                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
+                      dataType="bytes"
+                      length="32"
+                      lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
+                      name="row_hash" />
+                    <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -1547,12 +1583,6 @@ WHERE customer_key = ?</property>
                       lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
-                      dataType="bytes"
-                      length="32"
-                      lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[row_hash]"
-                      name="row_hash" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1610,6 +1640,22 @@ WHERE customer_key = ?</property>
                   refId="Package\DFT_Load_Dim_Customers\Sort.Inputs[Sort Input]"
                   name="Sort Input">
                   <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\Sort.Inputs[Sort Input].Columns[stg_id]"
+                      cachedDataType="i8"
+                      cachedName="stg_id"
+                      lineageId="Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].Columns[stg_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Sort.Inputs[Sort Input].Columns[customer_id]"
                       cachedDataType="wstr"
@@ -1757,6 +1803,19 @@ WHERE customer_key = ?</property>
                   name="Sort Output">
                   <outputColumns>
                     <outputColumn
+                      refId="Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[stg_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[stg_id]"
+                      name="stg_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT_Load_Dim_Customers\OLE DB Source.Outputs[OLE DB Source Output].Columns[stg_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[customer_id]"
                       dataType="wstr"
                       length="100"
@@ -1887,6 +1946,19 @@ WHERE customer_key = ?</property>
                   name="Union All Input 1">
                   <inputColumns>
                     <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1].Columns[stg_id]"
+                      cachedDataType="i8"
+                      cachedName="stg_id"
+                      lineageId="Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[stg_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[stg_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1].Columns[customer_id]"
                       cachedDataType="wstr"
                       cachedLength="100"
@@ -2014,7 +2086,7 @@ WHERE customer_key = ?</property>
                     </inputColumn>
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1].Columns[age_dt]"
-                      cachedDataType="i8"
+                      cachedDataType="i4"
                       cachedName="age_dt"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[age_dt]">
                       <properties>
@@ -2054,7 +2126,7 @@ WHERE customer_key = ?</property>
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1].Columns[row_hash_dt]"
                       cachedDataType="wstr"
-                      cachedLength="100"
+                      cachedLength="64"
                       cachedName="row_hash_dt"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[row_hash_dt]">
                       <properties>
@@ -2092,16 +2164,16 @@ WHERE customer_key = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1].Columns[is_curent]"
+                      refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1].Columns[is_current]"
                       cachedDataType="bool"
-                      cachedName="is_curent"
-                      lineageId="Package\DFT_Load_Dim_Customers\Derived Column 1.Outputs[Derived Column Output].Columns[is_curent]">
+                      cachedName="is_current"
+                      lineageId="Package\DFT_Load_Dim_Customers\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_curent]}</property>
+                          name="OutputColumnLineageID">#{Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_current]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -2112,6 +2184,19 @@ WHERE customer_key = ?</property>
                   hasSideEffects="true"
                   name="Union All Input 2">
                   <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 2].Columns[stg_id]"
+                      cachedDataType="i8"
+                      cachedName="stg_id"
+                      lineageId="Package\DFT_Load_Dim_Customers\Sort.Outputs[Sort Output].Columns[stg_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[stg_id]}</property>
+                      </properties>
+                    </inputColumn>
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 2].Columns[customer_id]"
                       cachedDataType="wstr"
@@ -2240,7 +2325,7 @@ WHERE customer_key = ?</property>
                     </inputColumn>
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 2].Columns[age_dt]"
-                      cachedDataType="i8"
+                      cachedDataType="i4"
                       cachedName="age_dt"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[age_dt]">
                       <properties>
@@ -2280,7 +2365,7 @@ WHERE customer_key = ?</property>
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 2].Columns[row_hash_dt]"
                       cachedDataType="wstr"
-                      cachedLength="100"
+                      cachedLength="64"
                       cachedName="row_hash_dt"
                       lineageId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output].Columns[row_hash_dt]">
                       <properties>
@@ -2327,7 +2412,7 @@ WHERE customer_key = ?</property>
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_curent]}</property>
+                          name="OutputColumnLineageID">#{Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_current]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -2346,6 +2431,11 @@ WHERE customer_key = ?</property>
                   refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1]"
                   name="Union All Output 1">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[stg_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[stg_id]"
+                      name="stg_id" />
                     <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[customer_id]"
                       dataType="wstr"
@@ -2401,7 +2491,7 @@ WHERE customer_key = ?</property>
                       name="customer_id_dt" />
                     <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[age_dt]"
-                      dataType="i8"
+                      dataType="i4"
                       lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[age_dt]"
                       name="age_dt" />
                     <outputColumn
@@ -2417,7 +2507,7 @@ WHERE customer_key = ?</property>
                     <outputColumn
                       refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]"
                       dataType="wstr"
-                      length="100"
+                      length="64"
                       lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[row_hash_dt]"
                       name="row_hash_dt" />
                     <outputColumn
@@ -2431,10 +2521,10 @@ WHERE customer_key = ?</property>
                       lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[effective_from]"
                       name="effective_from" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_curent]"
+                      refId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_current]"
                       dataType="bool"
-                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_curent]"
-                      name="is_curent" />
+                      lineageId="Package\DFT_Load_Dim_Customers\Union All.Outputs[Union All Output 1].Columns[is_current]"
+                      name="is_current" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2446,7 +2536,7 @@ WHERE customer_key = ?</property>
               refId="Package\DFT_Load_Dim_Customers.Paths[change]"
               endId="Package\DFT_Load_Dim_Customers\Multicast.Inputs[Multicast Input 1]"
               name="change"
-              startId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Outputs[change]" />
+              startId="Package\DFT_Load_Dim_Customers\Conditional Split.Outputs[change]" />
             <path
               refId="Package\DFT_Load_Dim_Customers.Paths[Data Conversion Output]"
               endId="Package\DFT_Load_Dim_Customers\Derived Column.Inputs[Derived Column Input]"
@@ -2454,14 +2544,14 @@ WHERE customer_key = ?</property>
               startId="Package\DFT_Load_Dim_Customers\Data Conversion.Outputs[Data Conversion Output]" />
             <path
               refId="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output]"
-              endId="Package\DFT_Load_Dim_Customers\Lookup.Inputs[Lookup Input]"
-              name="Derived Column Output"
-              startId="Package\DFT_Load_Dim_Customers\Derived Column.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output1]"
               endId="Package\DFT_Load_Dim_Customers\OLE DB Command.Inputs[OLE DB Command Input]"
               name="Derived Column Output"
               startId="Package\DFT_Load_Dim_Customers\Derived Column 2.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output1]"
+              endId="Package\DFT_Load_Dim_Customers\Lookup.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_Dim_Customers\Derived Column.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output2]"
               endId="Package\DFT_Load_Dim_Customers\Union All.Inputs[Union All Input 1]"
@@ -2474,7 +2564,7 @@ WHERE customer_key = ?</property>
               startId="Package\DFT_Load_Dim_Customers\Derived Column 3.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT_Load_Dim_Customers.Paths[Lookup Match Output]"
-              endId="Package\DFT_Load_Dim_Customers\Conditional Split 1.Inputs[Conditional Split Input]"
+              endId="Package\DFT_Load_Dim_Customers\Conditional Split.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
               startId="Package\DFT_Load_Dim_Customers\Lookup.Outputs[Lookup Match Output]" />
             <path
@@ -2820,67 +2910,131 @@ WHERE customer_key = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="120,41.6"
+          Id="Package\DFT_Load_Dim_Customers\Union All"
+          TopLeft="838.775511989615,721.899159417772" />
+        <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Dim_Customers\OLE DB Source"
-          TopLeft="441.555556489835,75.4379084438532" />
+          TopLeft="482.142858169213,75.0882352388184" />
         <NodeLayout
-          Size="172,42.4"
+          Size="170.4,41.6"
           Id="Package\DFT_Load_Dim_Customers\OLE DB Destination"
-          TopLeft="817.499963747605,910.882325005986" />
+          TopLeft="812.24489968824,895.915965950864" />
         <NodeLayout
-          Size="157.6,42.4"
+          Size="162.4,41.6"
+          Id="Package\DFT_Load_Dim_Customers\Derived Column 2"
+          TopLeft="311.718736065086,738.354134161275" />
+        <NodeLayout
+          Size="155.2,41.6"
           Id="Package\DFT_Load_Dim_Customers\Data Conversion"
-          TopLeft="437.946409160956,281.745085687253" />
+          TopLeft="476.785715300666,269.779411703542" />
         <NodeLayout
           Size="164,42.4"
           Id="Package\DFT_Load_Dim_Customers\Derived Column 1"
           TopLeft="769.977644150746,485.553549610718" />
         <NodeLayout
-          Size="113.6,42.4"
+          Size="112.8,41.6"
           Id="Package\DFT_Load_Dim_Customers\Lookup"
-          TopLeft="459.374979464338,500.849976785184" />
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\DFT_Load_Dim_Customers\Row Count"
-          TopLeft="837.500001782818,841.573529023832" />
+          TopLeft="466.326531604932,466.87394943907" />
         <NodeLayout
           Size="166.4,42.4"
           Id="Package\DFT_Load_Dim_Customers\OLE DB Command"
           TopLeft="306.584807723162,811.571389872688" />
         <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\DFT_Load_Dim_Customers\Sort"
+          TopLeft="495.53571534058,171.632352801253" />
+        <NodeLayout
           Size="154.4,42.4"
           Id="Package\DFT_Load_Dim_Customers\Derived Column"
           TopLeft="443.571408909499,367.663706955822" />
-        <NodeLayout
-          Size="165.6,42.4"
-          Id="Package\DFT_Load_Dim_Customers\Conditional Split 1"
-          TopLeft="429.374980805442,592.33330915769" />
         <NodeLayout
           Size="121.6,42.4"
           Id="Package\DFT_Load_Dim_Customers\Multicast"
           TopLeft="445.535694368717,672.192825090205" />
         <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DFT_Load_Dim_Customers\Conditional Split"
+          TopLeft="464.285715274057,568.722688720374" />
+        <NodeLayout
           Size="162.4,41.6"
           Id="Package\DFT_Load_Dim_Customers\Derived Column 3"
           TopLeft="573.437474365347,741.604137105744" />
         <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\DFT_Load_Dim_Customers\Derived Column 2"
-          TopLeft="311.718736065086,738.354134161275" />
+          Size="129.6,41.6"
+          Id="Package\DFT_Load_Dim_Customers\Row Count"
+          TopLeft="831.377552790193,812.077730730359" />
         <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Data Conversion Output]"
-          TopLeft="518.758909035228,324.145085687253">
+          Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output1]"
+          TopLeft="521.748970257215,410.063706955822">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43.5186212685693"
+              EndConnector="0,56.8102424832481"
               Start="0,0"
-              End="0,36.0186212685693">
+              End="0,49.3102424832481">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.0186212685693" />
+                    End="0,49.3102424832481" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output]"
+          TopLeft="391.351771894124,779.954134161275">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.6172557114129"
+              Start="0,0"
+              End="0,24.1172557114129">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1172557114129" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customers.Paths[Data Conversion Output]"
+          TopLeft="554.385715300666,311.379411703542">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-33.6143063911669,56.2842952522805"
+              Start="0,0"
+              End="-33.6143063911669,48.7842952522805">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1421476261402" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1421476261402"
+                    Point2="0,28.1421476261402"
+                    Point3="-4,28.1421476261402" />
+                  <mssgle:LineSegment
+                    End="-29.6143063911669,28.1421476261402" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-29.6143063911669,28.1421476261402"
+                    Point2="-33.6143063911669,28.1421476261402"
+                    Point3="-33.6143063911669,32.1421476261402" />
+                  <mssgle:LineSegment
+                    End="-33.6143063911669,48.7842952522805" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2891,42 +3045,144 @@ WHERE customer_key = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Customers.Paths[change]"
-          TopLeft="509.122004253746,634.999975824357">
+          TopLeft="541.485715274057,610.322688720374">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,37.1928492658484"
+              EndConnector="-35.1500209053399,61.8701363698308"
               Start="0,0"
-              End="0,29.6928492658484">
+              End="-35.1500209053399,54.3701363698308">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.6928492658484" />
+                    End="0,26.9350681849154" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.9350681849154"
+                    Point2="0,30.9350681849154"
+                    Point3="-4,30.9350681849154" />
+                  <mssgle:LineSegment
+                    End="-31.1500209053399,30.9350681849154" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-31.1500209053399,30.9350681849154"
+                    Point2="-35.1500209053399,30.9350681849154"
+                    Point3="-35.1500209053399,34.9350681849154" />
+                  <mssgle:LineSegment
+                    End="-35.1500209053399,54.3701363698308" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-16.63095703125,9.0148816641742,33.2619140625,11.6630859375"
+              BoundingBox="-34.20596748392,35.9350681849154,33.2619140625,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Row Count Output 1]"
-          TopLeft="902.899982765211,883.173529023832">
+          Id="Package\DFT_Load_Dim_Customers.Paths[Union All Output 1]"
+          TopLeft="897.476532389904,763.499159417772">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,27.7087959821539"
+              EndConnector="0,48.5785713125866"
               Start="0,0"
-              End="0,20.2087959821539">
+              End="0,41.0785713125866">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.2087959821539" />
+                    End="0,41.0785713125866" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customers.Paths[Sort Output]"
+          TopLeft="544.33571534058,213.232352801253">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.0499999600861,56.547058902289"
+              Start="0,0"
+              End="10.0499999600861,49.047058902289">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.2735294511445" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.2735294511445"
+                    Point2="0,28.2735294511445"
+                    Point3="4,28.2735294511445" />
+                  <mssgle:LineSegment
+                    End="6.0499999600861,28.2735294511445" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.0499999600861,28.2735294511445"
+                    Point2="10.0499999600861,28.2735294511445"
+                    Point3="10.0499999600861,32.2735294511445" />
+                  <mssgle:LineSegment
+                    End="10.0499999600861,49.047058902289" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customers.Paths[Row Count Output 1]"
+          TopLeft="896.811226239216,853.677730730359">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.238235220505"
+              Start="0,0"
+              End="0,34.738235220505">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.738235220505" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customers.Paths[OLE DB Source Output]"
+          TopLeft="556.942858169213,116.688235238818">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.607142828633,54.9441175624342"
+              Start="0,0"
+              End="-12.607142828633,47.4441175624342">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.4720587812171" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.4720587812171"
+                    Point2="0,27.4720587812171"
+                    Point3="-4,27.4720587812171" />
+                  <mssgle:LineSegment
+                    End="-8.60714282863296,27.4720587812171" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.60714282863296,27.4720587812171"
+                    Point2="-12.607142828633,27.4720587812171"
+                    Point3="-12.607142828633,31.4720587812171" />
+                  <mssgle:LineSegment
+                    End="-12.607142828633,47.4441175624342" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3005,78 +3261,102 @@ WHERE customer_key = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Customers.Paths[Lookup No Match Output]"
-          TopLeft="572.708312797672,522.183310118517">
+          TopLeft="579.126531604932,487.67394943907">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="197.269331353074,-15.2964271744655"
+              EndConnector="190.851112545814,19.0796001716478"
               Start="0,0"
-              End="189.769331353074,-15.2964271744655">
+              End="183.351112545814,19.0796001716478">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="94.6346656765372,0" />
+                    End="91.425556272907,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="94.6346656765372,0"
-                    Point2="98.6346656765372,0"
-                    Point3="98.6346656765372,-4" />
+                    Point1="91.425556272907,0"
+                    Point2="95.425556272907,0"
+                    Point3="95.425556272907,4" />
                   <mssgle:LineSegment
-                    End="98.6346656765372,-11.2964271744655" />
+                    End="95.425556272907,15.0796001716478" />
                   <mssgle:CubicBezierSegment
-                    Point1="98.6346656765372,-11.2964271744655"
-                    Point2="98.6346656765372,-15.2964271744655"
-                    Point3="102.634665676537,-15.2964271744655" />
+                    Point1="95.425556272907,15.0796001716478"
+                    Point2="95.425556272907,19.0796001716478"
+                    Point3="99.425556272907,19.0796001716478" />
                   <mssgle:LineSegment
-                    End="189.769331353074,-15.2964271744655" />
+                    End="183.351112545814,19.0796001716478" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="42.8282789577872,1,111.6127734375,11.609375"
+              BoundingBox="39.619169554157,-17.609375,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Customers.Paths[Lookup Match Output]"
-          TopLeft="514.041646801557,543.51664345185">
+          TopLeft="522.726531604932,508.47394943907">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,48.81666570584"
+              EndConnector="18.759183669125,60.248739281304"
               Start="0,0"
-              End="0,41.31666570584">
+              End="18.759183669125,52.748739281304">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41.31666570584" />
+                    End="0,26.124369640652" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.124369640652"
+                    Point2="0,30.124369640652"
+                    Point3="4,30.124369640652" />
+                  <mssgle:LineSegment
+                    End="14.759183669125,30.124369640652" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.759183669125,30.124369640652"
+                    Point2="18.759183669125,30.124369640652"
+                    Point3="18.759183669125,34.124369640652" />
+                  <mssgle:LineSegment
+                    End="18.759183669125,52.748739281304" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,14.85364535292,96.3827734375,11.609375"
+              BoundingBox="-38.8117948841875,35.124369640652,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output1]"
-          TopLeft="391.351771894124,779.954134161275">
+          Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output3]"
+          TopLeft="735.837474365347,762.404137105744">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.6172557114129"
+              EndConnector="102.938037624268,-19.7049776879721"
               Start="0,0"
-              End="0,24.1172557114129">
+              End="95.4380376242676,-19.7049776879721">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.1172557114129" />
+                    End="47.4690188121338,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="47.4690188121338,0"
+                    Point2="51.4690188121338,0"
+                    Point3="51.4690188121338,-4" />
+                  <mssgle:LineSegment
+                    End="51.4690188121338,-15.7049776879721" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.4690188121338,-15.7049776879721"
+                    Point2="51.4690188121338,-19.7049776879721"
+                    Point3="55.4690188121338,-19.7049776879721" />
+                  <mssgle:LineSegment
+                    End="95.4380376242676,-19.7049776879721" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3085,174 +3365,32 @@ WHERE customer_key = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output]"
-          TopLeft="518.473194186919,410.063706955822">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,90.7862698293617"
-              Start="0,0"
-              End="0,83.2862698293617">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,83.2862698293617" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\DFT_Load_Dim_Customers\Sort"
-          TopLeft="454.761905729974,163.235294027157" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[OLE DB Source Output]"
-          TopLeft="516.355556489835,117.037908443853">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-12.7936507598613,46.1973855833041"
-              Start="0,0"
-              End="-12.7936507598613,38.6973855833041">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.0986927916521" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.0986927916521"
-                    Point2="0,23.0986927916521"
-                    Point3="-4,23.0986927916521" />
-                  <mssgle:LineSegment
-                    End="-8.79365075986129,23.0986927916521" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-8.79365075986129,23.0986927916521"
-                    Point2="-12.7936507598613,23.0986927916521"
-                    Point3="-12.7936507598613,27.0986927916521" />
-                  <mssgle:LineSegment
-                    End="-12.7936507598613,38.6973855833041" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Sort Output]"
-          TopLeft="503.561905729974,204.835294027157">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="13.1845034309824,76.9097916600958"
-              Start="0,0"
-              End="13.1845034309824,69.4097916600958">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.4548958300479" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,34.4548958300479"
-                    Point2="0,38.4548958300479"
-                    Point3="4,38.4548958300479" />
-                  <mssgle:LineSegment
-                    End="9.18450343098243,38.4548958300479" />
-                  <mssgle:CubicBezierSegment
-                    Point1="9.18450343098243,38.4548958300479"
-                    Point2="13.1845034309824,38.4548958300479"
-                    Point3="13.1845034309824,42.4548958300479" />
-                  <mssgle:LineSegment
-                    End="13.1845034309824,69.4097916600958" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="120,41.6"
-          Id="Package\DFT_Load_Dim_Customers\Union All"
-          TopLeft="836.904763686312,744.313724913743" />
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output2]"
           TopLeft="851.977644150746,527.953549610718">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="44.9271195355665,216.360175303025"
+              EndConnector="46.7978678388687,193.945609807054"
               Start="0,0"
-              End="44.9271195355665,208.860175303025">
+              End="46.7978678388687,186.445609807054">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,104.180087651512" />
+                    End="0,92.9728049035269" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,104.180087651512"
-                    Point2="0,108.180087651512"
-                    Point3="4,108.180087651512" />
+                    Point1="0,92.9728049035269"
+                    Point2="0,96.9728049035269"
+                    Point3="4,96.9728049035269" />
                   <mssgle:LineSegment
-                    End="40.9271195355665,108.180087651512" />
+                    End="42.7978678388687,96.9728049035269" />
                   <mssgle:CubicBezierSegment
-                    Point1="40.9271195355665,108.180087651512"
-                    Point2="44.9271195355665,108.180087651512"
-                    Point3="44.9271195355665,112.180087651512" />
+                    Point1="42.7978678388687,96.9728049035269"
+                    Point2="46.7978678388687,96.9728049035269"
+                    Point3="46.7978678388687,100.972804903527" />
                   <mssgle:LineSegment
-                    End="44.9271195355665,208.860175303025" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Derived Column Output3]"
-          TopLeft="735.837474365347,763.758931009743">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="101.067289320965,0"
-              Start="0,0"
-              End="93.5672893209654,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="93.5672893209654,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Customers.Paths[Union All Output 1]"
-          TopLeft="899.602382734565,785.913724913743">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,55.6598041100891"
-              Start="0,0"
-              End="0,48.1598041100891">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.1598041100891" />
+                    End="46.7978678388687,186.445609807054" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3269,11 +3407,6 @@ WHERE customer_key = ?</property>
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
