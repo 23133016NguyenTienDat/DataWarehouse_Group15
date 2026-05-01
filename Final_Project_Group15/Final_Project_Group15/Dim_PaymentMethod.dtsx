@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{FF2B2D72-9150-4619-84C1-6ADAF4E1CED4}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{C6FCBAEB-DC9A-4FA9-95C6-18323E00C012}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -101,13 +101,13 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Flow Task"
+      DTS:refId="Package\DF_Load_Dim_PaymentMethod"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{E7739C33-E335-4CD5-AF18-727BE8F5D6BB}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Flow Task"
+      DTS:ObjectName="DF_Load_Dim_PaymentMethod"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -115,94 +115,114 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Conditional Split"
-              componentClassID="Microsoft.ConditionalSplit"
-              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
-              usesDispositions="true">
+              refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="CMD_Update_Payment_Method"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">update dw.dim_payment_method
+set payment_method_name = ? 
+where payment_method_key = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
-                  description="Input to the Conditional Split Transformation"
-                  name="Conditional Split Input">
+                  refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[payment_method]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="payment_method"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[payment_method_name]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input].Columns[payment_method_name]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="payment_method_name"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]" />
+                      externalMetadataColumnId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_name]" />
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input].Columns[payment_method_key]"
+                      cachedDataType="i4"
+                      cachedName="payment_method_key"
+                      externalMetadataColumnId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_key]" />
                   </inputColumns>
-                  <externalMetadataColumns />
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="100"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Conditional Split.Outputs[change]"
-                  description="Output 1 of the Conditional Split Transformation"
-                  errorOrTruncationOperation="Computation"
-                  errorRowDisposition="FailComponent"
+                  refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Outputs[OLE DB Command Output]"
                   exclusionGroup="1"
-                  name="change"
-                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
-                  truncationRowDisposition="FailComponent">
-                  <properties>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]} != #{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]}</property>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the friendly version of the expression. This expression version uses column names."
-                      expressionType="Notify"
-                      name="FriendlyExpression">payment_method_name != payment_method</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                      name="EvaluationOrder">0</property>
-                  </properties>
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Default Output]"
-                  description="Default Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  name="Conditional Split Default Output"
-                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      name="IsDefaultOut">true</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]"
-                  description="Error Output of the Conditional Split Transformation"
+                  refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Outputs[OLE DB Command Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
-                  name="Conditional Split Error Output"
-                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -211,43 +231,43 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Derived Column"
+              refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column"
+              name="DRV_Clean_PaymentMethod"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Inputs[Derived Column Input]"
                   description="Input to the Derived Column Transformation"
                   name="Derived Column Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[payment_method]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Inputs[Derived Column Input].Columns[payment_method]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="payment_method"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]" />
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output]"
                   description="Default Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   name="Derived Column Output"
-                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output].Columns[payment_method_name]"
                       dataType="wstr"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
                       length="100"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output].Columns[payment_method_name]"
                       name="payment_method_name"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -255,7 +275,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">[ISNULL](#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]}) ? "" : [TRIM](#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]})</property>
+                          name="Expression">[ISNULL](#{Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]}) ? "" : [TRIM](#{Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]})</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -268,23 +288,23 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Error Output]"
                   description="Error Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Derived Column Error Output"
-                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -293,11 +313,130 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Lookup"
+              refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_Dim_Payment_Method"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[dim_payment_method]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input].Columns[payment_method_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="payment_method_name"
+                      externalMetadataColumnId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input].ExternalColumns[payment_method_name]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output].Columns[payment_method_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input].ExternalColumns[payment_method_key]"
+                      dataType="i4"
+                      name="payment_method_key" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input].ExternalColumns[payment_method_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="payment_method_name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
+              name="LKP_Find_Existing_Payment"
               usesDispositions="true"
               version="6">
               <properties>
@@ -355,7 +494,7 @@ where [refTable].[payment_method_name] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]};</property>
+                  name="ParameterMap">#{Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output].Columns[payment_method_name]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -367,7 +506,7 @@ where [refTable].[payment_method_name] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\Lookup.Connections[OleDbConnection]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
                   description="Connection manager used to access lookup data."
@@ -375,15 +514,15 @@ where [refTable].[payment_method_name] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input].Columns[payment_method_name]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Inputs[Lookup Input].Columns[payment_method_name]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="payment_method_name"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]">
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output].Columns[payment_method_name]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -401,17 +540,17 @@ where [refTable].[payment_method_name] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[payment_method_key]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_key]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[payment_method_key]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_key]"
                       name="payment_method_key"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -422,11 +561,11 @@ where [refTable].[payment_method_name] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[payment_method_name]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_name]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
                       length="100"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[payment_method_name]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_name]"
                       name="payment_method_name"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -440,30 +579,30 @@ where [refTable].[payment_method_name] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -472,233 +611,152 @@ where [refTable].[payment_method_name] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Command"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="OLE DB Command"
-              usesDispositions="true"
-              version="2">
+              refId="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="RC_New_Rows">
               <properties>
                 <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
                   dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">update dw.dim_payment_method
-set payment_method_name = ? 
-where payment_method_key = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_valid_1</property>
               </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\OLE DB Command.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
+                  refId="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows.Inputs[Row Count Input 1]"
                   hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[payment_method_name]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="payment_method_name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[payment_method_name]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[payment_method_key]"
-                      cachedDataType="i4"
-                      cachedName="payment_method_key"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[payment_method_key]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      dataType="wstr"
-                      length="100"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      dataType="i4"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">81</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
+                  refId="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows.Inputs[Row Count Input 1]">
                   <externalMetadataColumns />
                 </output>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="OLE DB Destination"
-              usesDispositions="true"
-              version="4">
+              refId="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="RC_Update_Rows">
               <properties>
                 <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
                   dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dw].[dim_payment_method]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_valid_2</property>
               </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.DataWarehouse]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  refId="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows.Inputs[Row Count Input 1]"
                   hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[payment_method_name]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="payment_method_name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[payment_method_name]"
-                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[payment_method_name]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[payment_method_key]"
-                      dataType="i4"
-                      name="payment_method_key" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[payment_method_name]"
-                      dataType="wstr"
-                      length="100"
-                      name="payment_method_name" />
-                  </externalMetadataColumns>
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="SPL_Payment_ChangeDetection"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input].Columns[payment_method]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="payment_method"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]" />
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input].Columns[payment_method_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="payment_method_name"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[change]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="change"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output].Columns[payment_method_name]} != #{Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">payment_method_name != payment_method</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -707,11 +765,11 @@ where payment_method_key = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Source"
+              refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="OLE DB Source"
+              name="SRC_Staging_Orders"
               usesDispositions="true"
               version="7">
               <properties>
@@ -760,7 +818,7 @@ WHERE is_valid = 1
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost\SQLEXPRESS.Staging]"
                   description="The OLE DB runtime connection used to access the database."
@@ -768,50 +826,50 @@ WHERE is_valid = 1
               </connections>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[payment_method]"
+                      externalMetadataColumnId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].ExternalColumns[payment_method]"
                       length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[payment_method]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].Columns[payment_method]"
                       name="payment_method"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[payment_method]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output].ExternalColumns[payment_method]"
                       dataType="wstr"
                       length="100"
                       name="payment_method" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[payment_method]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output].Columns[payment_method]"
                       dataType="wstr"
                       length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[payment_method]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output].Columns[payment_method]"
                       name="payment_method" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -819,113 +877,87 @@ WHERE is_valid = 1
                 </output>
               </outputs>
             </component>
-            <component
-              refId="Package\Data Flow Task\Row Count"
-              componentClassID="Microsoft.RowCount"
-              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="Row Count">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable to hold the row count."
-                  name="VariableName">User::count_valid_1</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
-                  hasSideEffects="true"
-                  name="Row Count Input 1">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]"
-                  name="Row Count Output 1"
-                  synchronousInputId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Row Count 1"
-              componentClassID="Microsoft.RowCount"
-              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="Row Count 1">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable to hold the row count."
-                  name="VariableName">User::count_valid_2</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]"
-                  hasSideEffects="true"
-                  name="Row Count Input 1">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Row Count 1.Outputs[Row Count Output 1]"
-                  name="Row Count Output 1"
-                  synchronousInputId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[change]"
-              endId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[change]"
+              endId="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows.Inputs[Row Count Input 1]"
               name="change"
-              startId="Package\Data Flow Task\Conditional Split.Outputs[change]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Outputs[change]" />
             <path
-              refId="Package\Data Flow Task.Paths[Derived Column Output]"
-              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[Derived Column Output]"
+              endId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Inputs[Lookup Input]"
               name="Derived Column Output"
-              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Outputs[Derived Column Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Lookup Match Output]"
-              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[Lookup Match Output]"
+              endId="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
-              startId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Lookup No Match Output]"
-              endId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[Lookup No Match Output]"
+              endId="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows.Inputs[Row Count Input 1]"
               name="Lookup No Match Output"
-              startId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment.Outputs[Lookup No Match Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
-              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[OLE DB Source Output]"
+              endId="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod.Inputs[Derived Column Input]"
               name="OLE DB Source Output"
-              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Row Count Output 1]"
-              endId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[Row Count Output 1]"
+              endId="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method.Inputs[OLE DB Command Input]"
               name="Row Count Output 1"
-              startId="Package\Data Flow Task\Row Count 1.Outputs[Row Count Output 1]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Data Flow Task.Paths[Row Count Output 11]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\DF_Load_Dim_PaymentMethod.Paths[Row Count Output 11]"
+              endId="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
-              startId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+              startId="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows.Outputs[Row Count Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\EXP_Calculate_Error_Rows"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{0CD9FCF3-EA8A-4F4C-A926-DF0F9FCF2020}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXP_Calculate_Error_Rows"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXP_Calculate_Error_Rows_1"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{9d7a079b-b7ee-4579-a177-4a542511ed8b}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXP_Calculate_Error_Rows_1"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Init_PackageLog"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{1890D977-89F2-4BCC-BA5D-A8C973C02B45}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="SQL_Init_PackageLog"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -947,45 +979,15 @@ WHERE is_valid = 1
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 1"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{914CBDE6-F6A7-4A94-BAD8-ACFE0BC85E65}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 1"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{C53C6D23-76FB-46F8-A665-9EE523817491}"
-          SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET status = 'SUCCESS', end_time = GETDATE(), &#xA;    records_inserted = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ParameterBinding
-            SQLTask:ParameterName="1"
-            SQLTask:DtsVariableName="User::package_log_id"
-            SQLTask:ParameterDirection="Input"
-            SQLTask:DataType="3"
-            SQLTask:ParameterSize="-1" />
-          <SQLTask:ParameterBinding
-            SQLTask:ParameterName="0"
-            SQLTask:DtsVariableName="User::count_inserted"
-            SQLTask:ParameterDirection="Input"
-            SQLTask:DataType="3"
-            SQLTask:ParameterSize="-1" />
-        </SQLTask:SqlTaskData>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 1 1"
+      DTS:refId="Package\SQL_Update_PackageLog_Failure"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{fcc29276-f55d-4c61-b02e-5a2ede32eeb2}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 1 1"
+      DTS:ObjectName="SQL_Update_PackageLog_Failure"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1007,35 +1009,33 @@ WHERE is_valid = 1
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Expression Task"
-      DTS:CreationName="Microsoft.ExpressionTask"
-      DTS:Description="Expression Task"
-      DTS:DTSID="{0CD9FCF3-EA8A-4F4C-A926-DF0F9FCF2020}"
-      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:refId="Package\SQL_Update_PackageLog_Success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{914CBDE6-F6A7-4A94-BAD8-ACFE0BC85E65}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Expression Task"
-      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExpressionTask
-          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Expression Task 1"
-      DTS:CreationName="Microsoft.ExpressionTask"
-      DTS:Description="Expression Task"
-      DTS:DTSID="{9d7a079b-b7ee-4579-a177-4a542511ed8b}"
-      DTS:ExecutableType="Microsoft.ExpressionTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Expression Task 1"
-      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ObjectName="SQL_Update_PackageLog_Success"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
-        <ExpressionTask
-          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C53C6D23-76FB-46F8-A665-9EE523817491}"
+          SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET status = 'SUCCESS', end_time = GETDATE(), &#xA;    records_inserted = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::package_log_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::count_inserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1044,42 +1044,42 @@ WHERE is_valid = 1
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{98937523-AD02-40F5-8A43-935295991E79}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:From="Package\SQL_Init_PackageLog"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Data Flow Task" />
+      DTS:To="Package\DF_Load_Dim_PaymentMethod" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{A1EEDA16-B73D-4A7B-89C7-751AB4109BB0}"
-      DTS:From="Package\Data Flow Task"
+      DTS:From="Package\DF_Load_Dim_PaymentMethod"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Expression Task" />
+      DTS:To="Package\EXP_Calculate_Error_Rows" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{78C24AD3-DE56-4289-B2C8-E4310DF44EC6}"
-      DTS:From="Package\Expression Task"
+      DTS:From="Package\EXP_Calculate_Error_Rows"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Execute SQL Task 1" />
+      DTS:To="Package\SQL_Update_PackageLog_Success" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2 1]"
       DTS:CreationName=""
       DTS:DTSID="{64a2ea76-dccd-4b45-9d5c-b906e71f4044}"
-      DTS:From="Package\Expression Task 1"
+      DTS:From="Package\EXP_Calculate_Error_Rows_1"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2 1"
-      DTS:To="Package\Execute SQL Task 1 1" />
+      DTS:To="Package\SQL_Update_PackageLog_Failure" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{0A5FD54C-DE11-45D3-9289-C99555BF67F6}"
-      DTS:From="Package\Data Flow Task"
+      DTS:From="Package\DF_Load_Dim_PaymentMethod"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Expression Task 1"
+      DTS:To="Package\EXP_Calculate_Error_Rows_1"
       DTS:Value="1" />
   </DTS:PrecedenceConstraints>
   <DTS:EventHandlers>
@@ -1148,43 +1148,55 @@ WHERE is_valid = 1
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="152,42.4"
-          Id="Package\Data Flow Task"
+          Size="225.6,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod"
           TopLeft="283.303558763915,124.335708356926" />
         <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\Execute SQL Task"
+          Size="180.8,41.6"
+          Id="Package\SQL_Init_PackageLog"
           TopLeft="275.714286301209,51.99999995442" />
         <NodeLayout
-          Size="172,41.6"
-          Id="Package\Execute SQL Task 1"
-          TopLeft="278.571429164434,270.705882115657" />
+          Size="240.8,41.6"
+          Id="Package\SQL_Update_PackageLog_Success"
+          TopLeft="262.857143416697,266.882352707244" />
         <NodeLayout
-          Size="172,41.6"
-          Id="Package\Execute SQL Task 1 1"
-          TopLeft="490.000001043081,268.305882206817" />
+          Size="235.2,41.6"
+          Id="Package\SQL_Update_PackageLog_Failure"
+          TopLeft="511.428572517268,268.305882206817" />
         <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Expression Task"
+          Size="204.8,41.6"
+          Id="Package\EXP_Calculate_Error_Rows"
           TopLeft="284.285714890884,188.882352775614" />
         <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Expression Task 1"
+          Size="216.8,41.6"
+          Id="Package\EXP_Calculate_Error_Rows_1"
           TopLeft="495.714286769531,186.482352866774" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="358.108922532562,93.59999995442">
+          TopLeft="366.114286301209,93.59999995442">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,30.735708402506"
+              EndConnector="29.9892724627061,30.735708402506"
               Start="0,0"
-              End="0,23.235708402506">
+              End="29.9892724627061,23.235708402506">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.235708402506" />
+                    End="0,11.367854201253" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.367854201253"
+                    Point2="0,15.367854201253"
+                    Point3="4,15.367854201253" />
+                  <mssgle:LineSegment
+                    End="25.9892724627061,15.367854201253" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.9892724627061,15.367854201253"
+                    Point2="29.9892724627061,15.367854201253"
+                    Point3="29.9892724627061,19.367854201253" />
+                  <mssgle:LineSegment
+                    End="29.9892724627061,23.235708402506" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1195,30 +1207,30 @@ WHERE is_valid = 1
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="283.303558763915,145.535708356926">
+          TopLeft="396.103558763915,165.935708356926">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0.982156126969016,64.1466444186877"
+              EndConnector="-9.41784387303102,22.946644418688"
               Start="0,0"
-              End="-6.51784387303098,64.1466444186877">
+              End="-9.41784387303102,15.446644418688">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-18.5,0" />
+                    End="0,7.473322209344" />
                   <mssgle:CubicBezierSegment
-                    Point1="-18.5,0"
-                    Point2="-22.5,0"
-                    Point3="-22.5,4" />
+                    Point1="0,7.473322209344"
+                    Point2="0,11.473322209344"
+                    Point3="-4,11.473322209344" />
                   <mssgle:LineSegment
-                    End="-22.5,60.1466444186877" />
+                    End="-5.41784387303102,11.473322209344" />
                   <mssgle:CubicBezierSegment
-                    Point1="-22.5,60.1466444186877"
-                    Point2="-22.5,64.1466444186877"
-                    Point3="-18.5,64.1466444186877" />
+                    Point1="-5.41784387303102,11.473322209344"
+                    Point2="-9.41784387303102,11.473322209344"
+                    Point3="-9.41784387303102,15.473322209344" />
                   <mssgle:LineSegment
-                    End="-6.51784387303098,64.1466444186877" />
+                    End="-9.41784387303102,15.446644418688" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1229,18 +1241,18 @@ WHERE is_valid = 1
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="362.828572027659,230.482352775614">
+          TopLeft="384.97142915379,230.482352775614">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.2235293400433"
+              EndConnector="0,36.3999999316298"
               Start="0,0"
-              End="0,32.7235293400433">
+              End="0,28.8999999316298">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.7235293400433" />
+                    End="0,28.8999999316298" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1251,18 +1263,30 @@ WHERE is_valid = 1
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 1]"
-          TopLeft="574.257143906306,228.082352866774">
+          TopLeft="604.114286769531,228.082352866774">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.2235293400433"
+              EndConnector="24.9142857477374,40.223529340043"
               Start="0,0"
-              End="0,32.7235293400433">
+              End="24.9142857477374,32.723529340043">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.7235293400433" />
+                    End="0,16.1117646700215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.1117646700215"
+                    Point2="0,20.1117646700215"
+                    Point3="4,20.1117646700215" />
+                  <mssgle:LineSegment
+                    End="20.9142857477374,20.1117646700215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.9142857477374,20.1117646700215"
+                    Point2="24.9142857477374,20.1117646700215"
+                    Point3="24.9142857477374,24.1117646700215" />
+                  <mssgle:LineSegment
+                    End="24.9142857477374,32.723529340043" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1273,37 +1297,31 @@ WHERE is_valid = 1
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="435.303558763915,145.535708356926">
+          TopLeft="508.903558763915,145.135708356926">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="60.4107280056164,61.7466445098477"
+              EndConnector="95.2107280056159,41.346644509848"
               Start="0,0"
-              End="52.9107280056164,61.7466445098477">
+              End="95.2107280056159,33.846644509848">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="26.2053640028082,0" />
+                    End="91.2107280056159,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="26.2053640028082,0"
-                    Point2="30.2053640028082,0"
-                    Point3="30.2053640028082,4" />
+                    Point1="91.2107280056159,0"
+                    Point2="95.2107280056159,0"
+                    Point3="95.2107280056159,4" />
                   <mssgle:LineSegment
-                    End="30.2053640028082,57.7466445098477" />
-                  <mssgle:CubicBezierSegment
-                    Point1="30.2053640028082,57.7466445098477"
-                    Point2="30.2053640028082,61.7466445098477"
-                    Point3="34.2053640028082,61.7466445098477" />
-                  <mssgle:LineSegment
-                    End="52.9107280056164,61.7466445098477" />
+                    End="95.2107280056159,33.846644509848" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="14.9640163465582,-15.7490234375,30.4826953125,9.7490234375"
+              BoundingBox="79.9693803493659,-15.7490234375,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1323,56 +1341,68 @@ WHERE is_valid = 1
     </LayoutInfo>
   </DtsEventHandler>
   <TaskHost
-    design-time-name="Package\Data Flow Task">
+    design-time-name="Package\DF_Load_Dim_PaymentMethod">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="154.4,42.4"
-          Id="Package\Data Flow Task\Derived Column"
-          TopLeft="309.99998614192,133.249993646145" />
+          Size="228,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\SPL_Payment_ChangeDetection"
+          TopLeft="314.999972805382,207.961752749251" />
         <NodeLayout
-          Size="113.6,42.4"
-          Id="Package\Data Flow Task\Lookup"
-          TopLeft="335.638874130531,247.299988470078" />
+          Size="210.4,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment"
+          TopLeft="2.78173056482224,203.711753214167" />
         <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Data Flow Task\Row Count 1"
-          TopLeft="632.142858488523,329.779411475641" />
+          Size="176,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders"
+          TopLeft="31.4583188140155,0.178429323798628" />
         <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Data Flow Task\Row Count"
-          TopLeft="327.678572126113,333.602940884055" />
+          Size="209.6,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method"
+          TopLeft="31.8749854620545,377.61174465971" />
         <NodeLayout
-          Size="150.4,42.4"
-          Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="311.458319410062,43.7666645797095" />
+          Size="148.8,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\RC_New_Rows"
+          TopLeft="47.6785715300665,290.014705628145" />
         <NodeLayout
-          Size="156,42.4"
-          Id="Package\Data Flow Task\Conditional Split"
-          TopLeft="594.999973401428,251.549988005162" />
+          Size="161.6,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\RC_Update_Rows"
+          TopLeft="352.142857892477,286.191176219731" />
         <NodeLayout
-          Size="166.4,42.4"
-          Id="Package\Data Flow Task\OLE DB Command"
-          TopLeft="609.374972758816,410.79998041153" />
+          Size="227.2,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\CMD_Update_Payment_Method"
+          TopLeft="329.37497216277,367.21174515562" />
         <NodeLayout
-          Size="172,42.4"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="311.874986058101,421.19997991562" />
+          Size="212,41.6"
+          Id="Package\DF_Load_Dim_PaymentMethod\DRV_Clean_PaymentMethod"
+          TopLeft="29.9999855458734,89.6617583902341" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="387.062486109324,86.4333312463762">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[OLE DB Source Output]"
+          TopLeft="119.458318814015,41.7784293237986">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,46.8166623997688"
+              EndConnector="16.5416667318579,47.8833290664355"
               Start="0,0"
-              End="0,39.3166623997688">
+              End="16.5416667318579,40.3833290664355">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.3166623997688" />
+                    End="0,19.9416645332177" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.9416645332177"
+                    Point2="0,23.9416645332177"
+                    Point3="4,23.9416645332177" />
+                  <mssgle:LineSegment
+                    End="12.5416667318579,23.9416645332177" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.5416667318579,23.9416645332177"
+                    Point2="16.5416667318579,23.9416645332177"
+                    Point3="16.5416667318579,27.9416645332177" />
+                  <mssgle:LineSegment
+                    End="16.5416667318579,40.3833290664355" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1382,67 +1412,91 @@ WHERE is_valid = 1
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
-          TopLeft="392.458723128322,289.699988470078">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[Lookup No Match Output]"
+          TopLeft="107.981730564822,245.311753214167">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43.9029524139768"
+              EndConnector="14.0968409652443,44.702952413978"
               Start="0,0"
-              End="0,36.4029524139768">
+              End="14.0968409652443,37.202952413978">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.4029524139768" />
+                    End="0,18.351476206989" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.351476206989"
+                    Point2="0,22.351476206989"
+                    Point3="4,22.351476206989" />
+                  <mssgle:LineSegment
+                    End="10.0968409652443,22.351476206989" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.0968409652443,22.351476206989"
+                    Point2="14.0968409652443,22.351476206989"
+                    Point3="14.0968409652443,26.351476206989" />
+                  <mssgle:LineSegment
+                    End="14.0968409652443,37.202952413978" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,12.3967887069884,111.6127734375,11.609375"
+              BoundingBox="-48.7579662361279,27.351476206989,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="448.972207463864,270.758321570953">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[Lookup Match Output]"
+          TopLeft="213.181730564822,226.636752981709">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="146.027765937564,0"
+              EndConnector="101.81824224056,0"
               Start="0,0"
-              End="138.527765937564,0">
+              End="94.3182422405598,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="138.527765937564,0" />
+                    End="94.3182422405598,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="21.0724962500318,5,96.3827734375,11.609375"
+              BoundingBox="-1.03226559847013,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="389.819430136226,175.916660312812">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[Derived Column Output]"
+          TopLeft="135.999985545873,131.261758390234">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,71.3833281572667"
+              EndConnector="-28.0182549810512,72.4499948239329"
               Start="0,0"
-              End="0,63.8833281572667">
+              End="-28.0182549810512,64.9499948239329">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,63.8833281572667" />
+                    End="0,32.2249974119665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.2249974119665"
+                    Point2="0,36.2249974119665"
+                    Point3="-4,36.2249974119665" />
+                  <mssgle:LineSegment
+                    End="-24.0182549810512,36.2249974119665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24.0182549810512,36.2249974119665"
+                    Point2="-28.0182549810512,36.2249974119665"
+                    Point3="-28.0182549810512,40.2249974119665" />
+                  <mssgle:LineSegment
+                    End="-28.0182549810512,64.9499948239329" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1452,55 +1506,55 @@ WHERE is_valid = 1
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[change]"
-          TopLeft="672.999973401428,293.949988005162">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[change]"
+          TopLeft="430.971415348929,249.561752749251">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="28.7428850870953,35.8294234704795"
+              EndConnector="0,36.62942347048"
               Start="0,0"
-              End="28.7428850870953,28.3294234704795">
+              End="0,29.12942347048">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.9147117352397" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.9147117352397"
-                    Point2="0,17.9147117352397"
-                    Point3="4,17.9147117352397" />
-                  <mssgle:LineSegment
-                    End="24.7428850870953,17.9147117352397" />
-                  <mssgle:CubicBezierSegment
-                    Point1="24.7428850870953,17.9147117352397"
-                    Point2="28.7428850870953,17.9147117352397"
-                    Point3="28.7428850870953,21.9147117352397" />
-                  <mssgle:LineSegment
-                    End="28.7428850870953,28.3294234704795" />
+                    End="0,29.12942347048" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-2.25951448770237,22.9147117352397,33.2619140625,11.6630859375"
+              BoundingBox="-16.63095703125,8.73316876649001,33.2619140625,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Row Count Output 11]"
-          TopLeft="395.176779092107,375.202940884055">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[Row Count Output 11]"
+          TopLeft="122.078571530066,331.614705628145">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,45.9970390315652"
+              EndConnector="14.596413931988,45.997039031565"
               Start="0,0"
-              End="0,38.4970390315652">
+              End="14.596413931988,38.497039031565">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.4970390315652" />
+                    End="0,18.9985195157825" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.9985195157825"
+                    Point2="0,22.9985195157825"
+                    Point3="4,22.9985195157825" />
+                  <mssgle:LineSegment
+                    End="10.596413931988,22.9985195157825" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.596413931988,22.9985195157825"
+                    Point2="14.596413931988,22.9985195157825"
+                    Point3="14.596413931988,26.9985195157825" />
+                  <mssgle:LineSegment
+                    End="14.596413931988,38.497039031565" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1510,31 +1564,31 @@ WHERE is_valid = 1
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Row Count Output 1]"
-          TopLeft="701.742858488523,371.379411475641">
+          Id="Package\DF_Load_Dim_PaymentMethod.Paths[Row Count Output 1]"
+          TopLeft="432.942857892477,327.791176219731">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-9.16788572970711,39.4205689358885"
+              EndConnector="10.032114270293,39.420568935889"
               Start="0,0"
-              End="-9.16788572970711,31.9205689358885">
+              End="10.032114270293,31.920568935889">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.7102844679443" />
+                    End="0,15.7102844679445" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.7102844679443"
-                    Point2="0,19.7102844679443"
-                    Point3="-4,19.7102844679443" />
+                    Point1="0,15.7102844679445"
+                    Point2="0,19.7102844679445"
+                    Point3="4,19.7102844679445" />
                   <mssgle:LineSegment
-                    End="-5.16788572970711,19.7102844679443" />
+                    End="6.03211427029299,19.7102844679445" />
                   <mssgle:CubicBezierSegment
-                    Point1="-5.16788572970711,19.7102844679443"
-                    Point2="-9.16788572970711,19.7102844679443"
-                    Point3="-9.16788572970711,23.7102844679443" />
+                    Point1="6.03211427029299,19.7102844679445"
+                    Point2="10.032114270293,19.7102844679445"
+                    Point3="10.032114270293,23.7102844679445" />
                   <mssgle:LineSegment
-                    End="-9.16788572970711,31.9205689358885" />
+                    End="10.032114270293,31.920568935889" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1547,7 +1601,7 @@ WHERE is_valid = 1
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Lookup">
+    design-time-name="Package\DF_Load_Dim_PaymentMethod\LKP_Find_Existing_Payment">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -1570,7 +1624,7 @@ WHERE is_valid = 1
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Source">
+    design-time-name="Package\DF_Load_Dim_PaymentMethod\SRC_Staging_Orders">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1583,7 +1637,7 @@ WHERE is_valid = 1
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\DF_Load_Dim_PaymentMethod\DST_Dim_Payment_Method">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

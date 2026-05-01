@@ -12,8 +12,8 @@
   DTS:MaxConcurrentExecutables="3"
   DTS:ObjectName="Main_package"
   DTS:PackageType="5"
-  DTS:VersionBuild="97"
-  DTS:VersionGUID="{5DC33701-B056-4AAB-8AC4-B558E2481330}">
+  DTS:VersionBuild="113"
+  DTS:VersionGUID="{E7CE3D92-9304-46FE-9F0E-6556CC4AA4B5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -218,7 +218,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="End Batch"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -254,12 +254,12 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Failure"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="7">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E13B5359-1EC7-4A36-B1DC-BF2954B91ADE}"
-          SQLTask:SqlStatementSource="UPDATE adm.Etl_Batches&#xA;SET &#xA;    status = 'FAILURE',&#xA;    end_time = GETDATE(),&#xA;WHERE batch_id = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE adm.Etl_Batches&#xA;SET &#xA;    status = 'FAILURE',&#xA;    end_time = GETDATE()&#xA;WHERE batch_id = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::batch_id"
@@ -828,7 +828,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Create Batch Folder"
           DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <FileSystemData
@@ -857,7 +857,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Customer"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="2">
+              DTS:ThreadHint="1">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -877,7 +877,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Event"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="3">
+              DTS:ThreadHint="2">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -897,7 +897,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Order"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="4">
+              DTS:ThreadHint="3">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -917,7 +917,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive OrderItem"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="5">
+              DTS:ThreadHint="4">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -937,7 +937,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Product"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="0">
+              DTS:ThreadHint="5">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -957,7 +957,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Review"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="6">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -977,7 +977,7 @@
               DTS:LocaleID="-1"
               DTS:ObjectName="Archive Session"
               DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="6">
+              DTS:ThreadHint="7">
               <DTS:Variables />
               <DTS:ObjectData>
                 <FileSystemData
@@ -1011,15 +1011,16 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Start Batch"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="0"
+      DTS:TransactionOption="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E13B5359-1EC7-4A36-B1DC-BF2954B91ADE}"
-          SQLTask:SqlStatementSource="INSERT INTO adm.Etl_Batches (package_name, status, start_time)&#xA;VALUES (?, 'RUNNING', GETDATE());&#xA;&#xA;SELECT CAST(SCOPE_IDENTITY() AS INT) AS BatchID;"
+          SQLTask:SqlStatementSource="INSERT INTO adm.Etl_Batches (package_name, status, start_time)&#xA;VALUES (?, 'RUNNING', GETDATE());&#xA;&#xA;SELECT CAST(SCOPE_IDENTITY() AS INT);"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
-            SQLTask:ResultName="BatchID"
+            SQLTask:ResultName="0"
             SQLTask:DtsVariableName="User::batch_id" />
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
@@ -1690,9 +1691,9 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="162.4,41.6"
+          Size="NaN,NaN"
           Id="Package.EventHandlers[OnError]\Execute SQL Task"
-          TopLeft="460.999993130565,176.999997362495" />
+          TopLeft="NaN,NaN" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>

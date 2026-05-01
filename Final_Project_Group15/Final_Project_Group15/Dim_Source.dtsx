@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{1847FF41-5FAA-48A8-87C4-61877398F875}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{3E69FF17-6DE9-4416-9E4E-C3899D4BF784}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -100,13 +100,13 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Flow Task"
+      DTS:refId="Package\DF_Load_Dim_Source"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{01B259B5-E7E1-469E-84D0-495FC37C9E87}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Flow Task"
+      DTS:ObjectName="DF_Load_Dim_Source"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -114,282 +114,11 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Conditional Split"
-              componentClassID="Microsoft.ConditionalSplit"
-              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
-                  description="Input to the Conditional Split Transformation"
-                  name="Conditional Split Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[source]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="source"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[source_name_old]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="source_name_old"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_name_old]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Conditional Split.Outputs[change]"
-                  description="Output 1 of the Conditional Split Transformation"
-                  errorOrTruncationOperation="Computation"
-                  errorRowDisposition="FailComponent"
-                  exclusionGroup="1"
-                  name="change"
-                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
-                  truncationRowDisposition="FailComponent">
-                  <properties>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source]} != #{Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_name_old]}</property>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the friendly version of the expression. This expression version uses column names."
-                      expressionType="Notify"
-                      name="FriendlyExpression">source != source_name_old</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                      name="EvaluationOrder">0</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Default Output]"
-                  description="Default Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  name="Conditional Split Default Output"
-                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      name="IsDefaultOut">true</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]"
-                  description="Error Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Conditional Split Error Output"
-                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Lookup"
-              componentClassID="Microsoft.Lookup"
-              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
-              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
-              usesDispositions="true"
-              version="6">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SQL statement that generates the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from dw.dim_source</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from dw.dim_source) [refTable]
-where [refTable].[source_name] = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the type of connection used to access the reference dataset."
-                  name="ConnectionType"
-                  typeConverter="LookupConnectionType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the cache type of the lookup table."
-                  name="CacheType"
-                  typeConverter="CacheType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
-                  name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
-                  name="NoMatchCachePercentage">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
-                  name="MaxMemoryUsage">25</property>
-                <property
-                  dataType="System.Int64"
-                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
-                  name="MaxMemoryUsage64">25</property>
-                <property
-                  dataType="System.String"
-                  description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="source_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="source_name" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
-                <property
-                  containsID="true"
-                  dataType="System.String"
-                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]};</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
-                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
-                  description="Connection manager used to access lookup data."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
-                  name="Lookup Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input].Columns[source]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="source"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">source_name</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
-                  errorOrTruncationOperation="Lookup"
-                  exclusionGroup="1"
-                  name="Lookup Match Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_key]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_key]"
-                      name="source_key"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">source_key</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_name_old]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="100"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_name_old]"
-                      name="source_name_old"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">source_name</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
-                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
-                  exclusionGroup="1"
-                  name="Lookup No Match Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Lookup Error Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\OLE DB Command"
+              refId="Package\DF_Load_Dim_Source\CMD_Update_Source"
               componentClassID="Microsoft.OLEDBCommand"
               contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
               description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="OLE DB Command"
+              name="CMD_Update_Source"
               usesDispositions="true"
               version="2">
               <properties>
@@ -414,7 +143,7 @@ WHERE source_key = ?
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Command.Connections[OleDbConnection]"
+                  refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
                   connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
                   description="The OLE DB runtime connection used to access the database."
@@ -422,30 +151,30 @@ WHERE source_key = ?
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
+                  refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input]"
                   errorOrTruncationOperation="Command Execution"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[source_name_old]"
+                      refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input].Columns[source_name_old]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="source_name_old"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_name_old]" />
+                      externalMetadataColumnId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_name_old]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[source_key]"
+                      refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input].Columns[source_key]"
                       cachedDataType="i4"
                       cachedName="source_key"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[source_key]" />
+                      externalMetadataColumnId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_key]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
                       dataType="wstr"
                       length="100"
                       name="Param_0">
@@ -457,7 +186,7 @@ WHERE source_key = ?
                       </properties>
                     </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
                       dataType="i4"
                       name="Param_1">
                       <properties>
@@ -472,29 +201,29 @@ WHERE source_key = ?
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Output]"
+                  refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Outputs[OLE DB Command Output]"
                   exclusionGroup="1"
                   name="OLE DB Command Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
+                  synchronousInputId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Outputs[OLE DB Command Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
+                  synchronousInputId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_Source\CMD_Update_Source.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_Source\CMD_Update_Source.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_Source\CMD_Update_Source.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -503,11 +232,11 @@ WHERE source_key = ?
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination"
+              refId="Package\DF_Load_Dim_Source\DST_Dim_Source"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination"
+              name="DST_Dim_Source"
               usesDispositions="true"
               version="4">
               <properties>
@@ -560,7 +289,7 @@ WHERE source_key = ?
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
                   connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
                   description="The OLE DB runtime connection used to access the database."
@@ -568,29 +297,29 @@ WHERE source_key = ?
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[source]"
+                      refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input].Columns[source]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="source"
                       cachedSortKeyPosition="1"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_name]"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source]" />
+                      externalMetadataColumnId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input].ExternalColumns[source_name]"
+                      lineageId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output].Columns[source]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_key]"
+                      refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input].ExternalColumns[source_key]"
                       dataType="i4"
                       name="source_key" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_name]"
+                      refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input].ExternalColumns[source_name]"
                       dataType="wstr"
                       length="100"
                       name="source_name" />
@@ -599,22 +328,22 @@ WHERE source_key = ?
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_Source\DST_Dim_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_Source\DST_Dim_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_Source\DST_Dim_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -623,11 +352,340 @@ WHERE source_key = ?
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Source"
+              refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LKP_Find_Existing_Source"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from dw.dim_source</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from dw.dim_source) [refTable]
+where [refTable].[source_name] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="source_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="source_name" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].Columns[source]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.DataWarehouse]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Inputs[Lookup Input].Columns[source]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="source"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output].Columns[source]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">source_name</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_key]"
+                      name="source_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">source_key</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_name_old]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="100"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_name_old]"
+                      name="source_name_old"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">source_name</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load_Dim_Source\RC_New_Rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="RC_New_Rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_valid_2</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load_Dim_Source\RC_New_Rows.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load_Dim_Source\RC_New_Rows.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DF_Load_Dim_Source\RC_New_Rows.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load_Dim_Source\RC_Update_Rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="RC_Update_Rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::count_valid_1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_Load_Dim_Source\RC_Update_Rows.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load_Dim_Source\RC_Update_Rows.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DF_Load_Dim_Source\RC_Update_Rows.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="SPL_Source_ChangeDetection"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input].Columns[source]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="source"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output].Columns[source]" />
+                    <inputColumn
+                      refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input].Columns[source_name_old]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="source_name_old"
+                      lineageId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_name_old]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[change]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="change"
+                  synchronousInputId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output].Columns[source]} != #{Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output].Columns[source_name_old]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">source != source_name_old</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="OLE DB Source"
+              name="SRC_Staging_Sessions"
               usesDispositions="true"
               version="7">
               <properties>
@@ -674,7 +732,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LAPTOP-528QRPG1.Staging]"
                   connectionManagerRefId="Package.ConnectionManagers[LAPTOP-528QRPG1.Staging]"
                   description="The OLE DB runtime connection used to access the database."
@@ -682,50 +740,50 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]"
+                      refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].Columns[source]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source]"
+                      externalMetadataColumnId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].ExternalColumns[source]"
                       length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]"
+                      lineageId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].Columns[source]"
                       name="source"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[source]"
+                      refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].ExternalColumns[source]"
                       dataType="wstr"
                       length="100"
                       name="source" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source]"
+                      refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output].Columns[source]"
                       dataType="wstr"
                       length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[source]"
+                      lineageId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output].Columns[source]"
                       name="source" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -734,69 +792,11 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Row Count"
-              componentClassID="Microsoft.RowCount"
-              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="Row Count">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable to hold the row count."
-                  name="VariableName">User::count_valid_2</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
-                  hasSideEffects="true"
-                  name="Row Count Input 1">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]"
-                  name="Row Count Output 1"
-                  synchronousInputId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Row Count 1"
-              componentClassID="Microsoft.RowCount"
-              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-              name="Row Count 1">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable to hold the row count."
-                  name="VariableName">User::count_valid_1</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]"
-                  hasSideEffects="true"
-                  name="Row Count Input 1">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Row Count 1.Outputs[Row Count Output 1]"
-                  name="Row Count Output 1"
-                  synchronousInputId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Sort"
+              refId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source"
               componentClassID="Microsoft.Sort"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-              name="Sort"
+              name="SRT_Deduplicate_By_Source"
               version="1">
               <properties>
                 <property
@@ -811,15 +811,15 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               </properties>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Sort.Inputs[Sort Input]"
+                  refId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Inputs[Sort Input]"
                   name="Sort Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[source]"
+                      refId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Inputs[Sort Input].Columns[source]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="source"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]">
+                      lineageId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].Columns[source]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -837,15 +837,15 @@ WHERE is_valid = 1 AND is_processed = 0</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Sort.Outputs[Sort Output]"
+                  refId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output]"
                   isSorted="true"
                   name="Sort Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source]"
+                      refId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output].Columns[source]"
                       dataType="wstr"
                       length="100"
-                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[source]"
+                      lineageId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output].Columns[source]"
                       name="source"
                       sortKeyPosition="1">
                       <properties>
@@ -853,7 +853,7 @@ WHERE is_valid = 1 AND is_processed = 0</property>
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[source]}</property>
+                          name="SortColumnId">#{Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output].Columns[source]}</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -864,52 +864,84 @@ WHERE is_valid = 1 AND is_processed = 0</property>
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[change]"
-              endId="Package\Data Flow Task\Row Count 1.Inputs[Row Count Input 1]"
+              refId="Package\DF_Load_Dim_Source.Paths[change]"
+              endId="Package\DF_Load_Dim_Source\RC_Update_Rows.Inputs[Row Count Input 1]"
               name="change"
-              startId="Package\Data Flow Task\Conditional Split.Outputs[change]" />
+              startId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Outputs[change]" />
             <path
-              refId="Package\Data Flow Task.Paths[Lookup Match Output]"
-              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+              refId="Package\DF_Load_Dim_Source.Paths[Lookup Match Output]"
+              endId="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
-              startId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+              startId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Lookup No Match Output]"
-              endId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+              refId="Package\DF_Load_Dim_Source.Paths[Lookup No Match Output]"
+              endId="Package\DF_Load_Dim_Source\RC_New_Rows.Inputs[Row Count Input 1]"
               name="Lookup No Match Output"
-              startId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Outputs[Lookup No Match Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
-              endId="Package\Data Flow Task\Sort.Inputs[Sort Input]"
+              refId="Package\DF_Load_Dim_Source.Paths[OLE DB Source Output]"
+              endId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Inputs[Sort Input]"
               name="OLE DB Source Output"
-              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\DF_Load_Dim_Source\SRC_Staging_Sessions.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Row Count Output 1]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\DF_Load_Dim_Source.Paths[Row Count Output 1]"
+              endId="Package\DF_Load_Dim_Source\DST_Dim_Source.Inputs[OLE DB Destination Input]"
               name="Row Count Output 1"
-              startId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+              startId="Package\DF_Load_Dim_Source\RC_New_Rows.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Data Flow Task.Paths[Row Count Output 11]"
-              endId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
+              refId="Package\DF_Load_Dim_Source.Paths[Row Count Output 11]"
+              endId="Package\DF_Load_Dim_Source\CMD_Update_Source.Inputs[OLE DB Command Input]"
               name="Row Count Output 1"
-              startId="Package\Data Flow Task\Row Count 1.Outputs[Row Count Output 1]" />
+              startId="Package\DF_Load_Dim_Source\RC_Update_Rows.Outputs[Row Count Output 1]" />
             <path
-              refId="Package\Data Flow Task.Paths[Sort Output]"
-              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              refId="Package\DF_Load_Dim_Source.Paths[Sort Output]"
+              endId="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source.Inputs[Lookup Input]"
               name="Sort Output"
-              startId="Package\Data Flow Task\Sort.Outputs[Sort Output]" />
+              startId="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source.Outputs[Sort Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\EXP_Calculate_Error_Rows"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{718A7F37-222B-4B39-ABBC-6EADDFC53BDE}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXP_Calculate_Error_Rows"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXP_Calculate_Error_Rows_1"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{29dfd131-85a3-48ad-803b-f0e51e49bbac}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXP_Calculate_Error_Rows_1"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Init_PackageLog"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{1B544413-A728-4266-8A23-7719C74B8FE4}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="SQL_Init_PackageLog"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -931,43 +963,13 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 1"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{5BDB66CE-ABB2-4FFB-AEF1-74EA073D3856}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 1"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{84939029-2F45-416F-AE7A-D9C7C2B3A892}"
-          SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET status = 'SUCCESS', end_time = GETDATE(), &#xA;    records_inserted = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ParameterBinding
-            SQLTask:ParameterName="0"
-            SQLTask:DtsVariableName="User::count_inserted"
-            SQLTask:ParameterDirection="Input"
-            SQLTask:DataType="3"
-            SQLTask:ParameterSize="-1" />
-          <SQLTask:ParameterBinding
-            SQLTask:ParameterName="1"
-            SQLTask:DtsVariableName="User::package_log_id"
-            SQLTask:ParameterDirection="Input"
-            SQLTask:DataType="3"
-            SQLTask:ParameterSize="-1" />
-        </SQLTask:SqlTaskData>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task 1 1"
+      DTS:refId="Package\SQL_Update_PackageLog_Failure"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{36bed87e-3474-4bdd-a613-daaf60f1d43f}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task 1 1"
+      DTS:ObjectName="SQL_Update_PackageLog_Failure"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="1">
       <DTS:Variables />
@@ -992,35 +994,33 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Expression Task"
-      DTS:CreationName="Microsoft.ExpressionTask"
-      DTS:Description="Expression Task"
-      DTS:DTSID="{718A7F37-222B-4B39-ABBC-6EADDFC53BDE}"
-      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:refId="Package\SQL_Update_PackageLog_Success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5BDB66CE-ABB2-4FFB-AEF1-74EA073D3856}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Expression Task"
-      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ObjectName="SQL_Update_PackageLog_Success"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <ExpressionTask
-          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Expression Task 1"
-      DTS:CreationName="Microsoft.ExpressionTask"
-      DTS:Description="Expression Task"
-      DTS:DTSID="{29dfd131-85a3-48ad-803b-f0e51e49bbac}"
-      DTS:ExecutableType="Microsoft.ExpressionTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Expression Task 1"
-      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExpressionTask
-          Expression="@[User::count_inserted] = @[User::count_valid_1] + @[User::count_valid_2]" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{84939029-2F45-416F-AE7A-D9C7C2B3A892}"
+          SQLTask:SqlStatementSource="UPDATE adm.Etl_Package_Logs &#xA;SET status = 'SUCCESS', end_time = GETDATE(), &#xA;    records_inserted = ?&#xA;WHERE package_log_id = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::count_inserted"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::package_log_id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1029,42 +1029,42 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{1EFA6B4F-50DF-4452-9013-1531B3551406}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:From="Package\SQL_Init_PackageLog"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Data Flow Task" />
+      DTS:To="Package\DF_Load_Dim_Source" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{33D3545C-B080-4ABD-8E1D-13AEA396FE84}"
-      DTS:From="Package\Data Flow Task"
+      DTS:From="Package\DF_Load_Dim_Source"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Expression Task" />
+      DTS:To="Package\EXP_Calculate_Error_Rows" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{236B85EC-815A-4013-806F-9D72D9FEAC56}"
-      DTS:From="Package\Expression Task"
+      DTS:From="Package\EXP_Calculate_Error_Rows"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Execute SQL Task 1" />
+      DTS:To="Package\SQL_Update_PackageLog_Success" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2 1]"
       DTS:CreationName=""
       DTS:DTSID="{40138e83-4f10-48a8-9b17-f1abe0345172}"
-      DTS:From="Package\Expression Task 1"
+      DTS:From="Package\EXP_Calculate_Error_Rows_1"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2 1"
-      DTS:To="Package\Execute SQL Task 1 1" />
+      DTS:To="Package\SQL_Update_PackageLog_Failure" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{D83D3D95-798D-4BD5-A6BC-FA8F506A5692}"
-      DTS:From="Package\Data Flow Task"
+      DTS:From="Package\DF_Load_Dim_Source"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Expression Task 1"
+      DTS:To="Package\EXP_Calculate_Error_Rows_1"
       DTS:Value="1" />
   </DTS:PrecedenceConstraints>
   <DTS:EventHandlers>
@@ -1133,32 +1133,32 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150.4,41.6"
-          Id="Package\Data Flow Task"
+          Size="181.6,41.6"
+          Id="Package\DF_Load_Dim_Source"
           TopLeft="307.499983198941,175.066665449275" />
         <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\Execute SQL Task"
+          Size="204.8,41.6"
+          Id="Package\EXP_Calculate_Error_Rows"
+          TopLeft="264.285714848309,269.176470352292" />
+        <NodeLayout
+          Size="216.8,41.6"
+          Id="Package\EXP_Calculate_Error_Rows_1"
+          TopLeft="539.500001160162,261.529411535465" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\SQL_Init_PackageLog"
           TopLeft="309.285714944102,83.3529411034085" />
         <NodeLayout
-          Size="172,41.6"
-          Id="Package\Execute SQL Task 1"
-          TopLeft="279.785714869597,354.205882047287" />
-        <NodeLayout
-          Size="172,41.6"
-          Id="Package\Execute SQL Task 1 1"
+          Size="235.2,41.6"
+          Id="Package\SQL_Update_PackageLog_Failure"
           TopLeft="516.428572527912,347.323529112143" />
         <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Expression Task"
-          TopLeft="302.857143501846,268.411764470609" />
-        <NodeLayout
-          Size="163.2,41.6"
-          Id="Package\Expression Task 1"
-          TopLeft="539.500001160162,261.529411535465" />
+          Size="240.8,41.6"
+          Id="Package\SQL_Update_PackageLog_Success"
+          TopLeft="230.500000478966,351.911764402239" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="386.592849071522,124.952941103409">
+          TopLeft="398.992849071522,124.952941103409">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1180,18 +1180,18 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="381.178563350394,216.666665449275">
+          TopLeft="368.026182356958,216.666665449275">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51.745099021334"
+              EndConnector="0,52.5098049030166"
               Start="0,0"
-              End="0,44.245099021334">
+              End="0,45.0098049030166">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.245099021334" />
+                    End="0,45.0098049030166" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1202,30 +1202,30 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="379.657143501846,310.011764470609">
+          TopLeft="366.685714848309,310.776470352292">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-13.8714286322495,44.1941175766779"
+              EndConnector="-15.7857143693426,41.1352940499474"
               Start="0,0"
-              End="-13.8714286322495,36.6941175766779">
+              End="-15.7857143693426,33.6352940499474">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.097058788339" />
+                    End="0,16.5676470249737" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,18.097058788339"
-                    Point2="0,22.097058788339"
-                    Point3="-4,22.097058788339" />
+                    Point1="0,16.5676470249737"
+                    Point2="0,20.5676470249737"
+                    Point3="-4,20.5676470249737" />
                   <mssgle:LineSegment
-                    End="-9.87142863224955,22.097058788339" />
+                    End="-11.7857143693426,20.5676470249737" />
                   <mssgle:CubicBezierSegment
-                    Point1="-9.87142863224955,22.097058788339"
-                    Point2="-13.8714286322495,22.097058788339"
-                    Point3="-13.8714286322495,26.097058788339" />
+                    Point1="-11.7857143693426,20.5676470249737"
+                    Point2="-15.7857143693426,20.5676470249737"
+                    Point3="-15.7857143693426,24.5676470249737" />
                   <mssgle:LineSegment
-                    End="-13.8714286322495,36.6941175766779" />
+                    End="-15.7857143693426,33.6352940499474" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1236,30 +1236,30 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 1]"
-          TopLeft="621.100001160162,303.129411535465">
+          TopLeft="647.900001160162,303.129411535465">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-18.6714286322496,44.1941175766779"
+              EndConnector="-13.8714286322499,44.194117576678"
               Start="0,0"
-              End="-18.6714286322496,36.6941175766779">
+              End="-13.8714286322499,36.694117576678">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.0970587883389" />
+                    End="0,18.097058788339" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,18.0970587883389"
-                    Point2="0,22.0970587883389"
-                    Point3="-4,22.0970587883389" />
+                    Point1="0,18.097058788339"
+                    Point2="0,22.097058788339"
+                    Point3="-4,22.097058788339" />
                   <mssgle:LineSegment
-                    End="-14.6714286322496,22.0970587883389" />
+                    End="-9.87142863224994,22.097058788339" />
                   <mssgle:CubicBezierSegment
-                    Point1="-14.6714286322496,22.0970587883389"
-                    Point2="-18.6714286322496,22.0970587883389"
-                    Point3="-18.6714286322496,26.0970587883389" />
+                    Point1="-9.87142863224994,22.097058788339"
+                    Point2="-13.8714286322499,22.097058788339"
+                    Point3="-13.8714286322499,26.097058788339" />
                   <mssgle:LineSegment
-                    End="-18.6714286322496,36.6941175766779" />
+                    End="-13.8714286322499,36.694117576678" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1270,37 +1270,37 @@ WHERE is_valid = 1 AND is_processed = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="406.433316532274,216.666665449275">
+          TopLeft="427.233316532274,216.666665449275">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="214.666684627888,44.8627460861903"
+              EndConnector="220.666684627888,44.86274608619"
               Start="0,0"
-              End="214.666684627888,37.3627460861903">
+              End="220.666684627888,37.36274608619">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.2284420939678" />
+                    End="0,14.1801870602552" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,14.2284420939678"
-                    Point2="0,18.2284420939678"
-                    Point3="4,18.2284420939678" />
+                    Point1="0,14.1801870602552"
+                    Point2="0,18.1801870602552"
+                    Point3="4,18.1801870602552" />
                   <mssgle:LineSegment
-                    End="210.666684627888,18.2284420939678" />
+                    End="216.666684627888,18.1801870602552" />
                   <mssgle:CubicBezierSegment
-                    Point1="210.666684627888,18.2284420939678"
-                    Point2="214.666684627888,18.2284420939678"
-                    Point3="214.666684627888,22.2284420939678" />
+                    Point1="216.666684627888,18.1801870602552"
+                    Point2="220.666684627888,18.1801870602552"
+                    Point3="220.666684627888,22.1801870602552" />
                   <mssgle:LineSegment
-                    End="214.666684627888,37.3627460861903" />
+                    End="220.666684627888,37.36274608619" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="92.0919946576939,23.2284420939678,30.4826953125,9.7490234375"
+              BoundingBox="95.0919946576938,23.1801870602552,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1320,287 +1320,305 @@ WHERE is_valid = 1 AND is_processed = 0</property>
     </LayoutInfo>
   </DtsEventHandler>
   <TaskHost
-    design-time-name="Package\Data Flow Task">
+    design-time-name="Package\DF_Load_Dim_Source">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Data Flow Task\Lookup"
-          TopLeft="457.499975003303,239.199998336633" />
+          Size="184,41.6"
+          Id="Package\DF_Load_Dim_Source\SRC_Staging_Sessions"
+          TopLeft="121.928547266897,7.53921526312508" />
         <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\Data Flow Task\Sort"
-          TopLeft="451.685715242126,152.164705779128" />
+          Size="148.8,41.6"
+          Id="Package\DF_Load_Dim_Source\RC_New_Rows"
+          TopLeft="406.2500008648,190.79411747982" />
         <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Data Flow Task\Row Count"
-          TopLeft="688.392858608265,258.088235067893" />
+          Size="160,41.6"
+          Id="Package\DF_Load_Dim_Source\DST_Dim_Source"
+          TopLeft="395.416627109704,328.632350915" />
         <NodeLayout
-          Size="152,41.6"
-          Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="435.499976505837,74.833332851198" />
+          Size="213.6,41.6"
+          Id="Package\DF_Load_Dim_Source\SRT_Deduplicate_By_Source"
+          TopLeft="118.114285960611,86.3999999544204" />
         <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Data Flow Task\OLE DB Command"
-          TopLeft="399.345215718451,474.614702843357" />
+          Size="219.2,41.6"
+          Id="Package\DF_Load_Dim_Source\SPL_Source_ChangeDetection"
+          TopLeft="114.166642121735,255.857840885181" />
         <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="708.988056348643,395.926468503073" />
+          Size="201.6,41.6"
+          Id="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source"
+          TopLeft="105.357117110826,171.90588074856" />
         <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\Data Flow Task\Row Count 1"
-          TopLeft="433.035715207533,395.73529377077" />
+          Size="177.6,41.6"
+          Id="Package\DF_Load_Dim_Source\CMD_Update_Source"
+          TopLeft="85.7737864795111,407.320585255284" />
         <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Data Flow Task\Conditional Split"
-          TopLeft="427.738071360675,323.151958473254" />
+          Size="161.6,41.6"
+          Id="Package\DF_Load_Dim_Source\RC_Update_Rows"
+          TopLeft="119.464285968593,328.441176182697" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Row Count Output 1]"
-          TopLeft="753.192858608265,299.688235067893">
+          Id="Package\DF_Load_Dim_Source.Paths[Row Count Output 1]"
+          TopLeft="478.033313987252,232.39411747982">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="41.3951977403776,96.2382334351792"
+              EndConnector="0,96.23823343518"
               Start="0,0"
-              End="41.3951977403776,88.7382334351792">
+              End="0,88.73823343518">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.1191167175896" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,44.1191167175896"
-                    Point2="0,48.1191167175896"
-                    Point3="4,48.1191167175896" />
+                    End="0,88.73823343518" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_Load_Dim_Source.Paths[OLE DB Source Output]"
+          TopLeft="213.928547266897,49.1392152631251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.985738693714,37.2607846912953"
+              Start="0,0"
+              End="10.985738693714,29.7607846912953">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="37.3951977403776,48.1191167175896" />
+                    End="0,14.6303923456477" />
                   <mssgle:CubicBezierSegment
-                    Point1="37.3951977403776,48.1191167175896"
-                    Point2="41.3951977403776,48.1191167175896"
-                    Point3="41.3951977403776,52.1191167175896" />
+                    Point1="0,14.6303923456477"
+                    Point2="0,18.6303923456477"
+                    Point3="4,18.6303923456477" />
                   <mssgle:LineSegment
-                    End="41.3951977403776,88.7382334351792" />
+                    End="6.98573869371398,18.6303923456477" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.98573869371398,18.6303923456477"
+                    Point2="10.985738693714,18.6303923456477"
+                    Point3="10.985738693714,22.6303923456477" />
+                  <mssgle:LineSegment
+                    End="10.985738693714,29.7607846912953" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_Load_Dim_Source.Paths[Lookup No Match Output]"
+          TopLeft="306.957117110826,192.70588074856">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.2928837539737,18.88823673126"
+              Start="0,0"
+              End="91.7928837539737,18.88823673126">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.6464418769869,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.6464418769869,0"
+                    Point2="49.6464418769869,0"
+                    Point3="49.6464418769869,4" />
+                  <mssgle:LineSegment
+                    End="49.6464418769869,14.88823673126" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.6464418769869,14.88823673126"
+                    Point2="49.6464418769869,18.88823673126"
+                    Point3="53.6464418769869,18.88823673126" />
+                  <mssgle:LineSegment
+                    End="91.7928837539737,18.88823673126" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-6.15994484176313,-17.609375,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="511.499976505837,116.433332851198">
+          Id="Package\DF_Load_Dim_Source.Paths[Lookup Match Output]"
+          TopLeft="206.157117110826,213.50588074856">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-11.0142612637114,35.7313729279296"
+              EndConnector="17.609525010909,42.351960136621"
               Start="0,0"
-              End="-11.0142612637114,28.2313729279296">
+              End="17.609525010909,34.851960136621">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.8656864639648" />
+                    End="0,17.1759800683105" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.8656864639648"
-                    Point2="0,17.8656864639648"
-                    Point3="-4,17.8656864639648" />
+                    Point1="0,17.1759800683105"
+                    Point2="0,21.1759800683105"
+                    Point3="4,21.1759800683105" />
                   <mssgle:LineSegment
-                    End="-7.01426126371138,17.8656864639648" />
+                    End="13.609525010909,21.1759800683105" />
                   <mssgle:CubicBezierSegment
-                    Point1="-7.01426126371138,17.8656864639648"
-                    Point2="-11.0142612637114,17.8656864639648"
-                    Point3="-11.0142612637114,21.8656864639648" />
+                    Point1="13.609525010909,21.1759800683105"
+                    Point2="17.609525010909,21.1759800683105"
+                    Point3="17.609525010909,25.1759800683105" />
                   <mssgle:LineSegment
-                    End="-11.0142612637114,28.2313729279296" />
+                    End="17.609525010909,34.851960136621" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-39.3866242132955,26.1759800683105,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
-          TopLeft="570.299975003303,259.999998336633">
+          Id="Package\DF_Load_Dim_Source.Paths[change]"
+          TopLeft="223.766642121735,297.457840885181">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="118.092883604962,18.8882367312604"
+              EndConnector="-23.502356153142,30.983335297516"
               Start="0,0"
-              End="110.592883604962,18.8882367312604">
+              End="-23.502356153142,23.483335297516">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="55.046441802481,0" />
+                    End="0,11.491667648758" />
                   <mssgle:CubicBezierSegment
-                    Point1="55.046441802481,0"
-                    Point2="59.046441802481,0"
-                    Point3="59.046441802481,4" />
+                    Point1="0,11.491667648758"
+                    Point2="0,15.491667648758"
+                    Point3="-4,15.491667648758" />
                   <mssgle:LineSegment
-                    End="59.046441802481,14.8882367312604" />
+                    End="-19.502356153142,15.491667648758" />
                   <mssgle:CubicBezierSegment
-                    Point1="59.046441802481,14.8882367312604"
-                    Point2="59.046441802481,18.8882367312604"
-                    Point3="63.046441802481,18.8882367312604" />
+                    Point1="-19.502356153142,15.491667648758"
+                    Point2="-23.502356153142,15.491667648758"
+                    Point3="-23.502356153142,19.491667648758" />
                   <mssgle:LineSegment
-                    End="110.592883604962,18.8882367312604" />
+                    End="-23.502356153142,23.483335297516" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="3.24005508373101,-17.609375,111.6127734375,11.609375"
+              BoundingBox="-28.382135107821,20.491667648758,33.2619140625,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="513.899975003303,280.799998336633">
+          Id="Package\DF_Load_Dim_Source.Paths[Sort Output]"
+          TopLeft="224.914285960611,127.99999995442">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-9.36190364262791,42.3519601366207"
+              EndConnector="-18.757168849785,43.9058807941396"
               Start="0,0"
-              End="-9.36190364262791,34.8519601366207">
+              End="-18.757168849785,36.4058807941396">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.1759800683104" />
+                    End="0,17.9529403970698" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17.1759800683104"
-                    Point2="0,21.1759800683104"
-                    Point3="-4,21.1759800683104" />
+                    Point1="0,17.9529403970698"
+                    Point2="0,21.9529403970698"
+                    Point3="-4,21.9529403970698" />
                   <mssgle:LineSegment
-                    End="-5.36190364262791,21.1759800683104" />
+                    End="-14.757168849785,21.9529403970698" />
                   <mssgle:CubicBezierSegment
-                    Point1="-5.36190364262791,21.1759800683104"
-                    Point2="-9.36190364262791,21.1759800683104"
-                    Point3="-9.36190364262791,25.1759800683104" />
+                    Point1="-14.757168849785,21.9529403970698"
+                    Point2="-18.757168849785,21.9529403970698"
+                    Point3="-18.757168849785,25.9529403970698" />
                   <mssgle:LineSegment
-                    End="-9.36190364262791,34.8519601366207" />
+                    End="-18.757168849785,36.4058807941396" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-52.872338540064,26.1759800683104,96.3827734375,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[change]"
-          TopLeft="503.586893284104,364.751958473254">
+          Id="Package\DF_Load_Dim_Source.Paths[Row Count Output 11]"
+          TopLeft="200.264285968593,370.041176182697">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,30.983335297516"
+              EndConnector="-25.6904994890819,37.279409072587"
               Start="0,0"
-              End="0,23.483335297516">
+              End="-25.6904994890819,29.779409072587">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.483335297516" />
+                    End="0,14.6397045362935" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.6397045362935"
+                    Point2="0,18.6397045362935"
+                    Point3="-4,18.6397045362935" />
+                  <mssgle:LineSegment
+                    End="-21.6904994890819,18.6397045362935" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.6904994890819,18.6397045362935"
+                    Point2="-25.6904994890819,18.6397045362935"
+                    Point3="-25.6904994890819,22.6397045362935" />
+                  <mssgle:LineSegment
+                    End="-25.6904994890819,29.779409072587" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-16.63095703125,5.91012468000798,33.2619140625,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Sort Output]"
-          TopLeft="500.485715242126,193.764705779128">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="13.4142597611773,45.4352925575054"
-              Start="0,0"
-              End="13.4142597611773,37.9352925575054">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.7176462787527" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.7176462787527"
-                    Point2="0,22.7176462787527"
-                    Point3="4,22.7176462787527" />
-                  <mssgle:LineSegment
-                    End="9.41425976117733,22.7176462787527" />
-                  <mssgle:CubicBezierSegment
-                    Point1="9.41425976117733,22.7176462787527"
-                    Point2="13.4142597611773,22.7176462787527"
-                    Point3="13.4142597611773,26.7176462787527" />
-                  <mssgle:LineSegment
-                    End="13.4142597611773,37.9352925575054" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Row Count Output 11]"
-          TopLeft="502.635715207534,437.33529377077">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-19.6904994890824,37.2794090725872"
-              Start="0,0"
-              End="-19.6904994890824,29.7794090725872">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.6397045362936" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.6397045362936"
-                    Point2="0,18.6397045362936"
-                    Point3="-4,18.6397045362936" />
-                  <mssgle:LineSegment
-                    End="-15.6904994890824,18.6397045362936" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-15.6904994890824,18.6397045362936"
-                    Point2="-19.6904994890824,18.6397045362936"
-                    Point3="-19.6904994890824,22.6397045362936" />
-                  <mssgle:LineSegment
-                    End="-19.6904994890824,29.7794090725872" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Lookup">
+    design-time-name="Package\DF_Load_Dim_Source\SRC_Staging_Sessions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_Load_Dim_Source\DST_Dim_Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_Load_Dim_Source\LKP_Find_Existing_Source">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -1619,32 +1637,6 @@ WHERE is_valid = 1 AND is_processed = 0</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
